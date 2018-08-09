@@ -16,7 +16,7 @@
                                                     <i class="material-icons">local_taxi</i>
                                                 </div>
 
-          <%=select_tag "vehicle_id", options_from_collection_for_select(user_vehicles, "id", "license_plate", current_vehicle.id), class: "text-uppercase auto-submit current-vehicle form-control"%>
+          <%=select_tag "vehicle_id", options_from_collection_for_select(user_vehicles, "id", "license_plate", current_vehicle.try(:id)), class: "text-uppercase auto-submit current-vehicle form-control"%>
 
                                             </div>
                                         </div>

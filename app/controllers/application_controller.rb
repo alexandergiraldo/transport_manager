@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   around_action :app_time_zone, if: :current_user
+  before_action :validate_vehicle, if: :current_user
   helper_method :current_vehicle
 
   def app_time_zone(&block)
@@ -28,6 +29,12 @@ class ApplicationController < ActionController::Base
       params[:q] = {event_date_gteq: date, event_date_lteq: date.end_of_month}
     else
       params[:q] = {event_date_gteq: Time.now.beginning_of_month, event_date_lteq: Time.now.end_of_month}
+    end
+  end
+
+  def validate_vehicle
+    unless current_vehicle.present?
+      redirect_to new_vehicle_path if controller_name != 'vehicles'
     end
   end
 end

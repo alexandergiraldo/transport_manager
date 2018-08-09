@@ -6,5 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-account = Account.first_or_create(name: 'FGR')
-User.first_or_create(email: 'alexgr200@gmail.com', full_name: 'Alexander Giraldo', password: 'testing', account: account, role: 1)
+account = Account.where(name: 'FGR').first_or_create
+User.where(email: 'alexgr200@gmail.com', full_name: 'Alexander Giraldo', account: account, role: 1).first_or_create(password: 'testing')

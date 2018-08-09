@@ -1,0 +1,83 @@
+<%content_for :external_css do %>
+  <%= render_select2_css %>
+<%end%>
+<div class="row mb-3">
+  <div class="col-md-2">
+    <a href="<%=new_register_path%>" class="btn btn btn-primary">
+      <i class="material-icons md-18 align-middle">assignment</i>
+      <span class="align-middle">Crear Planilla</span>
+    </a>
+  </div>
+  <div class="col-md-2">
+    <a href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#newMaintenanceModal">
+      <i class="material-icons md-18 align-middle">exposure</i>
+      <span class="align-middle">Nuevo</span>
+    </a>
+  </div>
+</div>
+
+<div class="row font-1 mb-3 totals">
+  <%totals = calculate_registers_totals(@registers)%>
+
+  <div class="col-md-4">
+    <div class="card card-body flex-row align-items-center">
+      <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">content_paste</i> Total Mes</h5>
+        <div class="<%=register_total_color(totals[:total])%> ml-auto"><%=value_to_currency(totals[:total])%></div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-body flex-row align-items-center">
+      <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">local_atm</i> Total Ingresos</h5>
+        <div class="<%=register_total_color(totals[:total_incoming])%> ml-auto"><%=value_to_currency(totals[:total_incoming])%></div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-body flex-row align-items-center">
+      <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">keyboard_arrow_down</i> Total Gastos</h5>
+        <div class="<%=register_total_color(-totals[:total_outcoming])%> ml-auto"><%=value_to_currency(-totals[:total_outcoming])%></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <%= render partial: 'shared/date_filter'%>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="text-left">Fecha</th>
+            <th scope="col" class="text-left">Descripción</th>
+            <th scope="col" class="text-left">Valor</th>
+            <th scope="col" class="text-left">Notas</th>
+            <th scope="col" class="text-left">Taxi</th>
+            <th/>
+          </tr>
+        </thead>
+        <tbody>
+          <%@registers.each do |register|%>
+            <tr>
+              <td class="align-left text-left" scope="row"><%=format_date(register.event_date)%></td>
+              <td class="align-left text-left"><%=register.description%></td>
+              <td class="align-left text-center <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
+              <td class="align-left text-left"><%=register.notes%></td>
+              <td class="align-left text-left text-uppercase"><%=register.vehicle_license_plate%></td>
+              <td class="align-left text-left">
+                <%=link_to register_path(register.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+                  <i class="material-icons">delete</i>
+                <%end%>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+
+      <%= pagy_nav_bootstrap(@pagy).html_safe if @registers.present?%>
+    </div>
+  </div>
+</div>
+<%content_for :app_modals do %>
+  <%= render partial: 'form_modal'%>
+<%end%>

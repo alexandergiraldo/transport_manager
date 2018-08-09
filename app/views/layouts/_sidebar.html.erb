@@ -1,0 +1,48 @@
+<nav class="drawer drawer--dark">
+  <div class="drawer-spacer">
+    <div class="media align-items-center">
+      <a href="index.html" class="drawer-brand-circle mr-2">T</a>
+      <div class="media-body">
+        <a href="index.html" class="h5 m-0 text-link">Taxi Admin</a>
+      </div>
+    </div>
+  </div>
+
+  <%if user_signed_in?%>
+    <!-- HEADING -->
+    <div class="py-2 drawer-heading">
+      Menu
+    </div>
+
+    <!-- MENU -->
+    <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
+      <li class="drawer-menu-item">
+        <a href="/">
+          <i class="material-icons">poll</i>
+          <span class="drawer-menu-text">Dashboard</span>
+        </a>
+      </li>
+      <li class="drawer-menu-item">
+        <a href="<%=vehicles_path%>">
+          <i class="material-icons">local_taxi</i>
+          <span class="drawer-menu-text">Taxis</span>
+        </a>
+      </li>
+      <li class="drawer-menu-item">
+        <a href="<%=drivers_path%>">
+          <i class="material-icons">account_circle</i>
+          <span class="drawer-menu-text">Conductores</span>
+        </a>
+      </li>
+      <li class="drawer-menu-item">
+        <a href="<%=maintenances_path%>">
+          <i class="material-icons">build</i>
+          <span class="drawer-menu-text">Mantenimiento</span>
+        </a>
+      </li>
+
+    </ul>
+
+  <%end%>
+
+</nav>

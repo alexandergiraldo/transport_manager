@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Taxis</h3>
+  </div>
+  <div class="card-body">
+    <div class="row mb-3 float-right">
+      <a href="<%=new_vehicle_path%>" class="btn btn btn-primary">
+          <i class="material-icons md-18 align-middle">local_taxi</i>
+          <span class="align-middle">Agregar</span>
+        </a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Placa</th>
+            <th scope="col" class="text-center">Lateral</th>
+            <th scope="col" class="text-center">Modelo</th>
+            <th scope="col" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%@vehicles.each do |vehicle|%>
+            <tr>
+              <td class="align-middle text-center text-uppercase" scope="row"><%=vehicle.license_plate%></td>
+              <td class="align-middle text-center"><%=vehicle.side_number%></td>
+              <td class="align-middle text-center"><%=vehicle.model_date%></td>
+              <td class="align-middle text-center">
+                <%=link_to edit_vehicle_path(vehicle.id), title: 'Editar' do%>
+                  <i class="material-icons">edit</i>
+                <%end%>
+                <%=link_to vehicle_path(vehicle.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+                  <i class="material-icons">delete</i>
+                <%end%>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

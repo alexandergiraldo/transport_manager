@@ -1,0 +1,2 @@
+class RegisterPolicy < MaintenancePolicy
+end

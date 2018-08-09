@@ -1,0 +1,55 @@
+<div class="modal fade" id="newMaintenanceModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newCollaboratorModalLabel">Nuevo Registro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <%= form_for(Register.new) do |f|%>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="row mb-1">
+              <div class="col-md-6 mb-1">
+                <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "Fecha", required: true, autocomplete: "off"%>
+              </div>
+              <div class="col-md-6 mb-1">
+                <%= f.select :register_type, options_for_select(register_type_options), {include_blank: false}, {class: "form-control"}%>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <%= f.text_field :description, class: "form-control", placeholder: "Descripción", required: true%>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="" class="col-sm-2 col-form-label">$ Valor</label>
+              <div class="col-sm-10">
+                <%= f.number_field :value, class: "form-control", placeholder: '', required: true%>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <%= f.text_area :notes, rows: 1, placeholder: "Notas extras", class: "form-control", required: false%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-1 custom-control custom-checkbox register-maintainable-checkbox">
+                <%=f.check_box :maintainable, class: "custom-control-input check_box"%>
+                <%=f.label :maintainable, "Guardar como Mantenimiento", class: "custom-control-label align-middle"%>
+              </div>
+              <div class="col-md-6 mb-1 select-category">
+                <%= f.select :category, options_for_select(current_vehicle.account.maintenance_types.by_name.map{|m| [m.name, m.id]}), {:prompt => 'Categoría Mantenimiento'}, {class: "category-select2 form-control", required: false}%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

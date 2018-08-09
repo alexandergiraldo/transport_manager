@@ -1,0 +1,71 @@
+<%content_for :external_css do %>
+  <%= render_select2_css %>
+<%end%>
+<div class="row mb-2">
+  <div class="col-md-2">
+    <a href="<%=new_maintenance_path%>" class="btn btn btn-primary">
+      <i class="material-icons md-18 align-middle">assignment</i>
+      <span class="align-middle">Crear Planilla</span>
+    </a>
+  </div>
+  <div class="col-md-2">
+    <a href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#newMaintenanceModal">
+      <i class="material-icons md-18 align-middle">build</i>
+      <span class="align-middle">Agregar</span>
+    </a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h4>Mantenimientos</h3>
+  </div>
+  <div class="card-body">
+
+    <%= render partial: 'shared/date_filter'%>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="text-left">Fecha</th>
+            <th scope="col" class="text-left">Descripción</th>
+            <th scope="col" class="text-left">Valor</th>
+            <th scope="col" class="text-left">Categoría</th>
+            <th scope="col" class="text-left">Taxi</th>
+            <th/>
+          </tr>
+        </thead>
+        <tbody>
+          <%@maintenances.each do |maintenance|%>
+            <tr>
+              <td class="align-left text-left" scope="row"><%=format_date(maintenance.event_date)%></td>
+              <td class="align-left text-left"><%=maintenance.description%></td>
+              <td class="align-left text-center"><%=value_to_currency(maintenance.value)%></td>
+              <td class="align-left text-left"><%=maintenance.maintenance_type_name%></td>
+              <td class="align-left text-left text-uppercase"><%=maintenance.vehicle_license_plate%></td>
+              <td class="align-left text-left">
+                <%=link_to maintenance_path(maintenance.id), title: maintenance.register_id.present? ? 'Borrar Todo' : 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+                  <i class="material-icons"><%=maintenance.register_id.present? ? 'delete_sweep' : 'delete'%></i>
+                <%end%>
+              </td>
+            </tr>
+          <%end%>
+          <tr>
+            <td class="align-left text-left" scope="row"></td>
+            <td class="align-left text-center">TOTAL:</td>
+            <td class="align-left text-center"><%=value_to_currency(@maintenances.map(&:value).reduce(:+))%></td>
+            <td class="align-left text-left"></td>
+            <td class="align-left text-left"></td>
+            <td class="align-left text-left"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <%= pagy_nav_bootstrap(@pagy).html_safe if @maintenances.present?%>
+    </div>
+  </div>
+</div>
+<%content_for :app_modals do %>
+  <%= render partial: 'form_modal'%>
+<%end%>

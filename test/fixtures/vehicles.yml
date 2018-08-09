@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  license_plate: MyString
+  side_number: MyString
+  model_date: MyString
+  vehicle_type: MyString
+
+two:
+  license_plate: MyString
+  side_number: MyString
+  model_date: MyString
+  vehicle_type: MyString

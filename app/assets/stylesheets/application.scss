@@ -1,0 +1,50 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require bootstrap-datepicker.css
+ */
+
+// COLOR PROCESSING FUNCTIONS
+$primary: #3783B5;
+$font-size-base: 0.875rem;
+@import "bootstrap/scss/functions";
+@import "core/bootstrap-color-yiq";
+
+// BOOTSTRAP
+@import "bootstrap/scss/bootstrap";
+
+// APP THEME VARIABLES
+@import "core/variables";
+
+// MDK LAYOUT
+@import 'material-design-kit/src/style';
+
+// MATERIAL FONT ICONS
+@import 'core/material-icons';
+
+@import 'core/layout';
+@import 'core/drawer';
+@import "core/navbar";
+
+a{
+  color: theme-color('primary-app');
+}
+
+$mynewcolor: theme-color('primary-app');
+
+.btn-primary {
+  @include button-variant($mynewcolor, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%),lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+}
+
+.btn-outline-primary {
+  @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+}

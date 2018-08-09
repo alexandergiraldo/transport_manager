@@ -9,10 +9,5 @@
     "dom-factory": "1.0.0-alpha.10",
     "material-design-kit": "1.0.0-alpha.20",
     "material-design-icons-iconfont": "3.0.3"
-  },
-  "scripts": {
-    "build": "npm install && npm run build",
-    "deploy": "cp -a build/. public/",
-    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
   }
 }

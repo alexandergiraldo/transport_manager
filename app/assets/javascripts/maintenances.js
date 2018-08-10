@@ -20,7 +20,7 @@ Maintenances = (function(){
   }
 
   function calculate_maintenances_totals() {
-    var outcoming_values = [];
+    //var outcoming_values = [];
     $('.maintenance-row').each(function() {
       //var value = $(this).find('.maintenance-value').val() || 0;
       //outcoming_values.push(parseInt(value));

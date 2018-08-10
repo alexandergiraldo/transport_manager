@@ -36,7 +36,7 @@ Maintenances = (function(){
 
   function sum_values(values){
     if(values.length > 0){
-      return values.reduce((a, b) => a + b);
+      //return values.reduce((a, b) => a + b);
     }
     else{
       return 0;

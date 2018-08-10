@@ -20,10 +20,10 @@ Maintenances = (function(){
   }
 
   function calculate_maintenances_totals() {
-    //var outcoming_values = [];
+    var outcoming_values = [];
     $('.maintenance-row').each(function() {
-      //var value = $(this).find('.maintenance-value').val() || 0;
-      //outcoming_values.push(parseInt(value));
+      var value = $(this).find('.maintenance-value').val() || 0;
+      outcoming_values.push(parseInt(value));
     });
     $('#maintenances-total').html('$'+sum_values(outcoming_values));
   }
@@ -36,7 +36,10 @@ Maintenances = (function(){
 
   function sum_values(values){
     if(values.length > 0){
-      //return values.reduce((a, b) => a + b);
+      var sum = values.reduce(function (x, y) {
+        return x + y;
+      });
+      return sum
     }
     else{
       return 0;

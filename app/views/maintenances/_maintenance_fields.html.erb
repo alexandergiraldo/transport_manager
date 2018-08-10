@@ -9,9 +9,9 @@
     <%= f.text_area :description, rows: 1, class: "form-control", placeholder: "", required: true%>
   </td>
   <td class="align-left text-left">
-    <%= f.number_field :value, class: "form-control", placeholder: '', required: true%>
+    <%= f.number_field :value, class: "form-control maintenance-value", placeholder: '', required: true%>
   </td>
-  <td class="align-left text-center">
+  <td class="align-left text-center d-print-none">
     <div class="custom-control custom-checkbox">
       <%=f.check_box :registrable, class: "custom-control-input"%>
       <%=f.label :registrable, "Registrable?", class: "custom-control-label align-middle"%>

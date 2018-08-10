@@ -1,20 +1,20 @@
-<tr class="maintenance-row">
+<tr class="register-row">
   <td class="align-left text-left" scope="row">
     <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
   </td>
   <td class="align-left text-left" scope="row">
-    <%= f.select :register_type, options_for_select(register_type_options), {include_blank: false}, {class: "form-control"}%>
+    <%= f.select :register_type, options_for_select(register_type_options), {include_blank: false}, {class: "form-control register-type"}%>
   </td>
   <td class="align-left text-center">
     <%= f.text_field :description, class: "form-control", placeholder: "", required: true%>
   </td>
   <td class="align-left text-left">
-    <%= f.number_field :value, class: "form-control", placeholder: '', required: true%>
+    <%= f.number_field :value, class: "form-control register-value", placeholder: '', required: true%>
   </td>
   <td class="align-left text-center">
     <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>
   </td>
-  <td class="align-left">
+  <td class="align-left d-print-none">
     <div class="custom-control custom-checkbox mb-1 register-maintainable-checkbox">
       <%=f.check_box :maintainable, class: "custom-control-input check_box"%>
       <%=f.label :maintainable, "Mantenimiento?", class: "custom-control-label align-middle"%>
@@ -23,7 +23,7 @@
       <%= f.select :category, category_options(f.object), {:prompt => 'Seleccionar Categoría'}, {class: "category-select2 form-control", required: false}%>
     </div>
     <div class="text-center">
-      <%= link_to_remove_association f, wrapper_class: 'maintenance-row', title: "Eliminar" do%>
+      <%= link_to_remove_association f, wrapper_class: 'register-row', title: "Eliminar" do%>
         <i class="material-icons md-18 align-middle">delete</i>
       <%end%>
     </div>

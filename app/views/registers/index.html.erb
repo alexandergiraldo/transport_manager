@@ -21,12 +21,6 @@
 
   <div class="col-md-4">
     <div class="card card-body flex-row align-items-center">
-      <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">content_paste</i> Total Mes</h5>
-        <div class="<%=register_total_color(totals[:total])%> ml-auto"><%=value_to_currency(totals[:total])%></div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card card-body flex-row align-items-center">
       <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">local_atm</i> Total Ingresos</h5>
         <div class="<%=register_total_color(totals[:total_incoming])%> ml-auto"><%=value_to_currency(totals[:total_incoming])%></div>
     </div>
@@ -35,6 +29,12 @@
     <div class="card card-body flex-row align-items-center">
       <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">keyboard_arrow_down</i> Total Gastos</h5>
         <div class="<%=register_total_color(-totals[:total_outcoming])%> ml-auto"><%=value_to_currency(-totals[:total_outcoming])%></div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-body flex-row align-items-center">
+      <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">content_paste</i> Total Mes</h5>
+        <div class="<%=register_total_color(totals[:total])%> ml-auto"><%=value_to_currency(totals[:total])%></div>
     </div>
   </div>
 </div>

@@ -19,6 +19,7 @@
 //= require datepicker.js
 //= require select2.min.js
 //= require cocoon
+//= require registers
 //= require maintenances
 
 //= require dom-factory/dist/dom-factory.js

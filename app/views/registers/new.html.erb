@@ -9,7 +9,7 @@
   <div class="card-body">
     <%= form_for(current_vehicle, url: multiple_registers_path, method: :post) do |f|%>
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-sm">
           <thead>
             <tr>
               <th scope="col" class="text-left" style="width: 14%">Fecha</th>
@@ -17,7 +17,7 @@
               <th scope="col" class="text-left" style="width: 25%">Descripción</th>
               <th scope="col" class="text-left" style="width: 13%">Valor</th>
               <th scope="col" class="text-left">Notas</th>
-              <th></th>
+              <th class="d-print-none"></th>
             </tr>
           </thead>
           <tbody id="registers" class="">
@@ -27,17 +27,38 @@
           </tbody>
         </table>
 
-        <div class="row-fluid mb-4">
+        <div class="row-fluid mb-3 d-print-none">
           <div class="col-sm-12 text-center">
             <%=link_to_add_association 'Agregar Registro', f, :registers, class: "btn btn-success", partial: 'register_fields', "data-association-insertion-node" => '#registers', "data-association-insertion-method"=>"append"%>
           </div>
         </div>
+      </div>
 
-        <div class="row-fluid">
-          <div class="col-sm-12 text-center">
-            <%= f.submit 'Guardar', class: "btn btn-primary"%>
-            <%= link_to 'Cancelar', :back, class: 'btn btn-light'%>
+      <div class="row font-1 mb-3 totals">
+        <div class="col-md-4">
+          <div class="card card-body flex-row align-items-center">
+            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">local_atm</i> Total Ingresos</h5>
+              <div class="text-success ml-auto" id="registers-incoming"></div>
           </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-body flex-row align-items-center">
+            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">keyboard_arrow_down</i> Total Gastos</h5>
+              <div class="text-danger ml-auto" id="registers-outcoming"></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-body flex-row align-items-center">
+            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">content_paste</i> Total</h5>
+              <div class="ml-auto" id="registers-total"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid d-print-none">
+        <div class="col-sm-12 text-center">
+          <%= f.submit 'Guardar', class: "btn btn-primary"%>
+          <%= link_to 'Cancelar', :back, class: 'btn btn-light'%>
         </div>
       </div>
     <%end%>

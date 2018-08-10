@@ -4,7 +4,7 @@ class RegistersController < ApplicationController
   before_action :init_date_params, only: [:index]
 
   def index
-    @pagy, @registers = pagy(policy_scope(Register).where(vehicle_id: current_vehicle.id).search(params).by_date, items: 31)
+    @pagy, @registers = pagy(policy_scope(Register).where(vehicle_id: current_vehicle.id).search(params).by_date, items: 60)
   end
 
   def new
@@ -15,7 +15,7 @@ class RegistersController < ApplicationController
     @register_service = ::Registers::MultipleRegistersService.new({vehicle: {registers_attributes: {"0" => register_params}}}, current_user, current_vehicle)
 
     if @register_service.process
-      redirect_to registers_path, flash: {success: "Registro creado exitosamente"}
+      redirect_to request.referer, flash: {success: "Registro creado exitosamente"}
     else
       self.index
       flash[:error] = "Ha ocurrido un error"
@@ -50,7 +50,7 @@ class RegistersController < ApplicationController
     authorize @register, :update?
 
     if @register.destroy
-      redirect_to registers_path, flash: {alert: "Registro eliminado exitosamente"}
+      redirect_to request.referer, flash: {alert: "Registro eliminado exitosamente"}
     else
       render :new
     end

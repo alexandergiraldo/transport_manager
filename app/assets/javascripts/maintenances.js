@@ -22,16 +22,16 @@ Maintenances = (function(){
   function calculate_maintenances_totals() {
     var outcoming_values = [];
     $('.maintenance-row').each(function(index) {
-      var value = $(this).find('.maintenance-value').val() || 0;
+      var value = $(this).find('.maintenance-value').val();
       outcoming_values.push(parseInt(value));
     });
     $('#maintenances-total').html('$'+sum_values(outcoming_values));
   }
 
   function monitor_maintenances_values(){
-    $(document).on("change", '.maintenance-value', function() {
+    //$(document).on("change", '.maintenance-value', function() {
       calculate_maintenances_totals();
-    });
+    //});
   }
 
   function sum_values(values){

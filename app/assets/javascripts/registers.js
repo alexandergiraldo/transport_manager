@@ -5,9 +5,9 @@ Registers = (function(){
 
     $('.register-row').each(function(index) {
       var type = $(this).find('.register-type').val();
-      var value = $(this).find('.register-value').val() || 0;
+      var value = $(this).find('.register-value').val();
 
-      if( type  == '0'){
+      if( type == '0'){
         incoming_values.push(parseInt(value));
       }
       else{

@@ -19,35 +19,11 @@ Maintenances = (function(){
     });
   }
 
-  function calculate_maintenances_totals() {
-    var outcoming_values = [];
-    $('.maintenance-row').each(function(index) {
-      var value = $(this).find('.maintenance-value').val() || 0;
-      outcoming_values.push(parseInt(value));
-    });
-    $('#maintenances-total').html('$'+sum_values(outcoming_values));
-  }
-
-  function monitor_maintenances_values(){
-    $(document).on("change", '.maintenance-value', function() {
-      calculate_maintenances_totals();
-    });
-  }
-
-  function sum_values(values){
-    if(values.length > 0){
-      return values.reduce((a, b) => a + b)
-    }
-    else{
-      return 0;
-    }
-  }
-
   return{
     init: function() {
       cocoon_callbacks();
       toggle_category_select();
-      monitor_maintenances_values();
+      //monitor_maintenances_values();
     }
   }
 })();

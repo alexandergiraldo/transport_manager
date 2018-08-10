@@ -5,7 +5,7 @@ Registers = (function(){
 
     $('.register-row').each(function(index) {
       var type = $(this).find('.register-type').val();
-      var value = $(this).find('.register-value').val();
+      var value = $(this).find('.register-value').val() || 0;
 
       if( type == '0'){
         incoming_values.push(parseInt(value));
@@ -15,8 +15,8 @@ Registers = (function(){
       }
     });
 
-    incoming_sum = sum_values(incoming_values)
-    outcoming_sum = sum_values(outcoming_values)
+    var incoming_sum = sum_values(incoming_values)
+    var outcoming_sum = sum_values(outcoming_values)
 
     $('#registers-incoming').html('$'+incoming_sum);
     $('#registers-outcoming').html('$'+outcoming_sum);

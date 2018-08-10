@@ -24,7 +24,7 @@ Registers = (function(){
   }
 
   function monitor_total_values(){
-    $(document).on("change", '.register-value', function() {
+    $(document).on("change", '.register-value, .register-type', function() {
       calculate_registers_totals();
     });
   }

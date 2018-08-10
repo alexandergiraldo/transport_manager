@@ -27,23 +27,28 @@
           </tbody>
         </table>
 
-        <div class="row-fluid mb-3 d-print-none">
-          <div class="col-sm-12 text-center">
-            <%=link_to_add_association 'Agregar Registro', f, :registers, class: "btn btn-success", partial: 'register_fields', "data-association-insertion-node" => '#registers', "data-association-insertion-method"=>"append"%>
-          </div>
+      </div>
+      <div class="row mb-3 d-print-none">
+        <div class="col-sm-6 text-right">
+          <%=link_to_add_association 'Agregar Registro', f, :registers, class: "btn btn-dark", partial: 'register_fields', "data-association-insertion-node" => '#registers', "data-association-insertion-method"=>"append"%>
+        </div>
+        <div class="col-sm-6 text-left">
+          <%=link_to 'javascript:window.print()', class: 'btn btn-info' do%>
+            <i class="material-icons align-middle md-4">print</i>Imprimir
+          <%end%>
         </div>
       </div>
 
       <div class="row font-1 mb-3 totals">
         <div class="col-md-4">
           <div class="card card-body flex-row align-items-center">
-            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">local_atm</i> Total Ingresos</h5>
+            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">monetization_on</i> Total Ingresos</h5>
               <div class="text-success ml-auto" id="registers-incoming"></div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card card-body flex-row align-items-center">
-            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">keyboard_arrow_down</i> Total Gastos</h5>
+            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">money_off</i> Total Gastos</h5>
               <div class="text-danger ml-auto" id="registers-outcoming"></div>
           </div>
         </div>

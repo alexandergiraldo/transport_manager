@@ -12,7 +12,7 @@ module Registers
     def process
       xlsx = Roo::Spreadsheet.open("#{file_name}.xlsx")
       ActiveRecord::Base.transaction do
-        1.upto(xlsx.sheets.count-2).each do |sheet_number|
+        0.upto(xlsx.sheets.count-2).each do |sheet_number|
           sheet = xlsx.sheet(sheet_number)
           i = 9
           while sheet.cell('C', i).present?

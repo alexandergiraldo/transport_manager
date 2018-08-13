@@ -15,7 +15,7 @@
 
 // COLOR PROCESSING FUNCTIONS
 $primary: #3783B5;
-$font-size-base: 0.875rem;
+$font-size-base: 0.9375rem;
 @import "bootstrap/scss/functions";
 @import "core/bootstrap-color-yiq";
 
@@ -47,4 +47,8 @@ $mynewcolor: theme-color('primary-app');
 
 .btn-outline-primary {
   @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+}
+
+#registers-incoming, #registers-outcoming, #registers-total{
+  font-size: 20px;
 }

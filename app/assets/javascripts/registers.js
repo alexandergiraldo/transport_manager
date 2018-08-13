@@ -18,9 +18,9 @@ Registers = (function(){
     var incoming_sum = sum_values(incoming_values)
     var outcoming_sum = sum_values(outcoming_values)
 
-    $('#registers-incoming').html('$'+incoming_sum);
-    $('#registers-outcoming').html('$'+outcoming_sum);
-    $('#registers-total').html('$'+(incoming_sum-outcoming_sum));
+    $('#registers-incoming').html('$'+to_currency(incoming_sum));
+    $('#registers-outcoming').html('$'+to_currency(outcoming_sum));
+    $('#registers-total').html('$'+to_currency((incoming_sum-outcoming_sum)));
   }
 
   function monitor_total_values(){
@@ -39,6 +39,10 @@ Registers = (function(){
     else{
       return 0;
     }
+  }
+
+  function to_currency(number){
+    return (number).toLocaleString('es-CO');
   }
 
   return{

@@ -6,22 +6,20 @@
     <%=current_user.account.name%>
   </div>
 
-  <div class="collapse navbar-collapse" id="mainNavbar">
+  <div class="collapse navbar-collapse navbar-expand-sm" id="mainNavbar">
     <ul class="navbar-nav ml-auto align-items-center">
       <li class="nav-item nav-link">
         <%=form_tag change_vehicle_path, method: :post do %>
-                                        <div class="form-group m-0">
-                                            <div class="input-group input-group--inline">
-                                                <div class="input-group-addon">
-                                                    <i class="material-icons">local_taxi</i>
-                                                </div>
-
-          <%=select_tag "vehicle_id", options_from_collection_for_select(user_vehicles, "id", "license_plate", current_vehicle.try(:id)), class: "text-uppercase auto-submit current-vehicle form-control"%>
-
-                                            </div>
-                                        </div>
-                                        <%end%>
-                                    </li>
+          <div class="form-group m-0">
+            <div class="input-group input-group--inline">
+              <div class="input-group-addon">
+                <i class="material-icons">local_taxi</i>
+              </div>
+              <%=select_tag "vehicle_id", options_from_collection_for_select(user_vehicles, "id", "license_plate", current_vehicle.try(:id)), class: "text-uppercase auto-submit current-vehicle form-control"%>
+              </div>
+          </div>
+        <%end%>
+      </li>
       <li class="nav-item nav-divider">
       <li class="nav-item dropdown nav-language d-flex align-items-center">
         <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown" aria-expanded="false">

@@ -26,7 +26,8 @@ class ApplicationController < ActionController::Base
     if params.dig(:q, :event_date_gteq).present?
       year = params[:year].present? ? params[:year].to_i : Time.now.year
       date = Date.new(year, params.dig(:q, :event_date_gteq).to_i, 1)
-      params[:q] = {event_date_gteq: date, event_date_lteq: date.end_of_month}
+      params[:q][:event_date_gteq] = date
+      params[:q][:event_date_lteq] = date.end_of_month
     else
       params[:q] = {event_date_gteq: Time.now.beginning_of_month, event_date_lteq: Time.now.end_of_month}
     end

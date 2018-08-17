@@ -21,8 +21,27 @@
     <h4>Mantenimientos</h3>
   </div>
   <div class="card-body">
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
+          <div class="form-group">
+            <div class="row mb-1">
+              <div class="col-md-2 mb-1">
+                <%= f.select :event_date_gteq, options_for_select(month_options, params.dig(:q, :event_date_gteq).try(:mon)), {include_blank: false}, {class: "form-control auto-submit"}%>
+              </div>
+              <div class="col-md-2 mb-1">
+                <%=select_year(params.dig(:q, :event_date_gteq).try(:year) || Date.today, {start_year: 2013, end_year: 2030}, class: "form-control auto-submit", name: 'year')%>
+              </div>
 
-    <%= render partial: 'shared/date_filter'%>
+              <div class="col-md-4 mb-1">
+                <%= f.select :maintenance_type_id_eq, category_options, {:prompt => 'Categoría'}, {class: "category-select2 form-control auto-submit", required: false}%>
+              </div>
+            </div>
+          </div>
+        <%end%>
+      </div>
+
+    </div>
 
     <div class="table-responsive">
       <table class="table table-bordered table-sm">

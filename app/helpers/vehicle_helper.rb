@@ -9,9 +9,11 @@ module VehicleHelper
     end
   end
 
-  def category_options(maintenance)
+  def category_options(maintenance = nil)
     types = current_vehicle.account.maintenance_types.by_name.map{|m| [m.name, m.id]}
-    types << [maintenance.category, maintenance.category] if maintenance.category.to_i == 0
-    options_for_select(types, maintenance.category)
+    selected = maintenance.try(:category) || params.dig(:q, :maintenance_type_id_eq)
+    types << [maintenance.category, maintenance.category] if maintenance && maintenance.category.to_i == 0
+
+    options_for_select(types, selected)
   end
 end

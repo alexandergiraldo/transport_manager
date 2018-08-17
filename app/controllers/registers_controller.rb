@@ -7,6 +7,10 @@ class RegistersController < ApplicationController
     @pagy, @registers = pagy(policy_scope(Register).where(vehicle_id: current_vehicle.id).search(params).by_date, items: 60)
   end
 
+  def print
+    @registers = policy_scope(Register).where(vehicle_id: current_vehicle.id).search(params).by_date
+  end
+
   def new
     @maintenance = Maintenance.new
   end

@@ -49,6 +49,6 @@ $mynewcolor: theme-color('primary-app');
   @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
 }
 
-#registers-incoming, #registers-outcoming, #registers-total{
+.register-values{
   font-size: 20px;
 }

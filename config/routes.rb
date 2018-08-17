@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :registers, except: :index do
     post "multiple", to: "registers#create_multiple", on: :collection, as: "multiple"
+    get "print", to: "registers#print", on: :collection, as: "print"
   end
   get 'registers', to: 'registers#index'
 

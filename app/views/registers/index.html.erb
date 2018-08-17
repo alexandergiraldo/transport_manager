@@ -41,9 +41,16 @@
 
 <div class="card">
   <div class="card-body">
+    <div class="row mb-3">
+      <%= render partial: 'shared/date_filter'%>
 
-    <%= render partial: 'shared/date_filter'%>
-
+      <div class="col-md-7 text-right">
+        <a href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registersPrintModal">
+          <i class="material-icons md-18 align-middle">print</i>
+          <span class="align-middle">Imprimir</span>
+        </a>
+      </div>
+    </div>
     <div class="table-responsive">
       <table class="table table-bordered table-sm">
         <thead>
@@ -80,4 +87,5 @@
 </div>
 <%content_for :app_modals do %>
   <%= render partial: 'form_modal'%>
+  <%= render partial: 'print_modal'%>
 <%end%>

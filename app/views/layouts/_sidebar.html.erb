@@ -10,6 +10,17 @@
 
   <%if user_signed_in?%>
     <!-- HEADING -->
+
+    <div class="d-block d-sm-none drawer-heading">
+      <%=form_tag change_vehicle_path, method: :post do %>
+        <div class="form-group m-0">
+          <div class="input-group input-group--inline">
+            <%=select_tag "vehicle_id", options_from_collection_for_select(user_vehicles, "id", "license_plate", current_vehicle.try(:id)), class: "text-uppercase auto-submit current-vehicle form-control"%>
+            </div>
+        </div>
+      <%end%>
+    </div>
+
     <div class="py-2 drawer-heading">
       Menu
     </div>

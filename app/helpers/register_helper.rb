@@ -1,6 +1,7 @@
 module RegisterHelper
   def register_type_color(register_type)
     return '' if register_type.blank?
+
     register_type.eql?('outcoming') ? 'text-danger' : 'text-success'
   end
 

@@ -10,7 +10,7 @@ class Vehicle < ApplicationRecord
   accepts_nested_attributes_for :registers, reject_if: :all_blank, allow_destroy: true
 
   # Validations
-  validates :license_plate, presence: true
+  validates :license_plate, presence: true, uniqueness: {message: 'Ya existe'}
 
   #scopes
   scope :by_date, -> { order('id DESC') }

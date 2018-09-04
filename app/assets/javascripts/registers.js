@@ -4,7 +4,7 @@ Registers = (function(){
     var outcoming_values = [];
 
     $('.register-row').each(function() {
-      var type = $(this).find('.register-type').val();
+      var type = $(this).find('input[class=register-type-js]:checked').val();
       var value = $(this).find('.register-value').val() || 0;
 
       if( type == '0'){
@@ -24,7 +24,10 @@ Registers = (function(){
   }
 
   function monitor_total_values(){
-    $(document).on("change", '.register-value, .register-type', function() {
+    $(document).on("change", '.register-value, .register-type-js', function(e) {
+      if ($(e.currentTarget).hasClass('register-type-js')){
+        register_type_default_values($(this));
+      }
       calculate_registers_totals();
     });
   }
@@ -43,6 +46,19 @@ Registers = (function(){
 
   function to_currency(number){
     return (number).toLocaleString('es-CO');
+  }
+
+  function register_type_default_values(selector){
+
+      if ( selector.val() == '0' ){
+        selector.parents('tr').find(".register-description").val('ENTREGA DÍA Y NOCHE');
+        selector.parents('tr').find(".register-value").val(142000);
+      }
+      else{
+        selector.parents('tr').find(".register-description").val('');
+        selector.parents('tr').find(".register-value").val('');
+      }
+
   }
 
   return{

@@ -49,16 +49,14 @@ Registers = (function(){
   }
 
   function register_type_default_values(selector){
-
-      if ( selector.val() == '0' ){
-        selector.parents('tr').find(".register-description").val('ENTREGA DÍA Y NOCHE');
-        selector.parents('tr').find(".register-value").val(142000);
-      }
-      else{
-        selector.parents('tr').find(".register-description").val('');
-        selector.parents('tr').find(".register-value").val('');
-      }
-
+    if ( selector.val() == '0' ){
+      selector.parents('tr').find(".register-description").val('ENTREGA DÍA Y NOCHE');
+      selector.parents('tr').find(".register-value").val(152000);
+    }
+    else{
+      selector.parents('tr').find(".register-description").val('');
+      selector.parents('tr').find(".register-value").val('');
+    }
   }
 
   return{

@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {},
   "engines": {
-    "yarn": "1.12.3"
+    "node": "10.15.0"
   },
   "devDependencies": {
     "bootstrap": "^4.1.2",

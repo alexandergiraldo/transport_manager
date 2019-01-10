@@ -1,11 +1,10 @@
 {
   "name": "taxi-manager",
   "private": true,
-  "dependencies": {},
   "engines": {
     "node": "10.15.0"
   },
-  "devDependencies": {
+  "dependencies": {
     "bootstrap": "^4.1.2",
     "popper.js": "1.14.3",
     "jquery": "3.2.1",

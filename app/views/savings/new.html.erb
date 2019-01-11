@@ -1,0 +1,56 @@
+<%content_for :external_css do %>
+  <%= render_select2_css %>
+<%end%>
+
+<div class="card-header">
+  <h5 class="card-title">Nuevos Ahorros - <%=@saving.driver.name%></h5>
+</div>
+<div class="card">
+  <div class="card-body">
+    <%= form_for(@saving.driver, url: driver_savings_path(params[:driver_id]), method: :post) do |f|%>
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th scope="col" class="text-left">Fecha</th>
+              <th scope="col" class="text-left">Valor</th>
+              <th class="d-print-none"></th>
+            </tr>
+          </thead>
+          <tbody id="savings" class="">
+            <%= f.fields_for :savings, @saving_service.try(:savings) || @saving do |m| %>
+              <%= render partial: 'saving_fields', locals: {f: m}%>
+            <%end%>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="row mb-3 d-print-none">
+        <div class="col-sm-6 text-right">
+          <%=link_to_add_association 'Agregar Registro', f, :savings, class: "btn btn-dark", partial: 'saving_fields', "data-association-insertion-node" => '#savings', "data-association-insertion-method"=>"append"%>
+        </div>
+        <div class="col-sm-6 text-left">
+          <%=link_to 'javascript:window.print()', class: 'btn btn-info' do%>
+            <i class="material-icons align-middle md-4">print</i>Imprimir
+          <%end%>
+        </div>
+      </div>
+
+      <div class="row font-1 mb-3 totals">
+        <div class="col-md-4">
+          <div class="card card-body flex-row align-items-center">
+            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">content_paste</i> Total</h5>
+              <div class="ml-auto register-values text-success" id="savings-total"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid d-print-none">
+        <div class="col-sm-12 text-center">
+          <%= f.submit 'Guardar', class: "btn btn-primary"%>
+          <%= link_to 'Cancelar', :back, class: 'btn btn-light'%>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>

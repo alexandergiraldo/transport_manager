@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root to: "registers#index"
 
   resources :vehicles
-  resources :drivers
+  resources :drivers do
+    resources :savings, except: [:index]
+  end
   resources :maintenances, except: :index do
     post "multiple", to: "maintenances#create_multiple", on: :collection, as: "multiple"
   end
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
     get "print", to: "registers#print", on: :collection, as: "print"
   end
   get 'registers', to: 'registers#index'
+  get 'savings', to: 'savings#index'
 
   post "utils/change_vehicle", to: "utils#change_current_vehicle", as: 'change_vehicle'
 end

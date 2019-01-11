@@ -38,4 +38,8 @@ module ApplicationHelper
     ['Noviembre',11],
     ['Diciembre',12]]
   end
+
+  def drivers_list
+    current_user.account.drivers.by_name.map{|d| [d.name.titleize, d.id]}
+  end
 end

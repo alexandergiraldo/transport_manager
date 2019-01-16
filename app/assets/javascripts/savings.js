@@ -14,7 +14,6 @@ Savings = (function(){
 
   function monitor_total_values(){
     $(document).on("change", '.saving-value', function(e) {
-      $(this).parents('tr').find(".saving-value").val(2000);
       calculate_registers_totals();
     });
   }

@@ -29,6 +29,7 @@ module Savings
         driver_id: params[:driver_id],
         event_date: saving[:event_date],
         amount: saving[:amount].to_i,
+        notes: saving[:notes],
         user_id: user.id,
       )
     end

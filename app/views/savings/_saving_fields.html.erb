@@ -5,6 +5,9 @@
   <td class="align-left text-left">
     <%= f.number_field :amount, class: "form-control saving-value", placeholder: '', required: true%>
   </td>
+  <td class="align-left text-left" scope="row">
+    <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>
+  </td>
   <td class="align-left d-print-none">
     <div class="text-center">
       <%= link_to_remove_association f, wrapper_class: 'saving-row', title: "Eliminar" do%>

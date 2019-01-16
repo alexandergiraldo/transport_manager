@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
       params[:q][:event_date_gteq] = date
       params[:q][:event_date_lteq] = date.end_of_month
     else
-      params[:q] = {event_date_gteq: Time.now.beginning_of_month, event_date_lteq: Time.now.end_of_month}
+      params[:q] = {event_date_gteq: Time.now.beginning_of_month, event_date_lteq: Time.now.end_of_month, driver_id_eq: params.dig(:q, :driver_id_eq)}
     end
   end
 

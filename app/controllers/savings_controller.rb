@@ -17,10 +17,9 @@ class SavingsController < ApplicationController
     @saving_service = ::Savings::MultipleSavingsService.new(params.to_unsafe_h, current_user)
 
     if @saving_service.process
-      redirect_to driver_savings_path(params[:driver_id]), flash: {success: "Ahorros creados exitosamente"}
+      redirect_to savings_path(q: {driver_id_eq: params[:driver_id]}), flash: {success: "Ahorros creados exitosamente"}
     else
-      puts @saving_service.errors.inspect
-      flash[:error] = "Ha ocurrido un error"
+      flash[:error] = "Ha ocurrido un error: #{@saving_service.errors.join("<br/>")}"
       render :new
     end
   end

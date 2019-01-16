@@ -44,6 +44,7 @@
           <tr>
             <th scope="col" class="text-left">Fecha</th>
             <th scope="col" class="text-left">Valor</th>
+            <th scope="col" class="text-left">Notas</th>
             <th/>
           </tr>
         </thead>
@@ -52,6 +53,7 @@
             <tr>
               <td class="align-left text-left" scope="row"><%=format_date(saving.event_date)%></td>
               <td class="align-left text-left"><%=value_to_currency(saving.amount)%></td>
+              <td class="align-left text-left"><%=saving.notes%></td>
               <td class="align-left text-left">
                 <%=link_to driver_saving_path(saving.driver_id, saving.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
                   <i class="material-icons">delete</i>

@@ -6,7 +6,7 @@ class SavingsController < ApplicationController
   def index
     result = policy_scope(Saving)
     result = result.search(params).by_date
-    @pagy, @savings = pagy(result)
+    @pagy, @savings = pagy(result, items: 60)
   end
 
   def new

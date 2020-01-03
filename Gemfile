@@ -42,7 +42,7 @@ gem 'devise', '>= 4.4.3'
 gem 'pundit'
 
 # Search engine
-gem 'ransack'
+gem 'ransack', '~> 2.1.0'
 gem 'pagy'
 
 # Read excel file

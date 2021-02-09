@@ -51,7 +51,7 @@ Registers = (function(){
   function register_type_default_values(selector){
     if ( selector.val() == '0' ){
       selector.parents('tr').find(".register-description").val('ENTREGA DÍA Y NOCHE');
-      selector.parents('tr').find(".register-value").val(160000);
+      selector.parents('tr').find(".register-value").val(166000);
     }
     else{
       selector.parents('tr').find(".register-description").val('');

@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%=@driver.name%></h3>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td scope="col" class="text-left">Cedula</td>
+            <td scope="col" class="text-left"><%=@driver.identification_id%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">EPS</td>
+            <td scope="col" class="text-left"><%=@driver.insurance%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Pensión</td>
+            <td scope="col" class="text-left"><%=@driver.pension_company%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Dirección</td>
+            <td scope="col" class="text-left"><%=@driver.address%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Telefono</td>
+            <td scope="col" class="text-left"><%=@driver.phone_number%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Celular</td>
+            <td scope="col" class="text-left"><%=@driver.mobile_number%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Correo Electronico</td>
+            <td scope="col" class="text-left"><%=@driver.email%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Cumpleaños</td>
+            <td scope="col" class="text-left"><%=@driver.birthday%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Notas</td>
+            <td scope="col" class="text-left"><%=@driver.notes%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

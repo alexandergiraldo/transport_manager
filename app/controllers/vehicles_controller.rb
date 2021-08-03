@@ -14,7 +14,7 @@ class VehiclesController < ApplicationController
     @vehicle.account_id = current_account_id
 
     if @vehicle.save
-      redirect_to vehicles_path, flash: {success: "Taxi creado exitosamente"}
+      redirect_to vehicles_path, flash: {success: "Vehículo creado exitosamente"}
     else
       render :new
     end
@@ -30,7 +30,7 @@ class VehiclesController < ApplicationController
     authorize @vehicle, :update?
 
     if @vehicle.update(vehicle_params)
-      redirect_to vehicles_path, flash: {success: "Taxi actualizado exitosamente"}
+      redirect_to vehicles_path, flash: {success: "Vehículo actualizado exitosamente"}
     else
       render :new
     end
@@ -41,7 +41,7 @@ class VehiclesController < ApplicationController
     authorize @vehicle, :update?
 
     if @vehicle.archived!
-      redirect_to vehicles_path, flash: {alert: "Taxi archivado exitosamente"}
+      redirect_to vehicles_path, flash: {alert: "Vehículo archivado exitosamente"}
     else
       render :new
     end

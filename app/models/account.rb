@@ -5,6 +5,8 @@ class Account < ApplicationRecord
   has_many :drivers, dependent: :delete_all
   has_many :maintenance_types, dependent: :delete_all
 
+  enum cars_icon: [ :local_taxi, :local_shipping ]
+
   # Callbacks
   after_create :init_maintenance_types
 

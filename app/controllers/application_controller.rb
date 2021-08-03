@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   around_action :app_time_zone, if: :current_user
   before_action :validate_vehicle, if: :current_user
-  helper_method :current_vehicle
+  helper_method :current_vehicle, :current_account
 
   def app_time_zone(&block)
     Time.use_zone("America/Bogota", &block)

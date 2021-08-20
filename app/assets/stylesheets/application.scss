@@ -57,3 +57,14 @@ $mynewcolor: theme-color('primary-app');
 .select2-container .select2-selection--single{
   height: 35px !important;
 }
+
+.edit-doc-link {
+  position: initial;
+  left: 100%;
+  float: right;
+  display: inline;
+}
+
+#documents .card-header{
+  cursor: pointer;
+}

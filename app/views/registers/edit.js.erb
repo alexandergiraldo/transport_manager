@@ -1,0 +1,3 @@
+$("#edit-register-modal").html("<%= j render(partial: 'form', locals: {register: @register}) %>");
+$("#edit-register-modal").modal("show");
+window.Application.init_sheet_inputs();

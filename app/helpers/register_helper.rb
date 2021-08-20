@@ -25,4 +25,31 @@ module RegisterHelper
   def register_total_color(value)
     value < 0 ? 'text-danger' : 'text-success'
   end
+
+  def register_type_class
+    html_class = "register-type-js"
+    html_class += " no-default-value" if @document.present?
+    html_class
+  end
+
+  def get_register_uri(vehicle)
+    if vehicle.taxi?
+      new_register_path
+    elsif vehicle.truck?
+      new_document_path
+    end
+  end
+
+  def options_for_vehicle_types
+    options_for_select(
+      Vehicle.vehicle_types.map { |key, value|
+        [I18n.t("vehicle_types.#{key}"), Vehicle.vehicle_types.key(value)]
+      },
+      @vehicle.vehicle_type
+    )
+  end
+
+  def document_card_state(document)
+    document.id.to_s == params[:open_document] ? "show" : ""
+  end
 end

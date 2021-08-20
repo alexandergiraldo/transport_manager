@@ -20,7 +20,7 @@
   <div class="form-group row">
     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label">Clase</label>
     <div class="col-sm-10">
-      <%= f.text_field :vehicle_type, class: "form-control", placeholder: ""%>
+      <%= f.select :vehicle_type, options_for_vehicle_types, {:prompt => 'Seleccionar Categoría'}, {class: "category-select2 form-control", required: false}%>
     </div>
   </div>
   <%= link_to 'Cancelar', :back, class: 'btn btn-light'%>

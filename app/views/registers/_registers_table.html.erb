@@ -1,0 +1,31 @@
+<table class="table table-bordered table-sm">
+  <thead>
+    <tr>
+      <th scope="col" class="text-left">Fecha</th>
+      <th scope="col" class="text-left">Descripción</th>
+      <th scope="col" class="text-left">Valor</th>
+      <th scope="col" class="text-left">Notas</th>
+      <th scope="col" class="text-left">Vehículo</th>
+      <th/>
+    </tr>
+  </thead>
+  <tbody>
+    <%registers.each do |register|%>
+      <tr>
+        <td class="align-left text-left" scope="row"><%=format_date(register.event_date)%></td>
+        <td class="align-left text-left"><%=register.description%></td>
+        <td class="align-left text-center <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
+        <td class="align-left text-left"><%=register.notes%></td>
+        <td class="align-left text-left text-uppercase"><%=register.vehicle_license_plate%></td>
+        <td class="align-left text-left">
+          <%=link_to edit_register_path(register.id, format: :js), title: 'Editar', data: {remote: true}, class: "edit-register" do%>
+            <i class="material-icons">edit</i>
+          <%end%>
+          <%=link_to register_path(register.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+            <i class="material-icons">delete</i>
+          <%end%>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

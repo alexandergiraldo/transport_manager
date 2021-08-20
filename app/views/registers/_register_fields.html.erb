@@ -1,14 +1,15 @@
 <tr class="register-row">
   <td class="align-left text-left" scope="row">
+    <%= f.hidden_field :document_id, :value => @document&.id || f.object.document_id %>
     <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
   </td>
   <td class="align-left text-left" scope="row">
     <%= f.label(:register_type) do %>
-      <%= f.radio_button :register_type, register_type_options.first[1], class: "register-type-js" %>
+      <%= f.radio_button :register_type, register_type_options.first[1].to_i, class: register_type_class, checked: f.object.register_type_before_type_cast == register_type_options.first[1].to_i %>
       Entrada
     <%end%>
     <%= f.label(:register_type) do %>
-      <%= f.radio_button :register_type, register_type_options.last[1], class: "register-type-js" %>
+      <%= f.radio_button :register_type, register_type_options.last[1].to_i, class: register_type_class, checked: f.object.register_type_before_type_cast == register_type_options.last[1].to_i %>
       Gasto
     <%end%>
   </td>

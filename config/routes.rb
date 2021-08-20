@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: "registers#index"
 
   resources :vehicles
+  resources :documents
   resources :drivers do
     resources :savings, except: [:index]
   end

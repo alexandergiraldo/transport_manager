@@ -1,0 +1,51 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="newCollaboratorModalLabel">Editar Registro</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <%= form_for(register) do |f|%>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="row mb-1">
+            <div class="col-md-6 mb-1">
+              <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "Fecha", required: true, autocomplete: "off"%>
+            </div>
+            <div class="col-md-6 mb-1">
+              <%= f.select :register_type, options_for_select(Register.register_types.map {|key, value| [I18n.t("register_type.#{key}"), Register.register_types.key(value)]}, @register.register_type), {include_blank: false}, {class: "form-control"}%>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <%= f.text_field :description, class: "form-control", placeholder: "Descripción", required: true%>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label">$ Valor</label>
+            <div class="col-sm-10">
+              <%= f.number_field :value, class: "form-control", placeholder: '', required: true%>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <%= f.text_area :notes, rows: 1, placeholder: "Notas extras", class: "form-control", required: false%>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <%if register.document_id.present?%>
+                <%= f.select :document_id, options_for_select(@documents.map {|doc| [doc.title, doc.id]}, @register.document_id), {include_blank: false}, {class: "category-select2 form-control"}%>
+              <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    <%end%>
+  </div>
+</div>

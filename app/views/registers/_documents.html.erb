@@ -1,0 +1,66 @@
+<div id="documents">
+  <%documents.each.with_index(1) do |document, i|%>
+    <%totals = calculate_registers_totals(document.registers)%>
+
+    <div class="card">
+      <div class="card-header" id="heading<%=document.id%>" data-toggle="collapse" data-target="#collapse<%=document.id%>" aria-expanded="true" aria-controls="collapse<%=document.id%>">
+        <div class="row mb-3">
+          <div class="col-md-5 text-left btn">
+            <div class="btn btn-link">
+              <%=i%>.
+              <%=document.title%>
+            </div>
+            <div class="row ml-3">
+              Empresa:
+              <%=document.company%>
+            </div>
+            <div class="row ml-3">
+              Carga:
+              <%=document.load_type%>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            Ingresos
+            <span class="<%=register_total_color(totals[:total_incoming])%> ml-auto"><%=value_to_currency(totals[:total_incoming])%></span>
+          </div>
+          <div class="col-md-2">
+            Egresos
+            <span class="<%=register_total_color(-totals[:total_outcoming])%> ml-auto"><%=value_to_currency(-totals[:total_outcoming])%></span>
+          </div>
+          <div class="col-md-2">
+            Utilidad
+            <div class="<%=register_total_color(totals[:total])%> ml-auto"><%=value_to_currency(totals[:total])%></div>
+          </div>
+          <div class="col-md-1">
+            <ul class="navbar-nav ml-auto align-items-center">
+              <li class="nav-item dropdown nav-language d-flex align-items-center">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  ...
+                </a>
+                <div class="dropdown-menu dropdown-menu-right ">
+                  <ul class="list-unstyled">
+                    <li>
+                      <%=link_to "Editar", edit_document_path(document.id), class: "dropdown-item" %>
+                    </li>
+                    <li>
+                      <%= link_to "Borrar", document_path(document.id), class: "dropdown-item", data: { method: :delete, confirm: "Esta seguro de eliminar este documento y todos los registros?" } %>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="collapse<%=document.id%>" class="collapse <%=document_card_state(document)%>" aria-labelledby="heading<%=document.id%>" data-parent="#documents">
+        <div class="card-body">
+          <%=link_to "Nuevo Registro", new_register_path(document_id: document.id) %>
+          <br/>
+          <%= render partial: 'registers_table', locals: {registers: document.registers}%>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>

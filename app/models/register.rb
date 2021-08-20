@@ -6,6 +6,7 @@ class Register < ApplicationRecord
   # Associations
   belongs_to :vehicle
   belongs_to :user
+  belongs_to :document, optional: true
   has_one :maintenance, dependent: :destroy
 
   # Validations

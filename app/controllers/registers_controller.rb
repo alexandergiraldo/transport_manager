@@ -4,7 +4,8 @@ class RegistersController < ApplicationController
   before_action :init_date_params, only: [:index]
 
   def index
-    @pagy, @registers = pagy(policy_scope(Register).where(vehicle_id: current_vehicle.id).search(params).by_date, items: 60)
+    @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).includes(registers: [:vehicle]).by_date
+    @pagy, @registers = pagy(policy_scope(Register).where(vehicle_id: current_vehicle.id, document_id: nil).search(params).by_date, items: 60)
   end
 
   def print
@@ -12,7 +13,8 @@ class RegistersController < ApplicationController
   end
 
   def new
-    @maintenance = Maintenance.new
+    @document = Document.find_by(id: params[:document_id])
+    @register = Register.new
   end
 
   def create
@@ -21,9 +23,9 @@ class RegistersController < ApplicationController
     if @register_service.process
       redirect_to request.referer, flash: {success: "Registro creado exitosamente"}
     else
-      self.index
-      flash[:error] = "Ha ocurrido un error"
-      render :index
+      flash.now[:error] = @register_service.errors.join("<br/>")
+      @document = Document.find_by(id: params[:document_id])
+      render :new
     end
   end
 
@@ -31,10 +33,24 @@ class RegistersController < ApplicationController
     @register_service = ::Registers::MultipleRegistersService.new(params.to_unsafe_h, current_user, current_vehicle)
 
     if @register_service.process
-      redirect_to registers_path, flash: {success: "Registros creados exitosamente"}
+      redirect_to registers_path(open_document: params[:document_id]), flash: {success: "Registros creados exitosamente"}
     else
-      flash[:error] = "Ha ocurrido un error"
+      flash.now[:error] = @register_service.errors.join("<br/>")
+      @document = Document.find_by(id: params[:document_id])
       render :new
+    end
+  end
+
+  def edit
+    @register = Register.find(params[:id])
+    params[:q] = { event_date_gteq: Time.now.beginning_of_month, event_date_lteq: Time.now.end_of_month }
+    @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).by_date
+
+    respond_to do |format|
+      format.js {
+          render  :action => "edit.js.erb",
+                  :layout => false
+      }
     end
   end
 
@@ -42,8 +58,8 @@ class RegistersController < ApplicationController
     @register = Register.find(params[:id])
     authorize @register, :update?
 
-    if @register.update(vehicle_params)
-      redirect_to registers_path, flash: {success: "Registro actualizado exitosamente"}
+    if @register.update(register_params)
+      redirect_to registers_path(open_document: @register.document_id), flash: {success: "Registro actualizado exitosamente"}
     else
       render :new
     end
@@ -63,6 +79,6 @@ class RegistersController < ApplicationController
   protected
 
   def register_params
-    params.require(:register).permit(:description, :category, :register_type, :notes, :event_date, :value, :vehicle_id, :maintainable)
+    params.require(:register).permit(:description, :category, :register_type, :notes, :event_date, :value, :vehicle_id, :maintainable, :document_id)
   end
 end

@@ -3,12 +3,38 @@
 <%end%>
 
 <div class="card-header">
-  <h5 class="card-title">Nueva planilla</h5>
-  <h6 class="card-title"><%=@document&.title%></h6>
+  <h5 class="card-title">Nuevo Documento</h5>
 </div>
 <div class="card">
   <div class="card-body">
-    <%= form_for(current_vehicle, url: multiple_registers_path(document_id: @document&.id), method: :post) do |f|%>
+    <%= form_for(@document, url: documents_path, method: :post) do |f|%>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="exampleFormControlInput1">Titulo</label>
+            <%= f.text_field :title, class: "form-control", required: true, placeholder: "Viaje MDE - BGT"%>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="exampleFormControlInput1">Fecha</label>
+          <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="exampleFormControlInput1">Empresa</label>
+            <%= f.text_field :company, class: "form-control" %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="exampleFormControlInput1">Tipo de Carga</label>
+          <%= f.text_field :load_type, class: "form-control", autocomplete: "on"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="exampleFormControlInput1">Descripción</label>
+          <%= f.text_area :description, class: "form-control"%>
+        </div>
+      </div>
+
       <div class="table-responsive">
         <table class="table table-bordered table-sm">
           <thead>
@@ -22,8 +48,8 @@
             </tr>
           </thead>
           <tbody id="registers" class="">
-            <%= f.fields_for :registers, @register_service.try(:registers) || current_vehicle.registers.new do |m| %>
-              <%= render partial: 'register_fields', locals: {f: m}%>
+            <%= f.fields_for :registers, @register_service.try(:registers) || @document.registers.new do |m| %>
+              <%= render partial: 'registers/register_fields', locals: {f: m}%>
             <%end%>
           </tbody>
         </table>
@@ -31,7 +57,7 @@
       </div>
       <div class="row mb-3 d-print-none">
         <div class="col-sm-6 text-right">
-          <%=link_to_add_association 'Agregar Registro', f, :registers, class: "btn btn-dark", partial: 'register_fields', "data-association-insertion-node" => '#registers', "data-association-insertion-method"=>"append"%>
+          <%=link_to_add_association 'Agregar Registro', f, :registers, class: "btn btn-dark", partial: 'registers/register_fields', "data-association-insertion-node" => '#registers', "data-association-insertion-method"=>"append"%>
         </div>
         <div class="col-sm-6 text-left">
           <%=link_to 'javascript:window.print()', class: 'btn btn-info' do%>
@@ -67,6 +93,7 @@
           <%= link_to 'Cancelar', :back, class: 'btn btn-light'%>
         </div>
       </div>
+
     <%end%>
   </div>
 </div>

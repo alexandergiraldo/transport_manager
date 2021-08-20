@@ -31,3 +31,11 @@
 
 en:
   hello: "Hello world"
+
+en:
+  vehicle_types:
+    taxi: Taxi
+    truck: Camión
+  register_type:
+    incoming: Entrada
+    outcoming: Gasto

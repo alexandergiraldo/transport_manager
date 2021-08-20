@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_193419) do
+ActiveRecord::Schema.define(version: 2021_08_14_013819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,20 @@ ActiveRecord::Schema.define(version: 2021_08_03_193419) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cars_icon", default: 0
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.date "event_date"
+    t.bigint "user_id"
+    t.integer "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "company"
+    t.string "load_type"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+    t.index ["vehicle_id"], name: "index_documents_on_vehicle_id"
   end
 
   create_table "drivers", force: :cascade do |t|
@@ -71,6 +85,8 @@ ActiveRecord::Schema.define(version: 2021_08_03_193419) do
     t.datetime "updated_at", null: false
     t.string "notes"
     t.integer "user_id"
+    t.integer "document_id"
+    t.index ["document_id"], name: "index_registers_on_document_id"
     t.index ["event_date"], name: "index_registers_on_event_date"
     t.index ["vehicle_id", "event_date"], name: "index_registers_on_vehicle_id_and_event_date"
     t.index ["vehicle_id"], name: "index_registers_on_vehicle_id"
@@ -114,11 +130,11 @@ ActiveRecord::Schema.define(version: 2021_08_03_193419) do
     t.string "license_plate"
     t.string "side_number"
     t.string "model_date"
-    t.string "vehicle_type"
     t.integer "status", default: 0
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vehicle_type", default: 0
     t.index ["account_id"], name: "index_vehicles_on_account_id"
   end
 

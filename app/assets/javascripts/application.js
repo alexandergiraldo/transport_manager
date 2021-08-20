@@ -26,33 +26,34 @@
 //= require dom-factory/dist/dom-factory.js
 //= require material-design-kit/dist/material-design-kit.js
 
-Application = (function(){
-  function init_datepicker(){
+
+Application = (function () {
+  function init_datepicker() {
     $('.datepicker').datepicker({ format: 'yyyy/mm/dd' });
   }
 
   function init_select2_inputs() {
-    $('.category-select2').each(function(index) {
-      $(this).attr('id', $(this).attr('id')+index)
-      $( this ).select2({
+    $('.category-select2').each(function (index) {
+      $(this).attr('id', $(this).attr('id') + index)
+      $(this).select2({
         width: '100%',
         tags: true
       });
     });
   }
 
-  function auto_submit(){
-    $(".auto-submit").change(function() {
+  function auto_submit() {
+    $(".auto-submit").change(function () {
       this.form.submit();
     });
   }
 
-  return{
-    init_sheet_inputs: function() {
+  return {
+    init_sheet_inputs: function () {
       init_select2_inputs();
       init_datepicker();
     },
-    init: function() {
+    init: function () {
       init_datepicker();
       init_select2_inputs();
       auto_submit();
@@ -62,7 +63,7 @@ Application = (function(){
 
 window.Application = Application
 
-$(function() {
+$(function () {
   Application.init();
 });
 

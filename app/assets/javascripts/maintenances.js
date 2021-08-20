@@ -1,53 +1,53 @@
-Maintenances = (function(){
+Maintenances = (function () {
   function cocoon_callbacks() {
-    $('.container-fluid').on('cocoon:after-insert', function(e, insertedItem) {
+    $('.container-fluid').on('cocoon:after-insert', function (e, insertedItem) {
       window.Application.init_sheet_inputs();
       insertedItem.find(".select-category").toggle();
     });
 
-    $('.container-fluid').on('cocoon:after-remove', function(e, insertedItem) {
+    $('.container-fluid').on('cocoon:after-remove', function (e, insertedItem) {
       calculate_maintenances_totals();
       window.Registers.calculate_registers_totals();
     });
 
   }
 
-  function toggle_category_select(){
+  function toggle_category_select() {
     $(".select-category").toggle();
-    $(document).on("change", ".register-maintainable-checkbox .check_box", function() {
+    $(document).on("change", ".register-maintainable-checkbox .check_box", function () {
       $(this).parent().next(".select-category").toggle();
     });
   }
 
   function calculate_maintenances_totals() {
     var outcoming_values = [];
-    $('.maintenance-row').each(function() {
+    $('.maintenance-row').each(function () {
       var value = $(this).find('.maintenance-value').val() || 0;
       outcoming_values.push(parseInt(value));
     });
-    $('#maintenances-total').html('$'+sum_values(outcoming_values));
+    $('#maintenances-total').html('$' + sum_values(outcoming_values));
   }
 
-  function monitor_maintenances_values(){
-    $(document).on("change", '.maintenance-value', function() {
+  function monitor_maintenances_values() {
+    $(document).on("change", '.maintenance-value', function () {
       calculate_maintenances_totals();
     });
   }
 
-  function sum_values(values){
-    if(values.length > 0){
+  function sum_values(values) {
+    if (values.length > 0) {
       var sum = values.reduce(function (x, y) {
         return x + y;
       });
       return sum
     }
-    else{
+    else {
       return 0;
     }
   }
 
-  return{
-    init: function() {
+  return {
+    init: function () {
       cocoon_callbacks();
       toggle_category_select();
       monitor_maintenances_values();
@@ -55,6 +55,6 @@ Maintenances = (function(){
   }
 })();
 
-$(function() {
+$(function () {
   Maintenances.init();
 });

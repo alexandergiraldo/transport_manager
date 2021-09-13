@@ -10,16 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_14_013819) do
+ActiveRecord::Schema.define(version: 2021_09_13_015506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_users_on_account_id"
+    t.index ["user_id"], name: "index_account_users_on_user_id"
+  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "cars_icon", default: 0
   end
 
   create_table "documents", force: :cascade do |t|
@@ -32,6 +40,8 @@ ActiveRecord::Schema.define(version: 2021_08_14_013819) do
     t.datetime "updated_at", null: false
     t.string "company"
     t.string "load_type"
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_documents_on_account_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
     t.index ["vehicle_id"], name: "index_documents_on_vehicle_id"
   end

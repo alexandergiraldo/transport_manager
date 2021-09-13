@@ -27,11 +27,16 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right ">
           <ul class="list-unstyled">
-            <li>
-              <a href="account.html" class="dropdown-item">
-                Account
-              </a>
-            </li>
+            <%current_user.accounts.each do |account|%>
+              <%if account.id != current_account.id %>
+                <li>
+                  <%= link_to change_account_path(account_id: account.id), method: :put, class: "dropdown-item" do%>
+                    <i class="material-icons">swap_horiz</i>
+                    <span class="align-left"><%=account.name%></span>
+                  <%end%>
+                </li>
+              <%end%>
+            <%end%>
             <li>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
             </li>

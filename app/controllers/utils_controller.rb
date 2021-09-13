@@ -7,4 +7,17 @@ class UtilsController < ApplicationController
     end
     redirect_to request.referer
   end
+
+  def change_user_account
+    @user = current_user
+
+    if @user.account_ids.include?(params[:account_id].to_i)
+      @user.update(account_id: params[:account_id])
+      flash = {success: "Cambio de cuenta exitoso"}
+    else
+      flash = {alert: "Ha ocurrido un error"}
+    end
+
+    redirect_to request.referer, flash: flash
+  end
 end

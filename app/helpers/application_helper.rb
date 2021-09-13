@@ -40,6 +40,6 @@ module ApplicationHelper
   end
 
   def drivers_list
-    current_user.account.drivers.by_name.map{|d| [d.name.titleize, d.id]}
+    current_account.drivers.by_name.map{|d| [d.name.titleize, d.id]}
   end
 end

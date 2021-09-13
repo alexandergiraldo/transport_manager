@@ -18,7 +18,7 @@ class RegistersController < ApplicationController
   end
 
   def create
-    @register_service = ::Registers::MultipleRegistersService.new({vehicle: {registers_attributes: {"0" => register_params}}}, current_user, current_vehicle)
+    @register_service = ::Registers::MultipleRegistersService.new({vehicle: {registers_attributes: {"0" => register_params}}}, current_user, current_vehicle, current_account)
 
     if @register_service.process
       redirect_to request.referer, flash: {success: "Registro creado exitosamente"}
@@ -30,7 +30,7 @@ class RegistersController < ApplicationController
   end
 
   def create_multiple
-    @register_service = ::Registers::MultipleRegistersService.new(params.to_unsafe_h, current_user, current_vehicle)
+    @register_service = ::Registers::MultipleRegistersService.new(params.to_unsafe_h, current_user, current_vehicle, current_account)
 
     if @register_service.process
       redirect_to registers_path(open_document: params[:document_id]), flash: {success: "Registros creados exitosamente"}

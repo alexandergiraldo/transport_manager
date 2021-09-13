@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_vehicle
-    @current_vehicle ||= policy_scope(Vehicle).find_by_id(session[:vehicle_id]) || current_user.account.vehicles.first
+    @current_vehicle ||= policy_scope(Vehicle).find_by_id(session[:vehicle_id]) || current_user.active_account.vehicles.first
   end
 
   def current_account
-    @current_account ||= current_vehicle.try(:account) || current_user.account
+    @current_account ||= current_user.active_account || current_vehicle.try(:account)
   end
 
   def current_account_id

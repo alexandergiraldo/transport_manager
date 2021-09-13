@@ -2,6 +2,7 @@ class Document < ApplicationRecord
     # Associations
     has_many :registers, -> { order(:event_date => :asc) }, dependent: :destroy
     belongs_to :vehicle
+    belongs_to :user
 
     accepts_nested_attributes_for :registers, reject_if: :all_blank, allow_destroy: true
 

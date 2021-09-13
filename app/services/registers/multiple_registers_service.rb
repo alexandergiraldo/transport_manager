@@ -3,10 +3,11 @@ module Registers
     attr_accessor :errors
     attr_reader :vehicle, :params, :user
 
-    def initialize(params, user, vehicle)
+    def initialize(params, user, vehicle, current_account)
       @params = params
       @user = user
       @vehicle = vehicle
+      @current_account = current_account
       @errors = []
     end
 
@@ -76,6 +77,7 @@ module Registers
         document = Document.new(document_params.except(:registers_attributes, :commit))
         document.user_id = user.id
         document.vehicle_id = vehicle.id
+        document.account_id = current_account.id
         document.save!
         document
       end

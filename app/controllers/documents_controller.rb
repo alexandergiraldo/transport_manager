@@ -14,7 +14,7 @@ class DocumentsController < ApplicationController
     end
 
     def create
-      @register_service = ::Registers::MultipleRegistersService.new(params.to_unsafe_h, current_user, current_vehicle)
+      @register_service = ::Registers::MultipleRegistersService.new(params.to_unsafe_h, current_user, current_vehicle, current_account)
 
       if @register_service.process
         redirect_to registers_path, flash: {success: "Documento creado exitosamente"}

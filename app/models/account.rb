@@ -1,11 +1,11 @@
 class Account < ApplicationRecord
   # Associations
   has_many :vehicles, dependent: :destroy
-  has_many :users, dependent: :delete_all
   has_many :drivers, dependent: :delete_all
   has_many :maintenance_types, dependent: :delete_all
 
-  enum cars_icon: [ :local_taxi, :local_shipping ]
+  has_many :account_users
+  has_many :users, through: :account_users, dependent: :delete_all
 
   # Callbacks
   after_create :init_maintenance_types

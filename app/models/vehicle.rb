@@ -16,6 +16,10 @@ class Vehicle < ApplicationRecord
   #scopes
   scope :by_date, -> { order('id DESC') }
 
+  def cars_icon
+    taxi? ? :local_taxi : :local_shipping
+  end
+
   def object
     self
   end

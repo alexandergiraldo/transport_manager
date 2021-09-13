@@ -15,9 +15,9 @@ class DriverPolicy < ApplicationPolicy
     if user.super_admin?
       true
     elsif user.account_admin?
-      record.account_id == user.account_id
+      user.account_ids.include?(record.account_id)
     else
-      user.vehicle_ids.include?(record.id)
+      false
     end
   end
 end

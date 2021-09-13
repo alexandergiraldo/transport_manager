@@ -13,7 +13,7 @@
           <div class="form-group m-0">
             <div class="input-group input-group--inline">
               <div class="input-group-addon">
-                <i class="material-icons"><%=current_account.cars_icon%></i>
+                <i class="material-icons"><%=current_vehicle.cars_icon%></i>
               </div>
               <%=select_tag "vehicle_id", options_from_collection_for_select(user_vehicles, "id", "license_plate", current_vehicle.try(:id)), class: "text-uppercase auto-submit current-vehicle form-control"%>
               </div>

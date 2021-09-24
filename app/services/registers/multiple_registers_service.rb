@@ -37,7 +37,7 @@ module Registers
           vehicle_id: vehicle.id,
           maintainable: register[:maintainable],
           notes: register[:notes],
-          register_type: register[:register_type].to_i
+          register_type: register[:register_type]
         )
       end
     end
@@ -46,7 +46,7 @@ module Registers
       register_object = Register.create!(
         description: register[:description],
         event_date: register[:event_date],
-        register_type: register[:register_type].to_i,
+        register_type: register[:register_type],
         value: register[:value],
         notes: register[:notes],
         vehicle_id: vehicle.id,
@@ -77,7 +77,7 @@ module Registers
         document = Document.new(document_params.except(:registers_attributes, :commit))
         document.user_id = user.id
         document.vehicle_id = vehicle.id
-        document.account_id = current_account.id
+        document.account_id = @current_account.id
         document.save!
         document
       end

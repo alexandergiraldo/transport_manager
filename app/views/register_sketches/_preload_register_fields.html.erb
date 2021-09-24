@@ -1,0 +1,30 @@
+<tr class="register-row">
+  <td class="align-left text-left" scope="row">
+    <%= f.hidden_field :account_id, :value => current_account.id %>
+    <%= f.label(:register_type) do %>
+      <%= f.radio_button :register_type, :incoming, class: register_type_class(true) %>
+      Entrada
+    <%end%>
+    <br/>
+    <%= f.label(:register_type) do %>
+      <%= f.radio_button :register_type, :outcoming, class: register_type_class(true) %>
+      Gasto
+    <%end%>
+  </td>
+  <td class="align-left text-center">
+    <%= f.text_field :description, class: "form-control register-description", placeholder: "", required: true%>
+  </td>
+  <td class="align-left text-left">
+    <%= f.number_field :value, class: "form-control register-value", placeholder: '', required: true%>
+  </td>
+  <td class="align-left text-center">
+    <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>
+  </td>
+  <td class="align-left d-print-none">
+    <div class="text-center">
+      <%= link_to_remove_association f, wrapper_class: 'register-row', title: "Eliminar" do%>
+        <i class="material-icons md-18 align-middle">delete</i>
+      <%end%>
+    </div>
+  </td>
+</tr>

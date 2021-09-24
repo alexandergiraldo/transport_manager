@@ -3,37 +3,15 @@
 <%end%>
 
 <div class="card-header">
-  <h5 class="card-title">Nuevo Documento</h5>
+  <h5 class="card-title">Editar Planilla</h5>
 </div>
 <div class="card">
   <div class="card-body">
-    <%= render partial: 'load_document', locals: {url: new_document_path} %>
-
-    <%= form_for(@document, url: documents_path, method: :post) do |f|%>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="exampleFormControlInput1">Titulo</label>
-          <%= f.text_field :title, class: "form-control", required: true, placeholder: "Viaje MDE - BGT"%>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="exampleFormControlInput1">Fecha</label>
-          <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="exampleFormControlInput1">Empresa</label>
-            <%= f.text_field :company, class: "form-control" %>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="exampleFormControlInput1">Tipo de Carga</label>
-          <%= f.text_field :load_type, class: "form-control", autocomplete: "on"%>
-        </div>
-      </div>
+    <%= form_for(@register_sketch, url: register_sketch_path(@register_sketch.id), method: :put) do |f|%>
       <div class="row">
         <div class="col-md-12 mb-3">
-          <label for="exampleFormControlInput1">Descripción</label>
-          <%= f.text_area :description, class: "form-control"%>
+          <label for="exampleFormControlInput1">Nombre</label>
+            <%= f.text_field :name, class: "form-control", required: true%>
         </div>
       </div>
 
@@ -41,17 +19,16 @@
         <table class="table table-bordered table-sm">
           <thead>
             <tr>
-              <th scope="col" class="text-left" style="width: 14%">Fecha</th>
-              <th scope="col" class="text-left" style="width: 11%">Tipo</th>
-              <th scope="col" class="text-left" style="width: 20%">Descripción</th>
-              <th scope="col" class="text-left" style="width: 13%">Valor</th>
-              <th scope="col" class="text-left" style="width: 15%">Notas</th>
+              <th scope="col" class="text-left" style="width: 15%">Tipo</th>
+              <th scope="col" class="text-left" style="width: 30%">Descripción</th>
+              <th scope="col" class="text-left" style="width: 20%">Valor</th>
+              <th scope="col" class="text-left" style="width: 30%">Notas</th>
               <th class="d-print-none"></th>
             </tr>
           </thead>
           <tbody id="registers" class="">
-            <%= f.fields_for :registers, @register_service.try(:registers) || @registers do |m| %>
-              <%= render partial: 'registers/register_fields', locals: {f: m}%>
+            <%= f.fields_for :preload_registers, @register_sketch.preload_registers do |m| %>
+              <%= render partial: 'preload_register_fields', locals: {f: m}%>
             <%end%>
           </tbody>
         </table>
@@ -59,7 +36,7 @@
       </div>
       <div class="row mb-3 d-print-none">
         <div class="col-sm-6 text-right">
-          <%=link_to_add_association 'Agregar Registro', f, :registers, class: "btn btn-dark", partial: 'registers/register_fields', "data-association-insertion-node" => '#registers', "data-association-insertion-method"=>"append"%>
+          <%=link_to_add_association 'Agregar Registro', f, :preload_registers, class: "btn btn-dark", partial: 'preload_register_fields', "data-association-insertion-node" => '#registers', "data-association-insertion-method"=>"append"%>
         </div>
         <div class="col-sm-6 text-left">
           <%=link_to 'javascript:window.print()', class: 'btn btn-info' do%>

@@ -7,6 +7,9 @@ class DocumentsController < ApplicationController
 
     def new
       @document = Document.new
+      @register_sketch = RegisterSketch.find_by(id: params.dig(:register_sketch, :id))
+      @preload_registers = Register.preload_registers(@register_sketch)
+      @registers = @preload_registers.presence || @document.registers.new
     end
 
     def show

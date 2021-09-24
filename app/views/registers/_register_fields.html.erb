@@ -5,11 +5,11 @@
   </td>
   <td class="align-left text-left" scope="row">
     <%= f.label(:register_type) do %>
-      <%= f.radio_button :register_type, register_type_options.first[1].to_i, class: register_type_class, checked: f.object.register_type_before_type_cast == register_type_options.first[1].to_i %>
+      <%= f.radio_button :register_type, :incoming, class: register_type_class %>
       Entrada
     <%end%>
     <%= f.label(:register_type) do %>
-      <%= f.radio_button :register_type, register_type_options.last[1].to_i, class: register_type_class, checked: f.object.register_type_before_type_cast == register_type_options.last[1].to_i %>
+      <%= f.radio_button :register_type, :outcoming, class: register_type_class %>
       Gasto
     <%end%>
   </td>

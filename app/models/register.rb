@@ -23,4 +23,20 @@ class Register < ApplicationRecord
     query.result
   end
 
+
+  def self.preload_registers(register_sketch)
+    return unless register_sketch.present?
+    registers = []
+
+    register_sketch.preload_registers.each do |preload_register|
+      register = Register.new
+      register.description = preload_register.description
+      register.register_type = preload_register.register_type
+      register.value = preload_register.value
+      register.notes = preload_register.notes
+      registers << register
+    end
+
+    registers
+  end
 end

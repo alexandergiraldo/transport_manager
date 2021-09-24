@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :vehicles
   resources :documents
+  resources :register_sketches
+  resources :preload_registers, only: [:edit, :destroy, :update]
   resources :drivers do
     resources :savings, except: [:index]
   end

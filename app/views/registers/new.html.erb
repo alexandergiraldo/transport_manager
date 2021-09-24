@@ -8,6 +8,26 @@
 </div>
 <div class="card">
   <div class="card-body">
+    <% if @document.present? %>
+      <div class="row">
+        <div class="col-md-2">
+          <label for="exampleFormControlInput1">Cargar planilla</label>
+        </div>
+        <div class="col-md-5">
+          <%= form_for(:register_sketch, url: new_register_path, method: :get) do |f|%>
+            <%= hidden_field_tag 'document_id', @document.id %>
+            <div class="form-group">
+              <div class="row mb-1">
+                <div class="col-md-12 mb-1">
+                  <%= f.select :id, options_for_select(register_sketches_options, @register_sketch&.id), {include_blank: "Selecionar"}, {class: "form-control auto-submit"}%>
+                </div>
+              </div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    <%end%>
+
     <%= form_for(current_vehicle, url: multiple_registers_path(document_id: @document&.id), method: :post) do |f|%>
       <div class="table-responsive">
         <table class="table table-bordered table-sm">
@@ -22,7 +42,7 @@
             </tr>
           </thead>
           <tbody id="registers" class="">
-            <%= f.fields_for :registers, @register_service.try(:registers) || current_vehicle.registers.new do |m| %>
+            <%= f.fields_for :registers, @register_service.try(:registers) || @registers do |m| %>
               <%= render partial: 'register_fields', locals: {f: m}%>
             <%end%>
           </tbody>

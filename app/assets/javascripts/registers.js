@@ -3,11 +3,11 @@ Registers = (function () {
     var incoming_values = [];
     var outcoming_values = [];
 
-    $('.register-row').each(function () {
+    $('.register-row:visible').each(function () {
       var type = $(this).find('input[class*=register-type-js]:checked').val();
       var value = $(this).find('.register-value').val() || 0;
 
-      if (type == '0') {
+      if (type === '0' || type === 'incoming') {
         incoming_values.push(parseInt(value));
       }
       else {

@@ -10,10 +10,6 @@ module RegisterHelper
     register_type.eql?('outcoming') ? '-' : '+'
   end
 
-  def register_type_options
-    [['Entrada',0],['Gasto', 1]]
-  end
-
   def calculate_registers_totals(registers)
     totals = {}
     totals[:total_incoming] = registers.select{|r| r.incoming?}.map(&:value).sum
@@ -26,9 +22,9 @@ module RegisterHelper
     value < 0 ? 'text-danger' : 'text-success'
   end
 
-  def register_type_class
+  def register_type_class(no_default_value = false)
     html_class = "register-type-js"
-    html_class += " no-default-value" if @document.present?
+    html_class += " no-default-value" if no_default_value || @document.present?
     html_class
   end
 
@@ -51,5 +47,9 @@ module RegisterHelper
 
   def document_card_state(document)
     document.id.to_s == params[:open_document] ? "show" : ""
+  end
+
+  def register_sketches_options
+    RegisterSketch.where(account_id: current_account.id).pluck(:name, :id)
   end
 end

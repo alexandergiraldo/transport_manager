@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-2">
+    <label for="exampleFormControlInput1">Cargar planilla</label>
+  </div>
+  <div class="col-md-5">
+    <%= form_for(:register_sketch, url: url, method: :get) do |f|%>
+      <div class="form-group">
+        <div class="row mb-1">
+          <div class="col-md-12 mb-1">
+            <%= f.select :id, options_for_select(register_sketches_options, @register_sketch&.id), {include_blank: "Selecionar"}, {class: "form-control auto-submit"}%>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>

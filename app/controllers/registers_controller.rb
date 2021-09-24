@@ -14,7 +14,12 @@ class RegistersController < ApplicationController
 
   def new
     @document = Document.find_by(id: params[:document_id])
-    @register = Register.new
+    @registers = current_vehicle.registers.new
+    if @document
+      @register_sketch = RegisterSketch.find_by(id: params.dig(:register_sketch, :id))
+      registers_list = Register.preload_registers(@register_sketch)
+      @registers = registers_list if registers_list.present?
+    end
   end
 
   def create

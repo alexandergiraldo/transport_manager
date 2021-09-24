@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Plantillas Precargadas</h3>
+  </div>
+  <div class="card-body">
+    <div class="row mb-3 ml-1">
+      <a href="<%=new_register_sketch_path%>" class="btn btn btn-primary">
+        <i class="material-icons md-18 align-middle">assignment</i>
+        <span class="align-middle">Nuevo</span>
+      </a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="text-left" style="width: 85%">Nombre</th>
+            <th/>
+          </tr>
+        </thead>
+        <tbody>
+          <%@register_sketches.each do |sketch|%>
+            <tr>
+              <td class="align-left text-left" scope="row"><%=sketch.name%></td>
+              <td class="align-left text-left">
+                <%=link_to register_sketch_path(sketch.id), title: 'Ver' do%>
+                  <i class="material-icons">search</i>
+                <%end%>
+                <%=link_to edit_register_sketch_path(sketch.id), title: 'Editar' do%>
+                  <i class="material-icons">edit</i>
+                <%end%>
+                <%=link_to register_sketch_path(sketch.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+                  <i class="material-icons">delete</i>
+                <%end%>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

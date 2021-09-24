@@ -49,7 +49,7 @@ Registers = (function () {
   }
 
   function register_type_default_values(selector) {
-    if (selector.val() == '0') {
+    if (selector.val() == '0' || selector.val() == 'incoming') {
       selector.parents('tr').find(".register-description").val('ENTREGA DÍA Y NOCHE');
       selector.parents('tr').find(".register-value").val(166000);
     }

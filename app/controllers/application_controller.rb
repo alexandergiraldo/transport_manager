@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_vehicle
-    @current_vehicle ||= policy_scope(Vehicle).find_by_id(session[:vehicle_id]) || current_user.active_account.vehicles.first
+    @current_vehicle ||= policy_scope(Vehicle).find_by_id(session[:vehicle_id]) || current_user.active_account.vehicles.active.first
   end
 
   def current_account

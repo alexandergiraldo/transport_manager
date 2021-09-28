@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_160851) do
+ActiveRecord::Schema.define(version: 2021_09_28_214333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2021_09_13_160851) do
     t.string "company"
     t.string "load_type"
     t.integer "account_id"
+    t.decimal "load_value", precision: 11
+    t.string "load_size"
     t.index ["account_id"], name: "index_documents_on_account_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
     t.index ["vehicle_id"], name: "index_documents_on_vehicle_id"

@@ -39,9 +39,9 @@ class DocumentsController < ApplicationController
       authorize @document, :update?
 
       if @document.update(document_params)
-        redirect_to root_path, flash: {success: "Documento actualizado exitosamente"}
+        redirect_to root_path(q: {event_date_gteq: @document.event_date.month, year: @document.event_date.year}), flash: {success: "Documento actualizado exitosamente"}
       else
-        render :new, flash: {alert: "Error actualizando"}
+        render :edit, flash: {alert: "Error actualizando"}
       end
     end
 

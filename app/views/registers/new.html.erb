@@ -28,7 +28,7 @@
       </div>
     <%end%>
 
-    <%= form_for(current_vehicle, url: multiple_registers_path(document_id: @document&.id), method: :post) do |f|%>
+    <%= form_for(current_vehicle, url: registers_path(document_id: @document&.id), method: :post) do |f|%>
       <div class="table-responsive">
         <table class="table table-bordered table-sm">
           <thead>

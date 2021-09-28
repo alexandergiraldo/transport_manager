@@ -23,22 +23,11 @@ class RegistersController < ApplicationController
   end
 
   def create
-    @register_service = ::Registers::MultipleRegistersService.new({vehicle: {registers_attributes: {"0" => register_params}}}, current_user, current_vehicle, current_account)
-
-    if @register_service.process
-      redirect_to request.referer, flash: {success: "Registro creado exitosamente"}
-    else
-      flash.now[:error] = @register_service.errors.join("<br/>")
-      @document = Document.find_by(id: params[:document_id])
-      render :new
-    end
-  end
-
-  def create_multiple
     @register_service = ::Registers::MultipleRegistersService.new(params.to_unsafe_h, current_user, current_vehicle, current_account)
 
     if @register_service.process
-      redirect_to registers_path(open_document: params[:document_id]), flash: {success: "Registros creados exitosamente"}
+      target_date = @register_service.registers.last.event_date
+      redirect_to registers_path(open_document: params[:document_id], q: {event_date_gteq: target_date.month, year: target_date.year}), flash: {success: "Registros creados exitosamente"}
     else
       flash.now[:error] = @register_service.errors.join("<br/>")
       @document = Document.find_by(id: params[:document_id])
@@ -48,7 +37,7 @@ class RegistersController < ApplicationController
 
   def edit
     @register = Register.find(params[:id])
-    params[:q] = { event_date_gteq: Time.now.beginning_of_month, event_date_lteq: Time.now.end_of_month }
+    params[:q] = { event_date_gteq: @register.event_date.beginning_of_month, event_date_lteq: @register.event_date.end_of_month }
     @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).by_date
 
     respond_to do |format|
@@ -64,7 +53,10 @@ class RegistersController < ApplicationController
     authorize @register, :update?
 
     if @register.update(register_params)
-      redirect_to registers_path(open_document: @register.document_id), flash: {success: "Registro actualizado exitosamente"}
+      redirect_to registers_path(
+        open_document: @register.document_id,
+        q: {event_date_gteq: @register.event_date.month, year: @register.event_date.year}
+      ), flash: {success: "Registro actualizado exitosamente"}
     else
       render :new
     end

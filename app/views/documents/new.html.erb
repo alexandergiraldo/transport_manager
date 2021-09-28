@@ -21,13 +21,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-3 mb-3">
           <label for="exampleFormControlInput1">Empresa</label>
             <%= f.text_field :company, class: "form-control" %>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-3 mb-3">
           <label for="exampleFormControlInput1">Tipo de Carga</label>
           <%= f.text_field :load_type, class: "form-control", autocomplete: "on"%>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="exampleFormControlInput1">Valor Flete</label>
+          <%= f.number_field :load_value, class: "form-control", autocomplete: "on"%>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="exampleFormControlInput1">Peso</label>
+          <%= f.text_field :load_size, class: "form-control", autocomplete: "on"%>
         </div>
       </div>
       <div class="row">

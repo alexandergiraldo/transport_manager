@@ -16,7 +16,11 @@
             </div>
             <div class="row ml-3">
               Carga:
-              <%=document.load_type%>
+              <%=document.load_type%> - <%=document.load_size%>
+            </div>
+            <div class="row ml-3">
+              Valor Flete:
+              <%=value_to_currency(document.load_value)%>
             </div>
           </div>
 
@@ -56,7 +60,11 @@
 
       <div id="collapse<%=document.id%>" class="collapse <%=document_card_state(document)%>" aria-labelledby="heading<%=document.id%>" data-parent="#documents">
         <div class="card-body">
-          <%=link_to "Nuevo Registro", new_register_path(document_id: document.id) %>
+          <div class="row-fluid">
+            <%=document.description%>
+            <br/>
+            <%=link_to "Nuevo Registro", new_register_path(document_id: document.id) %>
+          </div>
           <br/>
           <%= render partial: 'registers_table', locals: {registers: document.registers}%>
         </div>

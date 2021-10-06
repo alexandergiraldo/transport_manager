@@ -11,30 +11,38 @@
               <%=document.title%>
             </div>
             <div class="document-info">
-              <div>
-                <div class="row ml-3">
-                  Empresa:
-                  <%=document.company%>
-                </div>
-              </div>
-              <div>
+              <% if document.company.present?%>
                 <div>
+                  <div class="row ml-3">
+                    Empresa:
+                    <%=document.company%>
+                  </div>
+                </div>
+              <%end%>
+              <div>
+                <div class="row <%=document.company.present? ? '' : 'ml-3'%>">
                   <%=l document.event_date, format: :long, locale: 'es'%>
                 </div>
               </div>
             </div>
-            <div class="row ml-3">
-              Manifiesto:
-              <%=document.load_manifest%>
-            </div>
-            <div class="row ml-3">
-              Carga:
-              <%=document.load_type%> - <%=document.load_size%>
-            </div>
-            <div class="row ml-3">
-              Valor Flete:
-              <%=value_to_currency(document.load_value)%>
-            </div>
+            <% if document.load_manifest.present?%>
+              <div class="row ml-3">
+                Manifiesto:
+                <%=document.load_manifest%>
+              </div>
+            <%end%>
+            <% if document.load_type.present?%>
+              <div class="row ml-3">
+                Carga:
+                <%=document.load_type%> - <%=document.load_size%>
+              </div>
+            <%end%>
+            <% if document.load_value.present?%>
+              <div class="row ml-3">
+                Valor Flete:
+                <%=value_to_currency(document.load_value)%>
+              </div>
+            <%end%>
           </div>
 
           <div class="col-md-2">

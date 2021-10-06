@@ -59,6 +59,6 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:title, :event_date, :description, :company, :load_type, :load_value, :load_size)
+      params.require(:document).permit(:title, :event_date, :description, :company, :load_type, :load_value, :load_size, :load_manifest)
     end
   end

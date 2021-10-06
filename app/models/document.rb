@@ -1,6 +1,6 @@
 class Document < ApplicationRecord
     # Associations
-    has_many :registers, -> { order(:event_date => :asc) }, dependent: :destroy
+    has_many :registers, -> { order(:created_at => :asc) }, dependent: :destroy
     belongs_to :vehicle
     belongs_to :user
 

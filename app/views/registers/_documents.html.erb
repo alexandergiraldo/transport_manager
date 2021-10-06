@@ -10,9 +10,22 @@
               <%=i%>.
               <%=document.title%>
             </div>
+            <div class="document-info">
+              <div>
+                <div class="row ml-3">
+                  Empresa:
+                  <%=document.company%>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <%=l document.event_date, format: :long, locale: 'es'%>
+                </div>
+              </div>
+            </div>
             <div class="row ml-3">
-              Empresa:
-              <%=document.company%>
+              Manifiesto:
+              <%=document.load_manifest%>
             </div>
             <div class="row ml-3">
               Carga:

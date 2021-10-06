@@ -68,3 +68,9 @@ $mynewcolor: theme-color('primary-app');
 #documents .card-header{
   cursor: pointer;
 }
+
+.document-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

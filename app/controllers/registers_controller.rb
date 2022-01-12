@@ -27,7 +27,7 @@ class RegistersController < ApplicationController
 
     if @register_service.process
       target_date = @register_service.registers.last.event_date
-      redirect_to registers_path(open_document: params[:document_id], q: {event_date_gteq: target_date.month, year: target_date.year}), flash: {success: "Registros creados exitosamente"}
+      redirect_to registers_path(open_document: params[:document_id], q: {event_date_gteq: target_date.month}, year: target_date.year), flash: {success: "Registros creados exitosamente"}
     else
       flash.now[:error] = @register_service.errors.join("<br/>")
       @document = Document.find_by(id: params[:document_id])
@@ -55,7 +55,8 @@ class RegistersController < ApplicationController
     if @register.update(register_params)
       redirect_to registers_path(
         open_document: @register.document_id,
-        q: {event_date_gteq: @register.event_date.month, year: @register.event_date.year}
+        q: {event_date_gteq: @register.event_date.month},
+        year: @register.event_date.year
       ), flash: {success: "Registro actualizado exitosamente"}
     else
       render :new

@@ -4,7 +4,7 @@ es:
       [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
     formats:
        default: "%d. %B %Y"
-       long: "%B %d, %Y"
+       long: "%B %d"
   date:
     <<: *defaults
   time:

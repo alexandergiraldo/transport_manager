@@ -6,7 +6,7 @@
           <%= f.select :event_date_gteq, options_for_select(month_options, params.dig(:q, :event_date_gteq).try(:mon)), {include_blank: false}, {class: "form-control auto-submit"}%>
         </div>
         <div class="col-md-4 mb-1">
-          <%=select_year(params.dig(:q, :event_date_gteq).try(:year) || Date.today, {start_year: 2013, end_year: 2030}, class: "form-control auto-submit", name: 'year')%>
+          <%=select_year(params.dig(:year).try(:to_i) || Date.today, {start_year: 2011, end_year: Time.now.year}, class: "form-control auto-submit", name: 'year')%>
         </div>
       </div>
     </div>

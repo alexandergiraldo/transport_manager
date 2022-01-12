@@ -4,41 +4,31 @@
 
     <div class="card">
       <div class="card-header" id="heading<%=document.id%>" data-toggle="collapse" data-target="#collapse<%=document.id%>" aria-expanded="true" aria-controls="collapse<%=document.id%>">
-        <div class="row mb-3">
-          <div class="col-md-5 text-left btn">
-            <div class="btn btn-link">
-              <%=i%>.
-              <%=document.title%>
-            </div>
-            <div class="document-info">
-              <% if document.company.present?%>
-                <div>
-                  <div class="row ml-3">
-                    Empresa:
-                    <%=document.company%>
-                  </div>
-                </div>
-              <%end%>
-              <div>
-                <div class="row <%=document.company.present? ? '' : 'ml-3'%>">
-                  <%=l document.event_date, format: :long, locale: 'es'%>
-                </div>
+        <div class="row">
+          <div class="col-md-5 text-left">
+            <div class="document-info mb-2">
+              <div class="btn-link item1">
+                <%=i%>.
+                <%=document.title%>
+              </div>
+              <div class="">
+                <%=l document.event_date, format: :long, locale: 'es'%>
               </div>
             </div>
-            <% if document.load_manifest.present?%>
-              <div class="row ml-3">
-                Manifiesto:
-                <%=document.load_manifest%>
+            <% if document.company.present?%>
+              <div class="item1">
+                Empresa:
+                <%=document.company%>
               </div>
             <%end%>
             <% if document.load_type.present?%>
-              <div class="row ml-3">
+              <div>
                 Carga:
-                <%=document.load_type%> - <%=document.load_size%>
+                <%=document.load_type%>
               </div>
             <%end%>
             <% if document.load_value.present?%>
-              <div class="row ml-3">
+              <div>
                 Valor Flete:
                 <%=value_to_currency(document.load_value)%>
               </div>
@@ -56,6 +46,12 @@
           <div class="col-md-2">
             Utilidad
             <div class="<%=register_total_color(totals[:total])%> ml-auto"><%=value_to_currency(totals[:total])%></div>
+            <% if document.load_manifest.present?%>
+              <div class="mt-3">
+                Mto:
+                <%=document.load_manifest%>
+              </div>
+            <%end%>
           </div>
           <div class="col-md-1">
             <ul class="navbar-nav ml-auto align-items-center">

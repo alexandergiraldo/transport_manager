@@ -14,6 +14,15 @@ class User < ApplicationRecord
   end
 
   def all_vehicle_ids
-    Vehicle.where(account_id: self.account_ids).pluck(:id)
+    return vehicle_ids if account_user?
+    Vehicle.where(account_id: self.account_ids).pluck(:id) + vehicle_ids
+  end
+
+  def default_vehicle
+    if account_user?
+      Vehicle.find_by_id(vehicle_ids.first)
+    else
+      active_account.vehicles.active.first
+    end
   end
 end

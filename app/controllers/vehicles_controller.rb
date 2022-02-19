@@ -12,6 +12,7 @@ class VehiclesController < ApplicationController
   def create
     @vehicle = Vehicle.new(vehicle_params)
     @vehicle.account_id = current_account_id
+    authorize @vehicle, :create?
 
     if @vehicle.save
       redirect_to vehicles_path, flash: {success: "Vehículo creado exitosamente"}

@@ -16,6 +16,7 @@ class DriversController < ApplicationController
   def create
     @driver = Driver.new(driver_params)
     @driver.account_id = current_account_id
+    authorize @driver, :create?
 
     if @driver.save
       redirect_to drivers_path, flash: {success: "Conductor creado exitosamente"}

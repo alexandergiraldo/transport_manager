@@ -4,7 +4,7 @@ class PreloadRegisterPolicy < ApplicationPolicy
       if user.super_admin?
         scope.all
       elsif user.account_admin?
-        scope.where(account_id: user.account_id)
+        scope.where(account_id: user.active_account.id)
       else
         scope.none
       end

@@ -3,10 +3,8 @@ class DriverPolicy < ApplicationPolicy
     def resolve
       if user.super_admin?
         scope.all
-      elsif user.account_admin?
-        scope.where(account_id: user.account_id)
       else
-        scope.none
+        scope.where(account_id: user.active_account.id)
       end
     end
   end
@@ -19,5 +17,9 @@ class DriverPolicy < ApplicationPolicy
     else
       false
     end
+  end
+
+  def create?
+    self.update?
   end
 end

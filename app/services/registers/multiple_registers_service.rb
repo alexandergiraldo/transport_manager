@@ -43,7 +43,7 @@ module Registers
     end
 
     def create_register(register, document = nil)
-      register_object = Register.create!(
+      register_object = Register.new(
         description: register[:description],
         event_date: register[:event_date],
         register_type: register[:register_type],
@@ -53,6 +53,8 @@ module Registers
         user_id: user.id,
         document_id: document&.id || register[:document_id]
       )
+      raise Pundit::NotAuthorizedError.new("Not authorized") unless RegisterPolicy.new(user, register_object).create?
+      register_object.save!
       create_maintenance(register, register_object.id) if register[:maintainable] == "1" && register_object.outcoming?
     end
 
@@ -78,6 +80,7 @@ module Registers
         document.user_id = user.id
         document.vehicle_id = vehicle.id
         document.account_id = @current_account.id
+        raise Pundit::NotAuthorizedError.new("Not authorized") unless DocumentPolicy.new(user, document).create?
         document.save!
         document
       end

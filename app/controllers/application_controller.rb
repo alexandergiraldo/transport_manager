@@ -4,12 +4,14 @@ class ApplicationController < ActionController::Base
   before_action :validate_vehicle, if: :current_user
   helper_method :current_vehicle, :current_account
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   def app_time_zone(&block)
     Time.use_zone("America/Bogota", &block)
   end
 
   def current_vehicle
-    @current_vehicle ||= policy_scope(Vehicle).find_by_id(session[:vehicle_id]) || current_user.active_account.vehicles.active.first
+    @current_vehicle ||= policy_scope(Vehicle).find_by_id(session[:vehicle_id]) || current_user.default_vehicle
   end
 
   def current_account
@@ -37,5 +39,10 @@ class ApplicationController < ActionController::Base
     unless current_vehicle.present?
       redirect_to new_vehicle_path if controller_name != 'vehicles'
     end
+  end
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
   end
 end

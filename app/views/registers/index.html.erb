@@ -57,7 +57,7 @@
           <div class="table-responsive">
             <%= render partial: 'registers_table', locals: {registers: @registers}%>
 
-            <%= pagy_nav_bootstrap(@pagy).html_safe if @registers.present?%>
+            <%= pagy_bootstrap_nav(@pagy).html_safe if @registers.present?%>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
       <div class="table-responsive">
         <%= render partial: 'registers_table', locals: {registers: @registers}%>
 
-        <%= pagy_nav_bootstrap(@pagy).html_safe if @registers.present?%>
+        <%= pagy_bootstrap_nav(@pagy).html_safe if @registers.present?%>
       </div>
     <%end%>
   </div>

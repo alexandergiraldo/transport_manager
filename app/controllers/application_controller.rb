@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Pundit
+  include Pundit::Authorization
   around_action :app_time_zone, if: :current_user
   before_action :validate_vehicle, if: :current_user
   helper_method :current_vehicle, :current_account

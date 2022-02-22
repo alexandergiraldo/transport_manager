@@ -15,7 +15,7 @@
     <%= f.text_field :description, class: "form-control register-description", placeholder: "", required: true%>
   </td>
   <td class="align-left text-left">
-    <%= f.number_field :value, class: "form-control register-value", placeholder: '', required: true%>
+    <%= f.text_field :value, class: "form-control register-value imask_number", placeholder: '', required: true%>
   </td>
   <td class="align-left text-center">
     <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>

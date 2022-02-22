@@ -42,6 +42,8 @@ class PreloadRegistersController < ApplicationController
   protected
 
   def register_sketch_params
-    params.require(:preload_register).permit(:description, :register_type, :value, :notes)
+    r_params = params.require(:preload_register).permit(:description, :register_type, :value, :notes)
+    r_params[:value] = r_params[:value]&.delete('^0-9')
+    r_params
   end
 end

@@ -14,7 +14,7 @@ class RegistersController < ApplicationController
 
   def new
     @document = Document.find_by(id: params[:document_id])
-    @registers = current_vehicle.registers.new
+    @registers = current_vehicle.registers.new(value: nil)
     if @document
       @register_sketch = RegisterSketch.find_by(id: params.dig(:register_sketch, :id))
       registers_list = Register.preload_registers(@register_sketch)
@@ -77,6 +77,8 @@ class RegistersController < ApplicationController
   protected
 
   def register_params
-    params.require(:register).permit(:description, :category, :register_type, :notes, :event_date, :value, :vehicle_id, :maintainable, :document_id)
+    r_params = params.require(:register).permit(:description, :category, :register_type, :notes, :event_date, :value, :vehicle_id, :maintainable, :document_id)
+    r_params[:value] = r_params[:value]&.delete('^0-9')
+    r_params
   end
 end

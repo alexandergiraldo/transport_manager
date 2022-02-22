@@ -16,6 +16,7 @@
 //= require rails-ujs
 //= require popper.js/dist/umd/popper.js
 //= require bootstrap/dist/js/bootstrap.min.js
+//= require imask/dist/imask.min.js
 //= require datepicker.js
 //= require select2.min.js
 //= require cocoon
@@ -48,6 +49,20 @@ Application = (function () {
     });
   }
 
+  function initNumberMask() {
+    $(".imask_number").each(function () {
+      IMask(this, {
+        mask: Number,  // enable number mask
+        scale: 0,
+        signed: true,  // disallow negative
+        thousandsSeparator: '.',  // any single char
+        padFractionalZeros: false,  // if true, then pads zeros at end to the length of scale
+        normalizeZeros: true,  // appends or removes zeros at ends
+        radix: ',',  // fractional delimiter
+      });
+    });
+  }
+
   return {
     init_sheet_inputs: function () {
       init_select2_inputs();
@@ -57,6 +72,10 @@ Application = (function () {
       init_datepicker();
       init_select2_inputs();
       auto_submit();
+      initNumberMask();
+    },
+    initNumberMask: function () {
+      initNumberMask();
     }
   }
 })();

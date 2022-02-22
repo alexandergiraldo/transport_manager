@@ -9,7 +9,7 @@ class DocumentsController < ApplicationController
       @document = Document.new
       @register_sketch = RegisterSketch.find_by(id: params.dig(:register_sketch, :id))
       @preload_registers = Register.preload_registers(@register_sketch)
-      @registers = @preload_registers.presence || @document.registers.new
+      @registers = @preload_registers.presence || @document.registers.new(value: nil)
     end
 
     def show
@@ -59,6 +59,8 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:title, :event_date, :description, :company, :load_type, :load_value, :load_size, :load_manifest)
+      d_params = params.require(:document).permit(:title, :event_date, :description, :company, :load_type, :load_value, :load_size, :load_manifest)
+      d_params[:load_value] = d_params[:load_value]&.delete('^0-9')
+      d_params
     end
   end

@@ -27,7 +27,7 @@
             </tr>
           </thead>
           <tbody id="registers" class="">
-            <%= f.fields_for :preload_registers, @register_sketch.preload_registers.new do |m| %>
+            <%= f.fields_for :preload_registers, @register_sketch.preload_registers.new(value: nil) do |m| %>
               <%= render partial: 'preload_register_fields', locals: {f: m}%>
             <%end%>
           </tbody>

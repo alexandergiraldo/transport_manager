@@ -5,7 +5,7 @@ Registers = (function () {
 
     $('.register-row:visible').each(function () {
       var type = $(this).find('input[class*=register-type-js]:checked').val();
-      var value = $(this).find('.register-value').val() || 0;
+      var value = $(this).find('.register-value').val().replace(/\D/g, '') || 0;
 
       if (type === '0' || type === 'incoming') {
         incoming_values.push(parseInt(value));

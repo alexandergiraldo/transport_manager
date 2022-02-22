@@ -3,6 +3,7 @@ Maintenances = (function () {
     $('.container-fluid').on('cocoon:after-insert', function (e, insertedItem) {
       window.Application.init_sheet_inputs();
       insertedItem.find(".select-category").toggle();
+      window.Application.initNumberMask();
     });
 
     $('.container-fluid').on('cocoon:after-remove', function (e, insertedItem) {

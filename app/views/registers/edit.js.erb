@@ -1,3 +1,7 @@
 $("#edit-register-modal").html("<%= j render(partial: 'form', locals: {register: @register}) %>");
 $("#edit-register-modal").modal("show");
+<%if !@register.maintenance%>
+  $(".select-category").toggle();
+<%end%>
 window.Application.init_sheet_inputs();
+window.Application.initNumberMask();

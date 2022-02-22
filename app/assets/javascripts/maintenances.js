@@ -15,7 +15,7 @@ Maintenances = (function () {
 
   function toggle_category_select() {
     $(".select-category").toggle();
-    $(document).on("change", ".register-maintainable-checkbox .check_box", function () {
+    $(document).on("change", ".register-maintainable-checkbox .check_box, .maintenance_checkbox", function () {
       $(this).parent().next(".select-category").toggle();
     });
   }

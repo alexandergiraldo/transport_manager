@@ -40,6 +40,15 @@
               <%end%>
             </div>
           </div>
+          <td class="row">
+            <div class="custom-control custom-checkbox mb-1 mt-2">
+              <%=f.check_box :maintainable, class: "custom-control-input maintenance_checkbox"%>
+              <%=f.label :maintainable, "Gasto de Mantenimiento?", class: "custom-control-label align-middle"%>
+            </div>
+            <div class="align-left mb-3 select-category">
+              <%= f.select :category, category_options(f.object), {:prompt => 'Seleccionar Categoría'}, {class: "category-select2 form-control", required: false}%>
+            </div>
+          </td>
         </div>
       </div>
       <div class="modal-footer">

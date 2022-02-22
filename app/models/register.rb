@@ -18,6 +18,9 @@ class Register < ApplicationRecord
   # Delegations
   delegate :license_plate, to: :vehicle, prefix: true
 
+  #Callbacks
+  after_save :save_maintenance
+
   def self.search(params, paginate: true)
     query = self.includes(:vehicle).ransack(params[:q])
     query.result
@@ -32,11 +35,30 @@ class Register < ApplicationRecord
       register = Register.new
       register.description = preload_register.description
       register.register_type = preload_register.register_type
-      register.value = preload_register.value
+      register.value = preload_register.value || nil
       register.notes = preload_register.notes
       registers << register
     end
 
     registers
+  end
+
+  private
+
+  def save_maintenance
+    if self.maintainable == "1" && self.category.present?
+      attributes = {
+        description: description,
+        category: category,
+        event_date: event_date,
+        value: value,
+        vehicle_id: vehicle.id,
+        user_id: user.id,
+        register_id: id
+      }
+      maintenance.present? ? maintenance.update(attributes) : Maintenance.create!(attributes)
+    elsif
+      maintenance&.destroy
+    end
   end
 end

@@ -4,7 +4,7 @@ class Maintenance < ApplicationRecord
   # Associations
   belongs_to :vehicle
   belongs_to :maintenance_type
-  belongs_to :register, dependent: :destroy, optional: true
+  belongs_to :register, optional: true
 
   # Scopes
   scope :by_date, -> { order('event_date ASC') }
@@ -27,7 +27,7 @@ class Maintenance < ApplicationRecord
     if self.category.to_i != 0
       self.maintenance_type_id = self.category.to_i
     else
-      maintenance_type = self.vehicle.account.maintenance_types.create(name: self.category.capitalize)
+      maintenance_type = self.vehicle.account.maintenance_types.create!(name: self.category.capitalize)
       self.maintenance_type_id = maintenance_type.id
     end
   end

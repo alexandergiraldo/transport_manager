@@ -39,6 +39,8 @@ class RegistersController < ApplicationController
     @register = Register.find(params[:id])
     params[:q] = { event_date_gteq: @register.event_date.beginning_of_month, event_date_lteq: @register.event_date.end_of_month }
     @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).by_date
+    @register.maintainable = @register.maintenance ? "1" : "0"
+    @register.category = @register.maintenance&.maintenance_type_id
 
     respond_to do |format|
       format.js {

@@ -44,6 +44,7 @@
           <tr>
             <th scope="col" class="text-left">Fecha</th>
             <th scope="col" class="text-left">Valor</th>
+            <th style="width: 13%" scope="col" class="text-left">Vehiculo</th>
             <th scope="col" class="text-left">Notas</th>
             <th/>
           </tr>
@@ -53,8 +54,12 @@
             <tr>
               <td class="align-left text-left" scope="row"><%=format_date(saving.event_date)%></td>
               <td class="align-left text-left"><%=value_to_currency(saving.amount)%></td>
+              <td class="align-left text-right"><%=saving.vehicle&.license_plate%></td>
               <td class="align-left text-left"><%=saving.notes%></td>
               <td class="align-left text-left">
+                <%=link_to edit_driver_saving_path(saving.driver_id, saving.id, format: :js), title: 'Editar', data: {remote: true}, class: "edit-saving" do%>
+                  <i class="material-icons">edit</i>
+                <%end%>
                 <%=link_to driver_saving_path(saving.driver_id, saving.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
                   <i class="material-icons">delete</i>
                 <%end%>
@@ -68,3 +73,8 @@
     </div>
   </div>
 </div>
+
+<%content_for :app_modals do %>
+  <div class="modal fade" id="edit-saving-modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  </div>
+<%end%>

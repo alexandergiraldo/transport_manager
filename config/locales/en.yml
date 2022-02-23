@@ -36,3 +36,6 @@ en:
   register_type:
     incoming: Entrada
     outcoming: Gasto
+  saving_status:
+    saved: Ahorro
+    paid: Pagado

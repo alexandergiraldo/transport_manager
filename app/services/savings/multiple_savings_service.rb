@@ -28,7 +28,7 @@ module Savings
       register_object = Saving.create!(
         driver_id: params[:driver_id],
         event_date: saving[:event_date],
-        amount: saving[:amount].to_i,
+        amount: saving[:amount]&.delete('^0-9'),
         notes: saving[:notes],
         user_id: user.id,
       )

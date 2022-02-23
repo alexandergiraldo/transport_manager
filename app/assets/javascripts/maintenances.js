@@ -9,6 +9,7 @@ Maintenances = (function () {
     $('.container-fluid').on('cocoon:after-remove', function (e, insertedItem) {
       calculate_maintenances_totals();
       window.Registers.calculate_registers_totals();
+      window.Savings.calculate_savings_totals();
     });
 
   }

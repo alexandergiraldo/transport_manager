@@ -3,7 +3,7 @@
     <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
   </td>
   <td class="align-left text-left">
-    <%= f.number_field :amount, class: "form-control saving-value", placeholder: '', required: true%>
+    <%= f.text_field :amount, class: "form-control saving-value imask_number", placeholder: '', required: true%>
   </td>
   <td class="align-left text-left" scope="row">
     <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>

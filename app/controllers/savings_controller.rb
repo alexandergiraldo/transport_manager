@@ -2,11 +2,32 @@ class SavingsController < ApplicationController
   include Pagy::Backend
   before_action :authenticate_user!
   before_action :init_date_params, :filter_driver, only: [:index]
+  before_action :filter_driver, only: [:index2]
 
   def index
     result = policy_scope(Saving)
     result = result.search(params).by_date
     @pagy, @savings = pagy(result, items: 60)
+  end
+
+  def index2
+    result = policy_scope(Saving)
+    result = result.search(params).by_date_desc
+    @pagy, @savings = pagy(result, items: 60)
+
+    @total = policy_scope(Saving).search(params).sum(:amount)
+    @total_saved = policy_scope(Saving).search({
+      q: {
+        status_eq: Saving.statuses[:saved],
+        driver_id_eq: params[:q][:driver_id_eq]
+      }
+    }).sum(:amount)
+    @total_paid = policy_scope(Saving).search({
+      q: {
+        status_eq: Saving.statuses[:paid],
+        driver_id_eq: params[:q][:driver_id_eq]
+      }
+    }).sum(:amount)
   end
 
   def new
@@ -17,7 +38,7 @@ class SavingsController < ApplicationController
     @saving_service = ::Savings::MultipleSavingsService.new(params.to_unsafe_h, current_user)
 
     if @saving_service.process
-      redirect_to savings_path(q: {driver_id_eq: params[:driver_id]}), flash: {success: "Ahorros creados exitosamente"}
+      redirect_to view_context.saving_main_path(q: {driver_id_eq: params[:driver_id]}), flash: {success: "Ahorros creados exitosamente"}
     else
       flash[:error] = "Ha ocurrido un error: #{@saving_service.errors.join("<br/>")}"
       render :new
@@ -35,10 +56,28 @@ class SavingsController < ApplicationController
     end
   end
 
+  def mark_as_paid
+    @saving = Saving.find(params[:id])
+    authorize @saving, :update?
+
+    if @saving.paid!
+      @saving.reload
+      @saving.update!(paid_date: Time.zone.now)
+    end
+
+    redirect_to request.referer, flash: {success: "Pago aplicado exitosamente"}
+  end
+
   protected
 
   def filter_driver
-    params[:q][:driver_id_eq] = view_context.drivers_list.first.try(:[],1) unless params[:q][:driver_id_eq].present?
+    if params[:q].blank?
+      params[:q] = {
+        driver_id_eq: view_context.drivers_list.first.try(:[],1)
+      }
+    else
+      params[:q][:driver_id_eq] = view_context.drivers_list.first.try(:[],1) unless params[:q][:driver_id_eq].present?
+    end
   end
 
 end

@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :register_sketches
   resources :preload_registers, only: [:edit, :destroy, :update]
   resources :drivers do
-    resources :savings, except: [:index]
+    resources :savings, except: [:index] do
+      put 'mark_as_paid', on: :member
+    end
   end
   resources :maintenances, except: :index do
     post "multiple", to: "maintenances#create_multiple", on: :collection, as: "multiple"
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
   end
   get 'registers', to: 'registers#index'
   get 'savings', to: 'savings#index'
+  get 'savings/index2', to: 'savings#index2', as: 'savings_index2'
 
   post "utils/change_vehicle", to: "utils#change_current_vehicle", as: 'change_vehicle'
   put "utils/change_account", to: "utils#change_user_account", as: 'change_account'

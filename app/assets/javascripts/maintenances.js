@@ -51,7 +51,7 @@ Maintenances = (function () {
 
   function fillRegisterDate(insertedItem) {
     if ($(".apply-date-checkbox").is(':checked')) {
-      const date = $('.date-origin').val();
+      var date = $('.date-origin').val();
       insertedItem.find(".fill-date").val(date);
     }
   }

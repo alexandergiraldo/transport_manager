@@ -62,7 +62,7 @@ Registers = (function () {
   function applySameDate() {
     $(document).on("change", ".apply-date-checkbox", function () {
       if ($(this).is(':checked')) {
-        const date = $('.date-origin').val();
+        var date = $('.date-origin').val();
         $(".fill-date").each(function () {
           $(this).val(date);
         });

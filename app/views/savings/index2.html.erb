@@ -52,7 +52,7 @@
         <thead>
           <tr>
             <th style="width: 11%" scope="col" class="text-left">Fecha</th>
-            <th style="width: 15%" scope="col" class="text-left">Valor</th>
+            <th style="width: 13%" scope="col" class="text-left">Valor</th>
             <th scope="col" class="text-left">Notas</th>
             <th style="width: 15%" scope="col" class="text-left">Estado</th>
             <th style="width: 10%" />
@@ -62,7 +62,7 @@
           <%@savings.each do |saving|%>
             <tr>
               <td class="align-left text-left" scope="row"><%=format_date(saving.event_date)%></td>
-              <td class="align-left text-left"><%=value_to_currency(saving.amount)%></td>
+              <td class="align-left text-right"><%=value_to_currency(saving.amount)%></td>
               <td class="align-left text-left"><%=saving.notes%></td>
               <td class="align-left text-left">
                 <%=I18n.t("saving_status.#{saving.status}") %>
@@ -86,6 +86,12 @@
               </td>
             </tr>
           <%end%>
+          <tr>
+            <td class="align-left text-left" scope="row">Total</td>
+            <td class="align-left text-right">
+              <%=value_to_currency(@savings.map(&:amount).sum)%>
+            </td>
+          </tr>
         </tbody>
       </table>
 

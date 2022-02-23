@@ -30,6 +30,7 @@ module Savings
         event_date: saving[:event_date],
         amount: saving[:amount]&.delete('^0-9'),
         notes: saving[:notes],
+        vehicle_id: saving[:vehicle_id],
         user_id: user.id,
       )
     end

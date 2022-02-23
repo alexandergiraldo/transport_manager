@@ -1,5 +1,6 @@
 class Saving < ApplicationRecord
   belongs_to :driver
+  belongs_to :vehicle, optional: true
 
   enum status: [ :saved, :paid ]
 

@@ -3,10 +3,8 @@ class SavingPolicy < ApplicationPolicy
     def resolve
       if user.super_admin?
         scope.all
-      elsif user.account_admin?
-        scope.where(driver_id: user.active_account.driver_ids)
       else
-        scope.none
+        scope.where(driver_id: user.active_account.driver_ids)
       end
     end
   end

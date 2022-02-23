@@ -53,9 +53,10 @@
           <tr>
             <th style="width: 11%" scope="col" class="text-left">Fecha</th>
             <th style="width: 13%" scope="col" class="text-left">Valor</th>
+            <th style="width: 13%" scope="col" class="text-left">Vehiculo</th>
             <th scope="col" class="text-left">Notas</th>
             <th style="width: 15%" scope="col" class="text-left">Estado</th>
-            <th style="width: 10%" />
+            <th style="width: 15%" />
           </tr>
         </thead>
         <tbody>
@@ -63,6 +64,7 @@
             <tr>
               <td class="align-left text-left" scope="row"><%=format_date(saving.event_date)%></td>
               <td class="align-left text-right"><%=value_to_currency(saving.amount)%></td>
+              <td class="align-left text-right"><%=saving.vehicle&.license_plate%></td>
               <td class="align-left text-left"><%=saving.notes%></td>
               <td class="align-left text-left">
                 <%=I18n.t("saving_status.#{saving.status}") %>
@@ -71,13 +73,16 @@
                 </small>
               </td>
               <td class="align-left text-center">
-                <div class="row">
-                  <div class="col-md-2">
+                <div class="row no-gutters">
+                  <div class="col-md-6">
+                    <%=link_to edit_driver_saving_path(saving.driver_id, saving.id, format: :js), title: 'Editar', data: {remote: true}, class: "edit-saving" do%>
+                      <i class="material-icons">edit</i>
+                    <%end%>
                     <%=link_to driver_saving_path(saving.driver_id, saving.id), title: 'Borrar', data: {confirm: 'Esta seguro de eliminar el registro?', method: :delete} do%>
                       <i class="material-icons">delete</i>
                     <%end%>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-6 text-left">
                     <%if saving.saved?%>
                       <%=link_to "Pagar", mark_as_paid_driver_saving_path(saving.driver_id, saving.id), title: 'Pagar', data: {confirm: 'Esta seguro ?', method: :put}%>
                     <%end%>
@@ -99,3 +104,8 @@
     </div>
   </div>
 </div>
+
+<%content_for :app_modals do %>
+  <div class="modal fade" id="edit-saving-modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  </div>
+<%end%>

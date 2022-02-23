@@ -3,7 +3,7 @@ module VehicleHelper
     if current_user.super_admin?
       Vehicle.all
     elsif current_user.account_admin?
-      Vehicle.where(account_id: current_user.account_id).active
+      Vehicle.where(account_id: current_user.active_account.id).active
     else
       Vehicle.where(id: current_user.vehicle_ids).active
     end

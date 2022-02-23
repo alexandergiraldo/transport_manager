@@ -6,6 +6,9 @@
     <%= f.text_field :amount, class: "form-control saving-value imask_number", placeholder: '', required: true%>
   </td>
   <td class="align-left text-left" scope="row">
+    <%= f.select :vehicle_id, options_for_select(user_vehicles.pluck(:license_plate, :id), f.object.vehicle_id), {:prompt => 'Seleccionar Vehiculo'}, {class: "category-select2 form-control", required: false}%>
+  </td>
+  <td class="align-left text-left" scope="row">
     <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>
   </td>
   <td class="align-left d-print-none">

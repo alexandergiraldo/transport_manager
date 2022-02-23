@@ -12,7 +12,7 @@ class SavingsController < ApplicationController
 
   def index2
     result = policy_scope(Saving)
-    result = result.search(params).by_date_desc
+    result = result.search(params).includes(:vehicle).by_date_desc
     @pagy, @savings = pagy(result, items: 60)
 
     @total = policy_scope(Saving).search(params).sum(:amount)
@@ -45,6 +45,29 @@ class SavingsController < ApplicationController
     end
   end
 
+  def edit
+    @saving = Saving.find(params[:id])
+    authorize @saving, :update?
+
+    respond_to do |format|
+      format.js {
+          render  :action => "edit.js.erb",
+                  :layout => false
+      }
+    end
+  end
+
+  def update
+    @saving = Saving.find(params[:id])
+    authorize @saving, :update?
+
+    if @saving.update(saving_params)
+      redirect_to view_context.saving_main_path(q: {driver_id_eq: @saving.driver_id}), flash: {success: "Ahorros actualizado exitosamente"}
+    else
+      redirect_to view_context.saving_main_path(q: {driver_id_eq: @saving.driver_id}), flash: {success: "Ha ocurrido un error"}
+    end
+  end
+
   def destroy
     @saving = Saving.find(params[:id])
     authorize @saving, :update?
@@ -69,6 +92,12 @@ class SavingsController < ApplicationController
   end
 
   protected
+
+  def saving_params
+    s_params = params.require(:saving).permit(:event_date, :amount, :notes, :paid_date, :vehicle_id)
+    s_params[:amount] = s_params[:amount]&.delete('^0-9')
+    s_params
+  end
 
   def filter_driver
     if params[:q].blank?

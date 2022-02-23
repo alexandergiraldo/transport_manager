@@ -1,0 +1,4 @@
+$("#edit-saving-modal").html("<%= j render(partial: 'form', locals: {saving: @saving}) %>");
+$("#edit-saving-modal").modal("show");
+window.Application.init_sheet_inputs();
+window.Application.initNumberMask();

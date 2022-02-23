@@ -17,7 +17,11 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="exampleFormControlInput1">Fecha</label>
-          <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
+          <%= f.text_field :event_date, class: "form-control datepicker date-origin", placeholder: "", required: true, autocomplete: "off"%>
+          <div class="custom-control custom-checkbox mb-1">
+            <%=f.check_box :apply_date_to_registers, class: "custom-control-input apply-date-checkbox"%>
+            <%=f.label :apply_date_to_registers, "Aplicar a registros?", class: "custom-control-label align-middle"%>
+          </div>
         </div>
         <div class="col-md-4 mb-3">
           <label for="exampleFormControlInput1">Manifiesto</label>

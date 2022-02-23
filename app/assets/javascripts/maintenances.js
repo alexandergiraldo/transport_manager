@@ -4,6 +4,7 @@ Maintenances = (function () {
       window.Application.init_sheet_inputs();
       insertedItem.find(".select-category").toggle();
       window.Application.initNumberMask();
+      fillRegisterDate(insertedItem);
     });
 
     $('.container-fluid').on('cocoon:after-remove', function (e, insertedItem) {
@@ -45,6 +46,13 @@ Maintenances = (function () {
     }
     else {
       return 0;
+    }
+  }
+
+  function fillRegisterDate(insertedItem) {
+    if ($(".apply-date-checkbox").is(':checked')) {
+      const date = $('.date-origin').val();
+      insertedItem.find(".fill-date").val(date);
     }
   }
 

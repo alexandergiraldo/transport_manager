@@ -1,7 +1,7 @@
 <tr class="register-row">
   <td class="align-left text-left" scope="row">
     <%= f.hidden_field :document_id, :value => @document&.id || f.object.document_id %>
-    <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
+    <%= f.text_field :event_date, class: "form-control datepicker fill-date", placeholder: "", required: true, autocomplete: "off"%>
   </td>
   <td class="align-left text-left" scope="row">
     <%= f.label(:register_type) do %>

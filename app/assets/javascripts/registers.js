@@ -59,6 +59,17 @@ Registers = (function () {
     }
   }
 
+  function applySameDate() {
+    $(document).on("change", ".apply-date-checkbox", function () {
+      if ($(this).is(':checked')) {
+        const date = $('.date-origin').val();
+        $(".fill-date").each(function () {
+          $(this).val(date);
+        });
+      }
+    })
+  }
+
   return {
     calculate_registers_totals: function () {
       calculate_registers_totals();
@@ -66,6 +77,7 @@ Registers = (function () {
     init: function () {
       calculate_registers_totals();
       monitor_total_values();
+      applySameDate();
     }
   }
 })();

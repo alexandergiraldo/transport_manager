@@ -1,19 +1,21 @@
 class Document < ApplicationRecord
-    # Associations
-    has_many :registers, -> { order(:created_at => :asc) }, dependent: :destroy
-    belongs_to :vehicle
-    belongs_to :user
+  attr_accessor :apply_date_to_registers
 
-    accepts_nested_attributes_for :registers, reject_if: :all_blank, allow_destroy: true
+  # Associations
+  has_many :registers, -> { order(:created_at => :asc) }, dependent: :destroy
+  belongs_to :vehicle
+  belongs_to :user
 
-    # Validations
-    validates :title, presence: true
+  accepts_nested_attributes_for :registers, reject_if: :all_blank, allow_destroy: true
 
-    # Scopes
-    scope :by_date, -> { order('event_date ASC') }
+  # Validations
+  validates :title, presence: true
 
-    def self.search(params, paginate: true)
-      query = self.ransack(params[:q])
-      query.result
-    end
+  # Scopes
+  scope :by_date, -> { order('event_date ASC') }
+
+  def self.search(params, paginate: true)
+    query = self.ransack(params[:q])
+    query.result
   end
+end

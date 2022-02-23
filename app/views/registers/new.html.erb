@@ -25,6 +25,16 @@
             </div>
           <%end%>
         </div>
+        <div class="col-md-1">
+          <label for="exampleFormControlInput1">Fecha</label>
+        </div>
+        <div class="col-md-3 mb-3">
+          <%= text_field_tag :event_date, '', class: "form-control datepicker date-origin", placeholder: "", required: true, autocomplete: "off"%>
+          <div class="custom-control custom-checkbox mb-1">
+            <%=check_box_tag :apply_date_to_registers, 'yes', false, class: "custom-control-input apply-date-checkbox"%>
+            <%=label_tag :apply_date_to_registers, "Aplicar a registros?", class: "custom-control-label align-middle"%>
+          </div>
+        </div>
       </div>
     <%end%>
 

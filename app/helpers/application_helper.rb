@@ -5,6 +5,10 @@ module ApplicationHelper
     '<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />'.html_safe
   end
 
+  def render_date_picker
+    '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />'.html_safe
+  end
+
   def flash_class(level)
     case level.to_sym
       when :notice then "alert alert-info"

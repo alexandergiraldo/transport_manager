@@ -12,10 +12,7 @@
           <div class="form-group">
             <div class="row mb-1">
               <div class="col-md-6 mb-1">
-                <%= f.text_field :event_date_gteq, class: "form-control datepicker", placeholder: "Fecha Inicio", required: true, autocomplete: "off"%>
-              </div>
-              <div class="col-md-6 mb-1">
-                <%= f.text_field :event_date_lteq, class: "form-control datepicker", placeholder: "Fecha Final", required: true, autocomplete: "off"%>
+                <%= f.text_field :event_date_between, class: "form-control daterange", placeholder: "Fecha Inicio", required: true, autocomplete: "off"%>
               </div>
             </div>
           </div>

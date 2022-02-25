@@ -19,6 +19,8 @@
 //= require imask/dist/imask.min.js
 //= require datepicker.js
 //= require select2.min.js
+//= require moment.min.js
+//= require daterangepicker.min.js
 //= require cocoon
 //= require registers
 //= require maintenances
@@ -31,6 +33,12 @@
 Application = (function () {
   function init_datepicker() {
     $('.datepicker').datepicker({ format: 'yyyy/mm/dd' });
+    $('.daterange').daterangepicker({
+      autoApply: true,
+      locale: {
+        format: 'YYYY/MM/DD',
+      }
+    });
   }
 
   function init_select2_inputs() {

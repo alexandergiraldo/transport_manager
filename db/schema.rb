@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_195514) do
+ActiveRecord::Schema.define(version: 2022_04_15_044325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,9 @@ ActiveRecord::Schema.define(version: 2022_02_23_195514) do
     t.decimal "load_value", precision: 11
     t.string "load_size"
     t.string "load_manifest"
+    t.bigint "driver_id"
     t.index ["account_id"], name: "index_documents_on_account_id"
+    t.index ["driver_id"], name: "index_documents_on_driver_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
     t.index ["vehicle_id"], name: "index_documents_on_vehicle_id"
   end

@@ -9,6 +9,6 @@ module SavingHelper
   end
 
   def saving_main_path(params = {})
-    current_vehicle.truck? ? savings_index2_path(params) : savings_path(params)
+    current_vehicle&.truck? ? savings_index2_path(params) : savings_path(params)
   end
 end

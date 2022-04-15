@@ -35,7 +35,7 @@
       </li>
       <li class="drawer-menu-item">
         <a href="<%=vehicles_path%>">
-          <i class="material-icons"><%=current_vehicle.cars_icon%></i>
+          <i class="material-icons"><%=current_vehicle&.cars_icon%></i>
           <span class="drawer-menu-text">Vehiculos</span>
         </a>
       </li>
@@ -57,7 +57,7 @@
           <span class="drawer-menu-text">Ahorros</span>
         </a>
       </li>
-      <%if current_vehicle.truck?%>
+      <%if current_vehicle&.truck?%>
         <li class="drawer-menu-item">
           <a href="<%=register_sketches_path%>">
             <i class="material-icons">assignment</i>

@@ -1,3 +1,7 @@
+<%content_for :external_css do %>
+  <%= render_select2_css %>
+<%end%>
+
 <div class="card-header">
   <h5 class="card-title">Editar Documento</h5>
 </div>
@@ -5,19 +9,22 @@
   <div class="card-body">
     <%= form_for(@document, url: document_path(@document.id), method: :put) do |f|%>
       <div class="row">
-        <div class="col-md-4 mb-3">
-          <label for="exampleFormControlInput1">Titulo</label>
+        <div class="col-md-3 mb-3">
+          <label for="exampleFormControlInput1">Nombre</label>
             <%= f.text_field :title, class: "form-control", required: true, placeholder: "Viaje MDE - BGT"%>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
+          <label for="exampleFormControlInput1">Conductor</label>
+          <%= f.select :driver_id, driver_options, {:prompt => 'Seleccionar Conductor'}, {class: "category-select2 form-control", required: true}%>
+        </div>
+        <div class="col-md-3 mb-3">
           <label for="exampleFormControlInput1">Fecha</label>
           <%= f.text_field :event_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
           <label for="exampleFormControlInput1">Manifiesto</label>
           <%= f.text_field :load_manifest, class: "form-control", placeholder: "", autocomplete: "on"%>
         </div>
-
       </div>
       <div class="row">
         <div class="col-md-3 mb-3">

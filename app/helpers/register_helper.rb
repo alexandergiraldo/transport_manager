@@ -52,4 +52,8 @@ module RegisterHelper
   def register_sketches_options
     RegisterSketch.where(account_id: current_account.id).pluck(:name, :id)
   end
+
+  def driver_options
+    current_account.drivers.collect {|d| [ d.name, d.id ] }
+  end
 end

@@ -59,7 +59,7 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      d_params = params.require(:document).permit(:title, :event_date, :description, :company, :load_type, :load_value, :load_size, :load_manifest)
+      d_params = params.require(:document).permit(:title, :driver_id, :event_date, :description, :company, :load_type, :load_value, :load_size, :load_manifest)
       d_params[:load_value] = d_params[:load_value]&.delete('^0-9')
       d_params
     end

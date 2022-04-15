@@ -2,6 +2,7 @@ class Driver < ApplicationRecord
   # Associations
   belongs_to :account
   has_many :savings
+  has_many :documents
 
   # Validations
   validates :name, presence: {message: "no puede ser vacio"}

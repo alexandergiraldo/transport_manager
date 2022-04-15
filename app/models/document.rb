@@ -5,6 +5,7 @@ class Document < ApplicationRecord
   has_many :registers, -> { order(:created_at => :asc) }, dependent: :destroy
   belongs_to :vehicle
   belongs_to :user
+  belongs_to :driver, optional: true
 
   accepts_nested_attributes_for :registers, reject_if: :all_blank, allow_destroy: true
 

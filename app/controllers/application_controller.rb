@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
   def validate_vehicle
     unless current_vehicle.present?
-      redirect_to new_vehicle_path if controller_name != 'vehicles'
+      redirect_to new_vehicle_path if controller_name != 'vehicles' && action_name != 'change_user_account'
     end
   end
 

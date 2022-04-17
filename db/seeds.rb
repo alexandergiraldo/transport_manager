@@ -7,4 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 account = Account.where(name: 'FGR').first_or_create
-User.where(email: 'alexgr200@gmail.com', full_name: 'Alexander Giraldo', account: account, role: 1).first_or_create(password: 'testing')
+user = User.where(email: 'alexgr200@gmail.com', full_name: 'Alexander Giraldo', account_id: account.id, role: 1).first_or_create(password: 'testing')
+user.accounts << account

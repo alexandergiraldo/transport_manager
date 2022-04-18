@@ -27,4 +27,6 @@ Rails.application.routes.draw do
 
   post "utils/change_vehicle", to: "utils#change_current_vehicle", as: 'change_vehicle'
   put "utils/change_account", to: "utils#change_user_account", as: 'change_account'
+
+  resources :reports
 end

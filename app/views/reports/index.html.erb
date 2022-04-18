@@ -1,0 +1,30 @@
+<%content_for :external_css do %>
+  <%= render_select2_css %>
+<%end%>
+
+<div class="card">
+  <div class="card-body">
+    <div class="row mb-3">
+      <div class="col-md-12">
+        Utilidades
+        <%= form_for(:q, url: reports_path, method: :get) do |f|%>
+          <%=select_year(params.dig(:year).try(:to_i) || Date.today, {start_year: 2010, end_year: Time.now.year}, class: "form-control auto-submit", name: 'year')%>
+        <%end%>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= column_chart @vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#129618", "#DC3913"], legend: false %>
+      </div>
+      <div class="col-md-6">
+        <%= column_chart @vehicle_utilities_by_year, thousands: ".", prefix: "$", colors: ["#129618", "#DC3913"] %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12 text-center">
+        Total Utilidades <%=params.dig(:year).try(:to_i) || Time.zone.now.year%>:
+        <%= calculate_utility(@vehicle_utilities_by_year) %>
+      </div>
+    </div>
+  </div>
+</div>

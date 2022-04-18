@@ -29,7 +29,7 @@
     <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
       <li class="drawer-menu-item">
         <a href="/">
-          <i class="material-icons">poll</i>
+          <i class="material-icons">home</i>
           <span class="drawer-menu-text">Inicio</span>
         </a>
       </li>
@@ -65,9 +65,13 @@
           </a>
         </li>
       <%end%>
-
+      <li class="drawer-menu-item">
+        <a href="<%=reports_path%>">
+          <i class="material-icons">insert_chart</i>
+          <span class="drawer-menu-text">Reportes</span>
+        </a>
+      </li>
     </ul>
-
   <%end%>
 
 </nav>

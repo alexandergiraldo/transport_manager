@@ -44,9 +44,13 @@ gem 'pundit'
 # Search engine
 gem 'ransack', '~> 2.4'
 gem 'pagy'
+gem "groupdate"
 
 # Read excel file
 gem 'roo'
+
+# Charts
+gem "chartkick"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

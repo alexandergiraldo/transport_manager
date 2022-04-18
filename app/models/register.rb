@@ -26,7 +26,6 @@ class Register < ApplicationRecord
     query.result
   end
 
-
   def self.preload_registers(register_sketch)
     return unless register_sketch.present?
     registers = []

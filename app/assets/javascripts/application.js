@@ -22,6 +22,9 @@
 //= require moment.min.js
 //= require daterangepicker.min.js
 //= require cocoon
+//= require chartkick
+//= require Chart.bundle
+
 //= require registers
 //= require maintenances
 //= require savings

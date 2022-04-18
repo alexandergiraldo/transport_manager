@@ -30,6 +30,33 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  defaults: &defaults
+    month_names:
+      [
+        ~,
+        Enero,
+        Febrero,
+        Marzo,
+        Abril,
+        Mayo,
+        Junio,
+        Julio,
+        Agosto,
+        Septiembre,
+        Octubre,
+        Noviembre,
+        Diciembre,
+      ]
+    abbr_month_names:
+      [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Agos, Sept, Oct, Nov, Dic]
+    formats:
+      default: "%d. %B %Y"
+      long: "%B %d"
+      abbr_month: "%b"
+  date:
+    <<: *defaults
+  time:
+    <<: *defaults
   vehicle_types:
     taxi: Taxi
     truck: Camión

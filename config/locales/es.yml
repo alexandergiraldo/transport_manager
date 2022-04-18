@@ -1,10 +1,27 @@
 es:
   defaults: &defaults
     month_names:
-      [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+      [
+        ~,
+        Enero,
+        Febrero,
+        Marzo,
+        Abril,
+        Mayo,
+        Junio,
+        Julio,
+        Agosto,
+        Septiembre,
+        Octubre,
+        Noviembre,
+        Diciembre,
+      ]
+    abbr_month_names:
+      [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Agos, Sept, Oct, Nov, Dic]
     formats:
-       default: "%d. %B %Y"
-       long: "%B %d"
+      default: "%d. %B %Y"
+      long: "%B %d"
+      abbr_month: "%b"
   date:
     <<: *defaults
   time:

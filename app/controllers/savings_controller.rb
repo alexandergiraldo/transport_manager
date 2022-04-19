@@ -95,7 +95,7 @@ class SavingsController < ApplicationController
 
   def saving_params
     s_params = params.require(:saving).permit(:event_date, :amount, :notes, :paid_date, :vehicle_id)
-    s_params[:amount] = s_params[:amount]&.delete('^0-9')
+    s_params[:amount] = Saving.sanitize_amount(s_params[:amount])
     s_params
   end
 

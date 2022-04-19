@@ -3,11 +3,17 @@ Savings = (function () {
     var incoming_values = [];
 
     $('.saving-row').each(function () {
-      var value = $(this).find('.saving-value').val().replace(/\D/g, '') || 0;
+      var value = $(this).find('.saving-value').val().replace(/[^0-9-]/g, '') || 0;
       incoming_values.push(parseInt(value));
     });
 
     var incoming_sum = sum_values(incoming_values)
+
+    if (incoming_sum < 0) {
+      $('#savings-total').removeClass( "text-success" ).addClass( "text-danger" );
+    } else {
+      $('#savings-total').removeClass( "text-danger" ).addClass( "text-success" );
+    }
 
     $('#savings-total').html('$' + to_currency(incoming_sum));
   }

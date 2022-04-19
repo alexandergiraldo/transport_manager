@@ -12,4 +12,8 @@ class Saving < ApplicationRecord
     query = self.ransack(params[:q])
     query.result
   end
+
+  def self.sanitize_amount(amount)
+    return amount&.delete('^0-9-')
+  end
 end

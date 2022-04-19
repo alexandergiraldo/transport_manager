@@ -47,7 +47,7 @@ module Registers
         description: register[:description],
         event_date: register[:event_date],
         register_type: register[:register_type],
-        value: register[:value]&.delete('^0-9'),
+        value: Register.sanitize_amount(register[:value]),
         notes: register[:notes],
         vehicle_id: vehicle.id,
         user_id: user.id,
@@ -76,7 +76,7 @@ module Registers
     def create_document_if_present
       document_params = params[:document]
       if document_params
-        document_params[:load_value] = document_params[:load_value]&.delete('^0-9')
+        document_params[:load_value] = Register.sanitize_amount(document_params[:load_value])
         document = Document.new(document_params.except(:registers_attributes, :commit))
         document.user_id = user.id
         document.vehicle_id = vehicle.id

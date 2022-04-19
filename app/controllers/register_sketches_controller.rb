@@ -62,7 +62,7 @@ class RegisterSketchesController < ApplicationController
   def register_sketch_params
     sketch_params = params.require(:register_sketch).permit(:name, preload_registers_attributes: [:id, :name, :description, :register_type, :value, :notes, :register_sketch_id, :account_id, :_destroy])
     sketch_params[:preload_registers_attributes].each do |k, p_register|
-      p_register[:value] = p_register[:value]&.delete('^0-9')
+      p_register[:value] = Register.sanitize_amount(p_register[:value])
     end
     sketch_params
   end

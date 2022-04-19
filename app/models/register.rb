@@ -26,6 +26,10 @@ class Register < ApplicationRecord
     query.result
   end
 
+  def self.sanitize_amount(amount)
+    return amount&.delete('^0-9')
+  end
+
   def self.preload_registers(register_sketch)
     return unless register_sketch.present?
     registers = []

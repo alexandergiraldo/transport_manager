@@ -43,7 +43,7 @@ class PreloadRegistersController < ApplicationController
 
   def register_sketch_params
     r_params = params.require(:preload_register).permit(:description, :register_type, :value, :notes)
-    r_params[:value] = r_params[:value]&.delete('^0-9')
+    r_params[:value] = Register.sanitize_amount(r_params[:value])
     r_params
   end
 end

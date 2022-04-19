@@ -80,7 +80,7 @@ class RegistersController < ApplicationController
 
   def register_params
     r_params = params.require(:register).permit(:description, :category, :register_type, :notes, :event_date, :value, :vehicle_id, :maintainable, :document_id)
-    r_params[:value] = r_params[:value]&.delete('^0-9')
+    r_params[:value] = Register.sanitize_amount(r_params[:value])
     r_params
   end
 end

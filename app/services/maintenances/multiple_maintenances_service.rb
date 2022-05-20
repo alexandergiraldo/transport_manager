@@ -44,7 +44,7 @@ module Maintenances
                 description: maintenance[:description],
                 category: maintenance[:category],
                 event_date: maintenance[:event_date],
-                value: maintenance[:value],
+                value: Register.sanitize_amount(maintenance[:value]),
                 vehicle_id: vehicle.id,
                 user_id: user.id,
                 register_id: register.try(:id)
@@ -67,7 +67,7 @@ module Maintenances
         event_date: maintenance[:event_date],
         register_type: 1,
         vehicle_id: vehicle.id,
-        value: maintenance[:value],
+        value: Register.sanitize_amount(maintenance[:value]),
         user_id: user.id,
       )
     end

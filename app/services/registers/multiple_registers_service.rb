@@ -92,7 +92,7 @@ module Registers
         description: register[:description],
         category: register[:category],
         event_date: register[:event_date],
-        value: register[:value],
+        value: Register.sanitize_amount(register[:value]),
         vehicle_id: vehicle.id,
         user_id: user.id,
         register_id: register_id

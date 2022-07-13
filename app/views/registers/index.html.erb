@@ -42,10 +42,17 @@
       <%= render partial: 'shared/date_filter'%>
 
       <div class="col-md-7 text-right">
-        <a href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registersPrintModal">
-          <i class="material-icons md-18 align-middle">print</i>
-          <span class="align-middle">Imprimir</span>
-        </a>
+        <%if @documents.present?%>
+          <a href="<%=export_documents_path(request.params.except(:action, :controller).merge(format: :xlsx))%>" class="btn btn btn-primary">
+            <i class="material-icons md-18 align-middle">file_download</i>
+            <span class="align-middle">Exportar</span>
+          </a>
+        <%else%>
+          <a href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registersPrintModal">
+            <i class="material-icons md-18 align-middle">print</i>
+            <span class="align-middle">Imprimir</span>
+          </a>
+        <%end%>
       </div>
     </div>
 

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root to: "registers#index"
 
   resources :vehicles
-  resources :documents
+  resources :documents do
+    get "export", to: "documents#export", on: :collection, as: "export"
+  end
   resources :register_sketches
   resources :preload_registers, only: [:edit, :destroy, :update]
   resources :drivers do

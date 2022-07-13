@@ -1,0 +1,71 @@
+
+wb = xlsx_package.workbook
+styles = wb.styles
+base_style = {:sz => 12, :font_name => 'Calibri Light'}
+date_format = styles.add_style({num_fmt: 16}.merge(base_style))
+currency_format = styles.add_style({format_code: '\$#,##0.00'}.merge(base_style))
+sheet_style = styles.add_style base_style
+
+wb.add_worksheet(name: "Liquidacion") do |sheet|
+  sheet.add_row([
+    "Viaje",
+    "Fecha",
+    "Anticipo Conductor",
+    "Consignó Anticipo",
+    "Anticipo Empresa",
+    "Compañia",
+    "Manifiesto",
+    "Conductor",
+    "Vehiculo",
+    "Empresa",
+    "Consignó",
+    "Fecha",
+    "Diferencia",
+    "Retenciones"
+  ], style: sheet_style)
+  @documents.each_with_index do |document, i|
+    sheet.add_row([
+      i + 1,
+      document.event_date,
+      document.driver_advance,
+      advance_responsible_title(document),
+      document.company_advance,
+      document.company,
+      document.load_manifest,
+      balance_in_favor_driver(document),
+      balance_in_favor_vehicle(document),
+      document.pending_company_amount,
+      document.pending_company_amount_paid,
+      document.paid_date,
+      document.pending_difference,
+      document.retentions
+    ], style: sheet_style)
+  end
+  sheet.add_row([
+    "Total",
+    "",
+    "=SUM(C2:C#{@documents.size + 1})",
+    "",
+    "=SUM(E2:E#{@documents.size + 1})",
+    "",
+    "",
+    "=SUM(H2:H#{@documents.size + 1})",
+    "=SUM(I2:I#{@documents.size + 1})",
+    "=SUM(J2:J#{@documents.size + 1})",
+    "=SUM(K2:K#{@documents.size + 1})",
+    "",
+    "=SUM(M2:M#{@documents.size + 1})",
+    "=SUM(N2:N#{@documents.size + 1})",
+  ], style: sheet_style)
+
+  sheet.col_style 1, date_format, row_offset: 1
+  sheet.col_style 2, currency_format, row_offset: 1
+  sheet.col_style 4, currency_format, row_offset: 1
+  sheet.col_style 7, currency_format, row_offset: 1
+  sheet.col_style 8, currency_format, row_offset: 1
+  sheet.col_style 9, currency_format, row_offset: 1
+  sheet.col_style 10, currency_format, row_offset: 1
+  sheet.col_style 11, date_format, row_offset: 1
+  sheet.col_style 12, currency_format, row_offset: 1
+  sheet.col_style 13, currency_format, row_offset: 1
+end

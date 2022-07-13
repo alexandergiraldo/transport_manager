@@ -48,6 +48,8 @@ gem "groupdate"
 
 # Read excel file
 gem 'roo'
+gem 'caxlsx'
+gem 'caxlsx_rails'
 
 # Charts
 gem "chartkick"

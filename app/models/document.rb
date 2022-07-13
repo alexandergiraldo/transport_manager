@@ -15,8 +15,14 @@ class Document < ApplicationRecord
   # Scopes
   scope :by_date, -> { order('event_date ASC') }
 
+  enum balance_in_favor_of: [ :driver_balance, :vehicle_balance ]
+
   def self.search(params, paginate: true)
     query = self.ransack(params[:q])
     query.result
+  end
+
+  def pending_difference
+    pending_company_amount_paid.to_f - pending_company_amount.to_f
   end
 end

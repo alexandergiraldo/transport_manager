@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_15_044325) do
+ActiveRecord::Schema.define(version: 2022_07_13_013429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 2022_04_15_044325) do
     t.string "load_size"
     t.string "load_manifest"
     t.bigint "driver_id"
+    t.decimal "driver_advance", precision: 11
+    t.decimal "company_advance", precision: 11
+    t.integer "advance_responsible"
+    t.decimal "balance_in_favor", precision: 11
+    t.integer "balance_in_favor_of", default: 0
+    t.decimal "pending_company_amount", precision: 11
+    t.decimal "pending_company_amount_paid", precision: 11
+    t.date "paid_date"
+    t.decimal "retentions", precision: 11
     t.index ["account_id"], name: "index_documents_on_account_id"
     t.index ["driver_id"], name: "index_documents_on_driver_id"
     t.index ["user_id"], name: "index_documents_on_user_id"

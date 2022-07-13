@@ -66,3 +66,6 @@ en:
   saving_status:
     saved: Ahorro
     paid: Pagado
+  balance_in_favor_of:
+    driver_balance: Conductor
+    vehicle_balance: Vehiculo

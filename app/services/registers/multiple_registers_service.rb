@@ -77,6 +77,12 @@ module Registers
       document_params = params[:document]
       if document_params
         document_params[:load_value] = Register.sanitize_amount(document_params[:load_value])
+        document_params[:driver_advance] = Register.sanitize_amount(document_params[:driver_advance])
+        document_params[:company_advance] = Register.sanitize_amount(document_params[:company_advance])
+        document_params[:balance_in_favor] = Register.sanitize_amount(document_params[:balance_in_favor])
+        document_params[:pending_company_amount] = Register.sanitize_amount(document_params[:pending_company_amount])
+        document_params[:pending_company_amount_paid] = Register.sanitize_amount(document_params[:pending_company_amount_paid])
+        document_params[:retentions] = Register.sanitize_amount(document_params[:retentions])
         document = Document.new(document_params.except(:registers_attributes, :commit))
         document.user_id = user.id
         document.vehicle_id = vehicle.id

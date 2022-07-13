@@ -10,53 +10,7 @@
     <%= render partial: 'load_document', locals: {url: new_document_path} %>
 
     <%= form_for(@document, url: documents_path, method: :post) do |f|%>
-      <div class="row">
-        <div class="col-md-3 mb-3">
-          <label for="exampleFormControlInput1">Nombre</label>
-          <%= f.text_field :title, class: "form-control", required: true, placeholder: "Viaje MDE - BGT"%>
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="exampleFormControlInput1">Conductor</label>
-          <%= f.select :driver_id, driver_options, {:prompt => 'Seleccionar Conductor'}, {class: "category-select2 form-control", required: true}%>
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="exampleFormControlInput1">Fecha</label>
-          <%= f.text_field :event_date, class: "form-control datepicker date-origin", placeholder: "", required: true, autocomplete: "off"%>
-          <div class="custom-control custom-checkbox mb-1">
-            <%=f.check_box :apply_date_to_registers, class: "custom-control-input apply-date-checkbox"%>
-            <%=f.label :apply_date_to_registers, "Aplicar a registros?", class: "custom-control-label align-middle"%>
-          </div>
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="exampleFormControlInput1">Manifiesto</label>
-          <%= f.text_field :load_manifest, class: "form-control", placeholder: "", autocomplete: "on"%>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3 mb-3">
-          <label for="exampleFormControlInput1">Empresa</label>
-            <%= f.text_field :company, class: "form-control" %>
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="exampleFormControlInput1">Tipo de Carga</label>
-          <%= f.text_field :load_type, class: "form-control", autocomplete: "on"%>
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="exampleFormControlInput1">Valor Flete</label>
-          <%= f.text_field :load_value, class: "form-control imask_number", autocomplete: "on"%>
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="exampleFormControlInput1">Peso</label>
-          <%= f.text_field :load_size, class: "form-control", autocomplete: "on"%>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 mb-3">
-          <label for="exampleFormControlInput1">Descripción</label>
-          <%= f.text_area :description, class: "form-control"%>
-        </div>
-      </div>
-
+      <%= render partial: 'form', locals: {f: f, apply_date_to_registers: true} %>
       <div class="table-responsive">
         <table class="table table-bordered table-sm">
           <thead>

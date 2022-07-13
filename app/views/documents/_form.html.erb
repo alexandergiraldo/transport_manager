@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Nombre</label>
+    <%= f.text_field :title, class: "form-control", required: true, placeholder: "Viaje MDE - BGT"%>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Conductor</label>
+    <%= f.select :driver_id, driver_options, {:prompt => 'Seleccionar Conductor'}, {class: "category-select2 form-control", required: true}%>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Fecha</label>
+    <%= f.text_field :event_date, class: "form-control datepicker date-origin", placeholder: "", required: true, autocomplete: "off"%>
+    <%if apply_date_to_registers %>
+      <div class="custom-control custom-checkbox mb-1">
+        <%=f.check_box :apply_date_to_registers, class: "custom-control-input apply-date-checkbox"%>
+        <%=f.label :apply_date_to_registers, "Aplicar a registros?", class: "custom-control-label align-middle"%>
+      </div>
+    <%end%>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Manifiesto</label>
+    <%= f.text_field :load_manifest, class: "form-control", placeholder: "", autocomplete: "on"%>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Empresa</label>
+      <%= f.text_field :company, class: "form-control" %>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Tipo de Carga</label>
+    <%= f.text_field :load_type, class: "form-control", autocomplete: "on"%>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Peso</label>
+    <%= f.text_field :load_size, class: "form-control", autocomplete: "on"%>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Valor Flete</label>
+    <%= f.text_field :load_value, class: "form-control imask_number", autocomplete: "on"%>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3 mb-3">
+    <%= f.label :driver_advance, "Anticipo a Conductor" %>
+    <%= f.text_field :driver_advance, class: "form-control imask_number" %>
+  </div>
+  <div class="col-md-3 mb-3">
+    <%= f.label :advance_responsible, "Consignó Anticipo" %>
+    <%= f.select :advance_responsible, advance_responsible_options, {include_blank: true}, {class: "category-select2 form-control"}%>
+  </div>
+  <div class="col-md-3 mb-3">
+    <%= f.label :company_advance, "Anticipo Empresa" %>
+    <%= f.text_field :company_advance, class: "form-control imask_number" %>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Saldo por pagar (Empresa)</label>
+    <%= f.text_field :pending_company_amount, class: "form-control imask_number" %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Retenciones</label>
+    <%= f.text_field :retentions, class: "form-control imask_number" %>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Saldo a Favor de</label>
+    <%= f.select :balance_in_favor_of, options_for_balance_in_favor_of(f.object.balance_in_favor_of), {include_blank: true}, {class: "category-select2 form-control"}%>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Saldo a Favor</label>
+    <%= f.text_field :balance_in_favor, class: "form-control imask_number" %>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Empresa consignó</label>
+    <%= f.text_field :pending_company_amount_paid, class: "form-control imask_number" %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3 mb-3">
+    <label for="exampleFormControlInput1">Fecha consignación</label>
+    <%= f.text_field :paid_date, class: "form-control datepicker date-origin", placeholder: "", autocomplete: "off"%>
+  </div>
+  <div class="col-md-9 mb-3">
+    <label for="exampleFormControlInput1">Descripción</label>
+    <%= f.text_area :description, class: "form-control", rows: 1%>
+  </div>
+</div>

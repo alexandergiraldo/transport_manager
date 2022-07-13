@@ -63,7 +63,7 @@ class DocumentsController < ApplicationController
       @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).by_date
       respond_to do |format|
         format.xlsx {
-          response.headers['Content-Disposition'] = 'attachment; filename="liquidacion.xlsx"'
+          response.headers['Content-Disposition'] = "attachment; filename=Liquidacion-#{current_vehicle.license_plate}.xlsx"
         }
       end
     end

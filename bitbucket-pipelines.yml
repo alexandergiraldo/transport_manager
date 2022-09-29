@@ -11,8 +11,8 @@ pipelines:
         caches:
           - bundler
         script: # Modify the commands below to build your repository.
-          - bundle install
+          - bundle install --path vendor/bundle
 
 definitions:
   caches:
-    bundler: ./vendor
+    bundler: ./vendor/bundle

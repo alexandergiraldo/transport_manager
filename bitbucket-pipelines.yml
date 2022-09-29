@@ -15,4 +15,4 @@ pipelines:
 
 definitions:
   caches:
-    bundler: ./vendor/bundle
+    bundler: vendor/bundle

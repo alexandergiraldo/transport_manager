@@ -40,7 +40,7 @@ wb.add_worksheet(name: "Liquidacion") do |sheet|
       document.paid_date,
       document.pending_difference,
       document.retentions,
-      document.driver.name
+      document.driver&.name
     ], style: sheet_style)
   end
   sheet.add_row([

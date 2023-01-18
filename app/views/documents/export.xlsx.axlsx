@@ -21,7 +21,8 @@ wb.add_worksheet(name: "Liquidacion") do |sheet|
     "Consignó",
     "Fecha",
     "Diferencia",
-    "Retenciones"
+    "Retenciones",
+    "Conductor"
   ], style: sheet_style)
   @documents.each_with_index do |document, i|
     sheet.add_row([
@@ -38,7 +39,8 @@ wb.add_worksheet(name: "Liquidacion") do |sheet|
       document.pending_company_amount_paid,
       document.paid_date,
       document.pending_difference,
-      document.retentions
+      document.retentions,
+      document.driver.name
     ], style: sheet_style)
   end
   sheet.add_row([

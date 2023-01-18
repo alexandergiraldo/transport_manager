@@ -60,7 +60,7 @@ class DocumentsController < ApplicationController
     end
 
     def export
-      @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).by_date
+      @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).includes(:driver).by_date
       respond_to do |format|
         format.xlsx {
           response.headers['Content-Disposition'] = "attachment; filename=Liquidacion-#{current_vehicle.license_plate}.xlsx"

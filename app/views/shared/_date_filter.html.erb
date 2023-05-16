@@ -2,7 +2,7 @@
   <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
     <div class="form-group">
       <div class="row mb-1">
-        <div class="col-md-4 mb-1">
+        <div class="col-md-6 mb-1">
           <input type="month" id="start" onfocus="this.showPicker()" name="event_start" min="2000-01" lang="es" max="<%=Time.now.strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
         </div>
       </div>

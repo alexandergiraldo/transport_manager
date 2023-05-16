@@ -5,6 +5,14 @@
 <div class="card">
   <div class="card-body">
     <div class="row mb-3">
+      <div class="col-md-4">
+        <div class="card card-body flex-row align-items-center">
+          <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">monetization_on</i> Utilidad Global</h5>
+            <div class="text-success ml-auto font-weight-bold"><%=value_to_currency(@total_vehicle_utilities)%></div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
       <div class="col-md-12">
         Utilidades
         <%= form_for(:q, url: reports_path, method: :get) do |f|%>
@@ -21,9 +29,15 @@
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-md-12 text-center">
-        Total Utilidades <%=params.dig(:year).try(:to_i) || Time.zone.now.year%>:
-        <%= calculate_utility(@vehicle_utilities_by_year) %>
+      <div class="col-md-6">
+        <%= column_chart @total_vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#8DAFEE"], legend: true %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12 text-center font-weight-bold text-large">
+          Total Utilidades <%=params.dig(:year).try(:to_i) || Time.zone.now.year%>:
+          <%= calculate_utility(@vehicle_utilities_by_year) %>
+
       </div>
     </div>
   </div>

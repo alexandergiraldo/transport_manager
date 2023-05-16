@@ -3,10 +3,7 @@
     <div class="form-group">
       <div class="row mb-1">
         <div class="col-md-4 mb-1">
-          <%= f.select :event_date_gteq, options_for_select(month_options, params.dig(:q, :event_date_gteq).try(:mon)), {include_blank: false}, {class: "form-control auto-submit"}%>
-        </div>
-        <div class="col-md-4 mb-1">
-          <%=select_year(params.dig(:year).try(:to_i) || Date.today, {start_year: 2011, end_year: Time.now.year}, class: "form-control auto-submit", name: 'year')%>
+          <input type="month" id="start" onfocus="this.showPicker()" name="event_start" min="2000-01" lang="es" max="<%=Time.now.strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
         </div>
       </div>
     </div>

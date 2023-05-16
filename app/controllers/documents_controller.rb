@@ -22,7 +22,7 @@ class DocumentsController < ApplicationController
 
       if @register_service.process
         target_date = @register_service.registers.last.event_date
-        redirect_to registers_path(q: {event_date_gteq: target_date.month}, year: target_date.year), flash: {success: "Documento creado exitosamente"}
+        redirect_to registers_path(event_start: "#{target_date.year}-#{sprintf('%02d', target_date.month)}"), flash: {success: "Documento creado exitosamente"}
       else
         flash[:error] = @register_service.errors.join("<br/>")
         @document = Document.new(document_params)
@@ -40,7 +40,7 @@ class DocumentsController < ApplicationController
       authorize @document, :update?
 
       if @document.update(document_params)
-        redirect_to root_path(q: {event_date_gteq: @document.event_date.month}, year: @document.event_date.year), flash: {success: "Documento actualizado exitosamente"}
+        redirect_to root_path(event_start: "#{@document.event_date.year}-#{sprintf('%02d', @document.event_date.month)}"), flash: {success: "Documento actualizado exitosamente"}
       else
         render :edit, flash: {alert: "Error actualizando"}
       end
@@ -56,7 +56,7 @@ class DocumentsController < ApplicationController
         alert = "Ha ocurrido un error"
       end
 
-      redirect_to root_path(q: {event_date_gteq: @document.event_date.month}, year: @document.event_date.year), flash: {alert: alert}
+      redirect_to root_path(event_start: "#{@document.event_date.year}-#{sprintf('%02d', @document.event_date.month)}"), flash: {alert: alert}
     end
 
     def export

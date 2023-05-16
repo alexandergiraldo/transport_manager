@@ -19,7 +19,7 @@ es:
     abbr_month_names:
       [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Agos, Sept, Oct, Nov, Dic]
     formats:
-      default: "%d. %B %Y"
+      default: "%d %B %Y"
       long: "%B %d"
       abbr_month: "%b"
   date:

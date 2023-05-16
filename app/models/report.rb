@@ -51,6 +51,9 @@ class Report
 
   def total_vehicle_utilities(vehicle_id)
     data = Register.select("value, register_type").where(vehicle_id: vehicle_id).group(:register_type).sum(:value)
-    return data["incoming"] - data["outcoming"]
+    return {
+      start_date: Vehicle.find_by(id: vehicle_id)&.created_at,
+      total: data["incoming"] - data["outcoming"]
+    }
   end
 end

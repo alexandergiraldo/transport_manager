@@ -7,8 +7,14 @@
     <div class="row mb-3">
       <div class="col-md-4">
         <div class="card card-body flex-row align-items-center">
-          <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">monetization_on</i> Utilidad Global</h5>
-            <div class="text-success ml-auto font-weight-bold"><%=value_to_currency(@total_vehicle_utilities)%></div>
+          <div class="flex-column align-items-center">
+            <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">monetization_on</i> Utilidad Global</h5>
+            <span>
+              <%=l @total_vehicle_utilities[:start_date], format: :default, locale: 'es'%> -
+              <%=l Time.now, format: :default, locale: 'es'%>
+            </span>
+          </div>
+          <div class="text-success ml-auto font-weight-bold"><%=value_to_currency(@total_vehicle_utilities[:total])%></div>
         </div>
       </div>
     </div>
@@ -21,8 +27,14 @@
       </div>
     </div>
     <div class="row mb-3">
+      <div class="col-md-12 text-center font-weight-bold text-large">
+          Total Utilidades <%=params.dig(:year).try(:to_i) || Time.zone.now.year%>:
+          <%= calculate_utility(@vehicle_utilities_by_year) %>
+      </div>
+    </div>
+    <div class="row mb-3">
       <div class="col-md-6">
-        <%= column_chart @vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#129618", "#DC3913"], legend: false %>
+        <%= column_chart @total_vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#8DAFEE"], legend: true %>
       </div>
       <div class="col-md-6">
         <%= column_chart @vehicle_utilities_by_year, thousands: ".", prefix: "$", colors: ["#129618", "#DC3913"] %>
@@ -30,14 +42,7 @@
     </div>
     <div class="row mb-3">
       <div class="col-md-6">
-        <%= column_chart @total_vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#8DAFEE"], legend: true %>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-md-12 text-center font-weight-bold text-large">
-          Total Utilidades <%=params.dig(:year).try(:to_i) || Time.zone.now.year%>:
-          <%= calculate_utility(@vehicle_utilities_by_year) %>
-
+        <%= column_chart @vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#129618", "#DC3913"], legend: false %>
       </div>
     </div>
   </div>

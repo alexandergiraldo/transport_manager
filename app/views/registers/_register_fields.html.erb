@@ -1,7 +1,7 @@
 <tr class="register-row">
   <td class="align-left text-left" scope="row">
     <%= f.hidden_field :document_id, :value => @document&.id || f.object.document_id %>
-    <%= f.text_field :event_date, class: "form-control datepicker fill-date", placeholder: "", required: true, autocomplete: "off"%>
+    <%= f.text_field :event_date, class: current_vehicle.taxi? ? 'auto-fill-date form-control datepicker fill-date' : 'form-control datepicker fill-date', placeholder: "", required: true, autocomplete: "off"%>
   </td>
   <td class="align-left text-left" scope="row">
     <%= f.label(:register_type) do %>
@@ -25,7 +25,7 @@
   <td class="align-left d-print-none">
     <div class="custom-control custom-checkbox mb-1 register-maintainable-checkbox">
       <%=f.check_box :maintainable, class: "custom-control-input check_box"%>
-      <%=f.label :maintainable, "Mantenimiento?", class: "custom-control-label align-middle"%>
+      <%=f.label :maintainable, "Gasto de mantenimiento?", class: "custom-control-label align-middle"%>
     </div>
     <div class="align-left mb-3 select-category">
       <%= f.select :category, category_options(f.object), {:prompt => 'Seleccionar Categoría'}, {class: "category-select2 form-control", required: false}%>

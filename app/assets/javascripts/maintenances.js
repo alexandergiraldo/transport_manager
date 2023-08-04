@@ -5,6 +5,7 @@ Maintenances = (function () {
       insertedItem.find(".select-category").toggle();
       window.Application.initNumberMask();
       fillRegisterDate(insertedItem);
+      autoFillDate(insertedItem);
     });
 
     $('.container-fluid').on('cocoon:after-remove', function (e, insertedItem) {
@@ -53,6 +54,31 @@ Maintenances = (function () {
     if ($(".apply-date-checkbox").is(':checked')) {
       var date = $('.date-origin').val();
       insertedItem.find(".fill-date").val(date);
+    }
+  }
+
+  function autoFillDate(insertedItem) {
+    if ($(".auto-fill-date").length > 0) {
+      var numOfFields = $('.auto-fill-date').length
+      var lastDate = $('.auto-fill-date')[numOfFields - 2].value;
+      if (lastDate == "") return;
+
+      var date = new Date(lastDate);
+      date.setDate(date.getDate() + 1);
+
+      var dd = date.getDate();
+      var mm = date.getMonth() + 1;
+      var yyyy = date.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      date = yyyy + '/' + mm + '/' + dd;
+
+      insertedItem.find(".auto-fill-date").val(date);
     }
   }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_13_013429) do
+ActiveRecord::Schema.define(version: 2024_01_05_184944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,14 @@ ActiveRecord::Schema.define(version: 2022_07_13_013429) do
     t.datetime "updated_at", null: false
     t.integer "account_id"
     t.index ["account_id"], name: "index_drivers_on_account_id"
+  end
+
+  create_table "global_settings", force: :cascade do |t|
+    t.integer "day_fee"
+    t.bigint "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_global_settings_on_account_id"
   end
 
   create_table "maintenance_types", force: :cascade do |t|
@@ -187,4 +195,5 @@ ActiveRecord::Schema.define(version: 2022_07_13_013429) do
     t.index ["account_id"], name: "index_vehicles_on_account_id"
   end
 
+  add_foreign_key "global_settings", "accounts"
 end

@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   put "utils/change_account", to: "utils#change_user_account", as: 'change_account'
 
   resources :reports
+
+  resources :global_settings, only: [:index, :update]
 end

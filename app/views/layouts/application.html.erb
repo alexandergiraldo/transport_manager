@@ -10,6 +10,9 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= yield :external_css%>
+    <%= javascript_tag do %>
+      window.settings = <%=raw current_settings.to_json(except: [:id, :account_id]) %>;
+    <% end %>
   </head>
 
   <body>

@@ -1,0 +1,14 @@
+<h2>Configuraciones</h2>
+<div class="card">
+  <div class="card-body">
+    <%= form_for(@global_settings) do |f|%>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Valor Entrega:</label>
+        <div class="col-sm-2">
+          <%= f.text_field :day_fee, class: "form-control imask_number", required: true%>
+        </div>
+      </div>
+      <%= f.submit 'Guardar', class: "btn btn-primary"%>
+    <%end%>
+  </div>
+</div>

@@ -71,6 +71,14 @@
           <span class="drawer-menu-text">Reportes</span>
         </a>
       </li>
+      <%if taxi_settings_allowed%>
+        <li class="drawer-menu-item">
+          <a href="<%=global_settings_path%>">
+            <i class="material-icons">settings</i>
+            <span class="drawer-menu-text">Configuraciones</span>
+          </a>
+        </li>
+      <%end%>
     </ul>
   <%end%>
 

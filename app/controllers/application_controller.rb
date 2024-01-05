@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   around_action :app_time_zone, if: :current_user
   before_action :validate_vehicle, if: :current_user
-  helper_method :current_vehicle, :current_account
+  helper_method :current_vehicle, :current_account, :current_settings
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def current_account_id
     current_account.id
+  end
+
+  def current_settings
+    @current_settings ||= current_account.global_setting
   end
 
   protected

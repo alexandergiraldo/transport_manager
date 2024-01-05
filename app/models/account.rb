@@ -6,6 +6,7 @@ class Account < ApplicationRecord
 
   has_many :account_users
   has_many :users, through: :account_users, dependent: :delete_all
+  has_one :global_setting, dependent: :destroy
 
   # Callbacks
   after_create :init_maintenance_types

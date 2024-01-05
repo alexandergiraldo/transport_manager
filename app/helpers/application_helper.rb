@@ -46,4 +46,8 @@ module ApplicationHelper
   def drivers_list
     current_account.drivers.by_name.map{|d| [d.name.titleize, d.id]}
   end
+
+  def taxi_settings_allowed
+    current_vehicle&.taxi? && (current_user.super_admin? || current_user.account_admin?)
+  end
 end

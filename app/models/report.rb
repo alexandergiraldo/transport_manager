@@ -53,7 +53,7 @@ class Report
     data = Register.select("value, register_type").where(vehicle_id: vehicle_id).group(:register_type).sum(:value)
     return {
       start_date: Vehicle.find_by(id: vehicle_id)&.created_at,
-      total: data["incoming"] - data["outcoming"]
+      total: data.present? ? data["incoming"] - data["outcoming"] : 0
     }
   end
 end

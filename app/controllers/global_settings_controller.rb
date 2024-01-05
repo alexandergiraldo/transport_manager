@@ -12,7 +12,8 @@ class GlobalSettingsController < ApplicationController
     if @global_settings.update(global_settings_params)
       redirect_to global_settings_path, flash: {success: "Cambios aplicados exitosamente"}
     else
-      render :index, flash: {error: "Ha ocurrido un error"}
+      flash.now[:error] = "Ha ocurrido un error"
+      render :index
     end
   end
 

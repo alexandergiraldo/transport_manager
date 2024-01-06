@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_settings
-    @current_settings ||= current_account.global_setting
+    @current_settings ||= current_user ? current_account.global_setting : nil
   end
 
   protected

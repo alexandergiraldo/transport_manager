@@ -78,3 +78,15 @@ $mynewcolor: theme-color('primary-app');
 .text-large {
   font-size: 18px;
 }
+
+.links-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 30px;
+}
+
+.active {
+  font-weight: bold;
+  border-bottom: #3783B5 2px solid;
+}

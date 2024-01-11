@@ -34,7 +34,7 @@
         </a>
       </li>
       <li class="drawer-menu-item">
-        <a href="<%=vehicles_path%>">
+        <a href="<%=vehicles_path(status: 'active')%>">
           <i class="material-icons"><%=current_vehicle&.cars_icon%></i>
           <span class="drawer-menu-text">Vehiculos</span>
         </a>
@@ -66,7 +66,7 @@
         </li>
       <%end%>
       <li class="drawer-menu-item">
-        <a href="<%=reports_path%>">
+        <a href="<%=reports_path()%>">
           <i class="material-icons">insert_chart</i>
           <span class="drawer-menu-text">Reportes</span>
         </a>

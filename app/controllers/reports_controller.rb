@@ -1,9 +1,14 @@
 class ReportsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
+    vehicle_id = params[:id].present? ? params[:id] : current_vehicle.id
+    @vehicle = Vehicle.find(vehicle_id)
+    authorize @vehicle, :report?
     reports = Report.new
-    @vehicle_utilities_by_year = reports.vehicle_utilities_by_year(current_vehicle.id, params[:year])
-    @vehicle_utilities_by_month = reports.vehicle_utilities_by_month(current_vehicle.id, params[:year])
-    @total_vehicle_utilities = reports.total_vehicle_utilities(current_vehicle.id)
-    @total_vehicle_utilities_by_month = reports.total_vehicle_utilities_by_month(current_vehicle.id, params[:year])
+    @vehicle_utilities_by_year = reports.vehicle_utilities_by_year(vehicle_id, params[:year])
+    @vehicle_utilities_by_month = reports.vehicle_utilities_by_month(vehicle_id, params[:year])
+    @total_vehicle_utilities = reports.total_vehicle_utilities(vehicle_id)
+    @total_vehicle_utilities_by_month = reports.total_vehicle_utilities_by_month(vehicle_id, params[:year])
   end
 end

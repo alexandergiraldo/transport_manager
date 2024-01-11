@@ -3,6 +3,7 @@ class VehiclesController < ApplicationController
 
   def index
     @vehicles = policy_scope(Vehicle).by_date
+    @vehicles = params[:status] == 'active' ? @vehicles.active : @vehicles
   end
 
   def new

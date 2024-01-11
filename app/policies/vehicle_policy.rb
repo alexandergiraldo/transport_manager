@@ -4,7 +4,7 @@ class VehiclePolicy < ApplicationPolicy
       if user.super_admin?
         scope.all
       elsif user.account_admin?
-        scope.where(account_id: user.account_id).active
+        scope.where(account_id: user.account_id)
       else
         scope.where(id: user.vehicle_ids).active
       end
@@ -22,6 +22,10 @@ class VehiclePolicy < ApplicationPolicy
   end
 
   def create?
+    self.update?
+  end
+
+  def report?
     self.update?
   end
 end

@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "registers#index"
 
-  resources :vehicles
+  resources :vehicles do
+    get "reports", to: "reports#index", on: :member
+  end
+
   resources :documents do
     get "export", to: "documents#export", on: :collection, as: "export"
   end
@@ -30,7 +33,7 @@ Rails.application.routes.draw do
   post "utils/change_vehicle", to: "utils#change_current_vehicle", as: 'change_vehicle'
   put "utils/change_account", to: "utils#change_user_account", as: 'change_account'
 
-  resources :reports
+  resources :reports, only: [:index]
 
   resources :global_settings, only: [:index, :update]
 end

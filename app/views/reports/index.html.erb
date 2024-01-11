@@ -6,6 +6,13 @@
   <div class="card-body">
     <div class="row mb-3">
       <div class="col-md-4">
+        <h3 class="text-uppercase">
+          <%= @vehicle.license_plate %>
+        </h3>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-4">
         <div class="card card-body flex-row align-items-center">
           <div class="flex-column align-items-center">
             <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">monetization_on</i> Utilidad Global</h5>
@@ -21,7 +28,7 @@
     <div class="row mb-3">
       <div class="col-md-12">
         Utilidades
-        <%= form_for(:q, url: reports_path, method: :get) do |f|%>
+        <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
           <%=select_year(params.dig(:year).try(:to_i) || Date.today, {start_year: 2010, end_year: Time.now.year}, class: "form-control auto-submit", name: 'year')%>
         <%end%>
       </div>

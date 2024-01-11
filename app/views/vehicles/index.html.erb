@@ -3,10 +3,22 @@
     <h4>Vehículos</h3>
   </div>
   <div class="card-body">
-    <div class="row mb-3 float-right">
+    <div class="row mb-3 ml-1">
       <a href="<%=new_vehicle_path%>" class="btn btn btn-primary">
-          <span class="align-middle">Nuevo</span>
+          <span class="align-middle">Nuevo Vehiculo</span>
         </a>
+    </div>
+    <div class="row mb-3 ml-1 links-list">
+      <div class="<%= params[:status] == 'active' ? 'active' : '' %>">
+        <a href="<%=vehicles_path(status: 'active')%>" class="">
+          <span class="align-middle">Activos</span>
+        </a>
+      </div>
+      <div class="<%= params[:status] != 'active' ? 'active' : '' %>">
+        <a href="<%=vehicles_path(status: 'all')%>" class="">
+          <span class="align-middle">Todos</span>
+        </a>
+      </div>
     </div>
     <div class="table-responsive">
       <table class="table table-striped">
@@ -21,15 +33,21 @@
         <tbody>
           <%@vehicles.each do |vehicle|%>
             <tr>
-              <td class="align-middle text-center text-uppercase" scope="row"><%=vehicle.license_plate%></td>
+              <td class="align-middle text-center text-uppercase" scope="row">
+                <%= link_to vehicle.license_plate, reports_vehicle_path(vehicle)%>
+              </td>
               <td class="align-middle text-center"><%=vehicle.side_number%></td>
               <td class="align-middle text-center"><%=vehicle.model_date%></td>
               <td class="align-middle text-center">
                 <%=link_to edit_vehicle_path(vehicle.id), title: 'Editar' do%>
                   <i class="material-icons">edit</i>
                 <%end%>
-                <%=link_to vehicle_path(vehicle.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
-                  <i class="material-icons">delete</i>
+                <%if vehicle.archived?%>
+                  <i class="material-icons">clear</i>
+                <%else%>
+                  <%=link_to vehicle_path(vehicle.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+                    <i class="material-icons">delete</i>
+                  <%end%>
                 <%end%>
               </td>
             </tr>

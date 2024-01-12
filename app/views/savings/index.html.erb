@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-body">
-    <div class="row mb-3">
+    <div class="row mb-1">
       <div class="col-md-8">
         <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
           <div class="form-group">
@@ -19,6 +19,8 @@
           </div>
         <%end%>
       </div>
+    </div>
+    <div class="row mb-3">
       <div class="col-md-4">
         <a href=<%=new_driver_saving_url("@")%> id="add-savings-button" class="btn btn btn-primary">
           <i class="material-icons md-18 align-middle">assignment</i>

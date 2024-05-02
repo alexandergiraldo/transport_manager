@@ -1,24 +1,29 @@
 # README
+![deploy workflow](https://github.com/alexandergiraldo/transport_manager/actions/workflows/deploy.yml/badge.svg)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Transport manager is an all-in-one solution for effortlessly managing public transport operations! Transport Manager simplifies the complexities of day-to-day operations with its user-friendly interface and comprehensive features.
 
 Things you may want to cover:
 
 * Ruby version
+  * 2.7.2
 
 * System dependencies
+  * Postgresql
 
 * Configuration
 
 * Database creation
+  * rails db:create
 
 * Database initialization
+  * rails db:migrate
 
 * How to run the test suite
+  * bundle exec rspec spec
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-* ...
+  * Github action pipeline
+  * Automatic deployment

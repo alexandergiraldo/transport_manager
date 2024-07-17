@@ -41,15 +41,15 @@
     </div>
     <div class="row mb-3">
       <div class="col-md-6">
-        <%= column_chart @total_vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#8DAFEE"], legend: true %>
+        <%= area_chart @total_vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#38812F"], legend: true, curve: false %>
       </div>
       <div class="col-md-6">
-        <%= column_chart @vehicle_utilities_by_year, thousands: ".", prefix: "$", colors: ["#129618", "#DC3913"] %>
+        <%= column_chart @vehicle_utilities_by_year, thousands: ".", prefix: "$", colors: ["#38812F", "#C9190B"] %>
       </div>
     </div>
     <div class="row mb-3">
       <div class="col-md-6">
-        <%= column_chart @vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#129618", "#DC3913"], legend: false %>
+        <%= area_chart @vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#38812F", "#C9190B"], legend: false, curve: false %>
       </div>
     </div>
   </div>

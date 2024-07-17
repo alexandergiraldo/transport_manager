@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.0.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.6'
 # Use sqlite3 as the database for Active Record
-gem 'pg', '~> 1.2.3'
+gem 'pg', '~> 1.5.6'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -70,13 +70,9 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15', '< 4.0'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
   gem 'rspec-rails', '~> 5.1.2'
   gem 'shoulda-matchers', '~> 5.1'
+  gem 'factory_bot_rails', '~> 6.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -8,12 +8,16 @@ FactoryBot.define do
 
     factory :account_admin do
       role { 1 }
+    end
 
-      after(:create) do |user|
-        account = create(:account)
-        user.accounts << account
-        user.account_id = account.id
-      end
+    factory :account_user do
+      role { 0 }
+    end
+
+    after(:create) do |user|
+      account = create(:account)
+      user.accounts << account
+      user.account_id = account.id
     end
   end
 end

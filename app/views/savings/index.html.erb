@@ -2,8 +2,7 @@
   <%= render_select2_css %>
 <%end%>
 
-<div class="card">
-  <div class="card-body">
+
     <div class="row mb-1">
       <div class="col-md-8">
         <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
@@ -70,8 +69,7 @@
 
       <%= pagy_bootstrap_nav(@pagy).html_safe if @savings.present?%>
     </div>
-  </div>
-</div>
+
 
 <%content_for :app_modals do %>
   <div class="modal fade" id="edit-saving-modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

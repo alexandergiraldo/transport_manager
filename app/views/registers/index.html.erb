@@ -36,49 +36,46 @@
   </div>
 </div>
 
-<div class="card">
-  <div class="card-body">
-    <div class="row mb-3">
-      <%= render partial: 'shared/date_filter'%>
+<div class="row mb-3">
+  <%= render partial: 'shared/date_filter'%>
 
-      <div class="col-md-7 text-right">
-        <%if @documents.present?%>
-          <a href="<%=export_documents_path(request.params.except(:action, :controller).merge(format: :xlsx))%>" class="btn btn btn-primary">
-            <i class="material-icons md-18 align-middle">file_download</i>
-            <span class="align-middle">Exportar</span>
-          </a>
-        <%else%>
-          <a href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registersPrintModal">
-            <i class="material-icons md-18 align-middle">print</i>
-            <span class="align-middle">Imprimir</span>
-          </a>
-        <%end%>
-      </div>
-    </div>
+  <div class="col-md-7 text-right">
+    <%if @documents.present?%>
+      <a href="<%=export_documents_path(request.params.except(:action, :controller).merge(format: :xlsx))%>" class="btn btn btn-primary">
+        <i class="material-icons md-18 align-middle">file_download</i>
+        <span class="align-middle">Exportar</span>
+      </a>
+    <%else%>
+      <a href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registersPrintModal">
+        <i class="material-icons md-18 align-middle">print</i>
+        <span class="align-middle">Imprimir</span>
+      </a>
+    <%end%>
+  </div>
+</div>
 
-    <%= render partial: 'documents', locals: {documents: @documents}%>
+<%= render partial: 'documents', locals: {documents: @documents}%>
 
-    <%if @registers.present? && @documents.present?%>
-      <hr/>
-      <h5>Otros Registros:</h5>
-      <div class="card">
-        <div class="card-body">
-          <div class="table-responsive">
-            <%= render partial: 'registers_table', locals: {registers: @registers}%>
-
-            <%= pagy_bootstrap_nav(@pagy).html_safe if @registers.present?%>
-          </div>
-        </div>
-      </div>
-    <%elsif @registers.present?%>
+<%if @registers.present? && @documents.present?%>
+  <hr/>
+  <h5>Otros Registros:</h5>
+  <div class="card">
+    <div class="card-body">
       <div class="table-responsive">
         <%= render partial: 'registers_table', locals: {registers: @registers}%>
 
         <%= pagy_bootstrap_nav(@pagy).html_safe if @registers.present?%>
       </div>
-    <%end%>
+    </div>
   </div>
-</div>
+<%elsif @registers.present?%>
+  <div class="table-responsive">
+    <%= render partial: 'registers_table', locals: {registers: @registers}%>
+
+    <%= pagy_bootstrap_nav(@pagy).html_safe if @registers.present?%>
+  </div>
+<%end%>
+
 <%content_for :app_modals do %>
   <%= render partial: 'form_modal'%>
   <%= render partial: 'print_modal'%>

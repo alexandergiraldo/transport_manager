@@ -34,8 +34,8 @@ html, body {
   padding-left: $spacer-xs;
   padding-right: $spacer-xs;
   @include media-breakpoint-up(sm) {
-    padding-left: $spacer;
-    padding-right: $spacer;
+    padding-left: $spacer-lg;
+    padding-right: $spacer-lg;
   }
   @include media-breakpoint-up(lg) {
     &.container--wide {

@@ -19,7 +19,7 @@ class Account < ApplicationRecord
 
   def init_maintenance_types
     MaintenanceType::DEFAULT_TYPES.each do |m_type|
-      self.maintenance_types.new(name: m_type).save
+      self.maintenance_types.new(name: m_type).save!
     end
   end
 end

@@ -8,7 +8,7 @@
 <div class="card">
   <div class="card-body">
     <%= form_for(@document, url: document_path(@document.id), method: :put) do |f|%>
-      <%= render partial: 'form', locals: {apply_date_to_registers: false, f: f} %>
+      <%= render partial: 'form', locals: {apply_date_to_registers: true, f: f} %>
 
       <div class="row">
         <div class="col-sm-12 text-center">

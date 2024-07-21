@@ -40,6 +40,8 @@ class DocumentsController < ApplicationController
       authorize @document, :update?
 
       if @document.update(document_params)
+        Registers::UpdateRegistersDate.new(@document).perform if params[:document][:apply_date_to_registers] == "1"
+
         redirect_to root_path(event_start: "#{@document.event_date.year}-#{sprintf('%02d', @document.event_date.month)}"), flash: {success: "Documento actualizado exitosamente"}
       else
         render :edit, flash: {alert: "Error actualizando"}

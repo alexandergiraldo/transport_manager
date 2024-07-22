@@ -17,7 +17,7 @@
         <td class="align-left text-center <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
         <td class="align-left text-left"><%=register.notes%></td>
         <td class="align-left text-left text-uppercase"><%=register.vehicle_license_plate%></td>
-        <td class="align-left text-left">
+        <td class="align-left text-center">
           <%=link_to edit_register_path(register.id, format: :js), title: 'Editar', data: {remote: true}, class: "edit-register" do%>
             <i class="material-icons">edit</i>
           <%end%>

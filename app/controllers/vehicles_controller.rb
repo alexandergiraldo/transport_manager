@@ -1,9 +1,11 @@
 class VehiclesController < ApplicationController
+  include Pagy::Backend
   before_action :authenticate_user!
 
   def index
     @vehicles = policy_scope(Vehicle).by_date
     @vehicles = params[:status] == 'active' ? @vehicles.active : @vehicles
+    @pagy, @vehicles = pagy(@vehicles, items: 20)
   end
 
   def new

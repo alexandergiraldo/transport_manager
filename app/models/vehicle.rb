@@ -13,6 +13,9 @@ class Vehicle < ApplicationRecord
   # Validations
   validates :license_plate, presence: true, uniqueness: {message: 'Ya existe'}
 
+  # Storage
+  has_one_attached :image
+
   #scopes
   scope :by_date, -> { order('id DESC') }
 

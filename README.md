@@ -6,7 +6,7 @@ Transport manager is an all-in-one solution for effortlessly managing public tra
 Things you may want to cover:
 
 * Ruby version
-  * 2.7.2
+  * 3.1.4
 
 * System dependencies
   * Postgresql

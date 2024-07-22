@@ -54,23 +54,15 @@
             <%end%>
           </div>
           <div class="col-md-1">
-            <ul class="navbar-nav ml-auto align-items-center">
-              <li class="nav-item dropdown nav-language d-flex align-items-center">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  ...
-                </a>
-                <div class="dropdown-menu dropdown-menu-right ">
-                  <ul class="list-unstyled">
-                    <li>
-                      <%=link_to "Editar", edit_document_path(document.id), class: "dropdown-item" %>
-                    </li>
-                    <li>
-                      <%= link_to "Borrar", document_path(document.id), class: "dropdown-item", data: { method: :delete, confirm: "Esta seguro de eliminar este documento y todos los registros?" } %>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
+            <a class="btn btn-white btn-sm" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Acciones">
+              <i class="material-icons md-18 align-middle">more_vert</i>
+            </a>
+
+            <div class="dropdown-menu">
+              <%=link_to "Editar", edit_document_path(document.id), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Borrar", document_path(document.id), class: "dropdown-item text-danger", data: { method: :delete, confirm: "Esta seguro de eliminar este documento y todos los registros?" } %>
+            </div>
           </div>
         </div>
       </div>

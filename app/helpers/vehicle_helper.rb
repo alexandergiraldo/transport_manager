@@ -16,4 +16,12 @@ module VehicleHelper
 
     options_for_select(types, selected)
   end
+
+  def vehicle_image(vehicle)
+    if vehicle.taxi?
+      return image_tag('vehicles/taxi-logo.png')
+    else
+      image_tag('vehicles/truck-logo.png')
+    end
+  end
 end

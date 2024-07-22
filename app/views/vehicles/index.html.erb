@@ -1,59 +1,60 @@
-<div class="card">
-  <div class="card-header">
-    <h4>Vehículos</h3>
+<div class="page-title">
+  <h3>Vehículos</h3>
+  <a href="<%=new_vehicle_path%>" class="btn btn btn-primary">
+    <span class="align-middle">Nuevo Vehiculo</span>
+  </a>
+</div>
+
+<div class="row mb-3 ml-1 mt-5 links-list">
+  <div class="<%= params[:status] == 'active' ? 'active' : '' %>">
+    <a href="<%=vehicles_path(status: 'active')%>" class="">
+      <span class="align-middle">Activos</span>
+    </a>
   </div>
-  <div class="card-body">
-    <div class="row mb-3 ml-1">
-      <a href="<%=new_vehicle_path%>" class="btn btn btn-primary">
-          <span class="align-middle">Nuevo Vehiculo</span>
-        </a>
-    </div>
-    <div class="row mb-3 ml-1 links-list">
-      <div class="<%= params[:status] == 'active' ? 'active' : '' %>">
-        <a href="<%=vehicles_path(status: 'active')%>" class="">
-          <span class="align-middle">Activos</span>
-        </a>
-      </div>
-      <div class="<%= params[:status] != 'active' ? 'active' : '' %>">
-        <a href="<%=vehicles_path(status: 'all')%>" class="">
-          <span class="align-middle">Todos</span>
-        </a>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col" class="text-center">Placa</th>
-            <th scope="col" class="text-center">Lateral</th>
-            <th scope="col" class="text-center">Modelo</th>
-            <th scope="col" class="text-center">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%@vehicles.each do |vehicle|%>
-            <tr>
-              <td class="align-middle text-center text-uppercase" scope="row">
-                <%= link_to vehicle.license_plate, reports_vehicle_path(vehicle)%>
-              </td>
-              <td class="align-middle text-center"><%=vehicle.side_number%></td>
-              <td class="align-middle text-center"><%=vehicle.model_date%></td>
-              <td class="align-middle text-center">
-                <%=link_to edit_vehicle_path(vehicle.id), title: 'Editar' do%>
-                  <i class="material-icons">edit</i>
-                <%end%>
-                <%if vehicle.archived?%>
-                  <i class="material-icons">clear</i>
-                <%else%>
-                  <%=link_to vehicle_path(vehicle.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
-                    <i class="material-icons">delete</i>
-                  <%end%>
-                <%end%>
-              </td>
-            </tr>
-          <%end%>
-        </tbody>
-      </table>
-    </div>
+  <div class="<%= params[:status] != 'active' ? 'active' : '' %>">
+    <a href="<%=vehicles_path(status: 'all')%>" class="">
+      <span class="align-middle">Todos</span>
+    </a>
   </div>
 </div>
+<div class="cards-list">
+  <%@vehicles.each do |vehicle|%>
+    <div class="vehicle <%=vehicle.archived? ? 'archived' : ''%>">
+      <div class="icon">
+        <%= vehicle_image(vehicle) %>
+      </div>
+      <div class='actions'>
+        <a class="btn btn-white btn-sm" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Acciones">
+          <i class="material-icons md-18 align-middle">more_vert</i>
+        </a>
+
+        <div class="dropdown-menu">
+          <%=link_to edit_vehicle_path(vehicle.id), title: 'Editar', class: "dropdown-item" do%>
+            <i class="material-icons md-14 align-middle">edit</i>
+            <span class="align-middle">Editar</span>
+          <%end%>
+
+          <div class="dropdown-divider"></div>
+          <%if vehicle.archived?%>
+            <i class="dropdown-item material-icons md-14 align-middle">clear</i>
+          <%else%>
+            <%=link_to vehicle_path(vehicle.id), title: 'Borrar', class: 'dropdown-item text-danger', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+              <i class="material-icons md-14 align-middle">delete</i>
+              <span class="align-middle">Borrar</span>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+      <div class="info">
+        <div class="label"><b>Placa:</b> <%= link_to vehicle.license_plate, reports_vehicle_path(vehicle)%></div>
+        <div class="label"><b>Lateral:</b> <%=vehicle.side_number%></div>
+        <div class="label"><b>Modelo:</b> <%=vehicle.model_date%></div>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+
+  <div class="row ml-1 mt-5">
+    <%= pagy_bootstrap_nav(@pagy).html_safe if @vehicles.present?%>
+  </div>

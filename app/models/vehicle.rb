@@ -18,6 +18,7 @@ class Vehicle < ApplicationRecord
 
   #scopes
   scope :by_date, -> { order('id DESC') }
+  scope :by_model_date , -> { order('model_date DESC') }
 
   def cars_icon
     taxi? ? :local_taxi : :local_shipping

@@ -1,32 +1,26 @@
-<div class="card mb-3">
-  <div class="card-header">
-    <h5 class="card-title text-uppercase"><%=current_vehicle.license_plate%></h5>
-  </div>
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-bordered table-sm">
-        <thead>
-          <tr>
-            <th scope="col" class="text-left">Fecha</th>
-            <th scope="col" class="text-left">Descripción</th>
-            <th scope="col" class="text-left">Valor</th>
-            <th scope="col" class="text-left">Notas</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%@registers.each do |register|%>
-            <tr class="<%=register_type_color(register.register_type) if register.register_type.eql?('outcoming')%>">
-              <td class="align-left text-left" scope="row"><%=format_date(register.event_date)%></td>
-              <td class="align-left text-left"><%=register.description%></td>
-              <td class="align-left text-center <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
-              <td class="align-left text-left"><%=register.notes%></td>
-            </tr>
-          <%end%>
-        </tbody>
-      </table>
+<div class="table-responsive">
+  <h3 class="card-title text-uppercase mb-4"><%=current_vehicle.license_plate%></h3>
 
-    </div>
-  </div>
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        <th scope="col" class="text-left">Fecha</th>
+        <th scope="col" class="text-left">Descripción</th>
+        <th scope="col" class="text-left">Valor</th>
+        <th scope="col" class="text-left">Notas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@registers.each do |register|%>
+        <tr class="<%=register_type_color(register.register_type) if register.register_type.eql?('outcoming')%>">
+          <td class="align-left text-left" scope="row"><%=format_date(register.event_date)%></td>
+          <td class="align-left text-left"><%=register.description%></td>
+          <td class="align-left text-center <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
+          <td class="align-left text-left"><%=register.notes%></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
 </div>
 
 <div class="row font-1 mb-3 totals">

@@ -18,8 +18,12 @@ module VehicleHelper
   end
 
   def vehicle_image(vehicle)
+    if vehicle.image.attached?
+      return image_tag(url_for(vehicle.image.variant(resize_to_fit: [200, 200])))
+    end
+
     if vehicle.taxi?
-      return image_tag('vehicles/taxi-logo.png')
+      image_tag('vehicles/taxi-logo.png')
     else
       image_tag('vehicles/truck-logo.png')
     end

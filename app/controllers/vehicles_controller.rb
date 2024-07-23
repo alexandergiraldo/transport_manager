@@ -3,7 +3,7 @@ class VehiclesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @vehicles = policy_scope(Vehicle).by_date
+    @vehicles = policy_scope(Vehicle).by_model_date.includes(:image_attachment)
     @vehicles = params[:status] == 'active' ? @vehicles.active : @vehicles
     @pagy, @vehicles = pagy(@vehicles, items: 20)
   end
@@ -34,6 +34,7 @@ class VehiclesController < ApplicationController
     authorize @vehicle, :update?
 
     if @vehicle.update(vehicle_params)
+      @vehicle.image.purge if params[:remove_image] == '1'
       redirect_to vehicles_path(status: 'active'), flash: {success: "Vehículo actualizado exitosamente"}
     else
       render :new
@@ -54,6 +55,6 @@ class VehiclesController < ApplicationController
   protected
 
   def vehicle_params
-    params.require(:vehicle).permit(:license_plate, :side_number, :model_date, :vehicle_type, :status)
+    params.require(:vehicle).permit(:license_plate, :side_number, :model_date, :vehicle_type, :status, :image)
   end
 end

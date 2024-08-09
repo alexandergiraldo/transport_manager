@@ -9,6 +9,11 @@ class DriverPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    return false if user.account_user?
+    true
+  end
+
   def update?
     if user.super_admin?
       true

@@ -20,4 +20,9 @@ class MaintenancePolicy < ApplicationPolicy
       user.vehicle_ids.include? record.vehicle_id
     end
   end
+
+  def create?
+    return true if user.super_admin? || user.account_admin?
+    false
+  end
 end

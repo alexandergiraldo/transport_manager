@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Usuarios</h3>
+  </div>
+  <div class="card-body">
+    <div class="row mb-3 mr-1 float-right">
+      <a href="<%=new_user_path%>" class="btn btn btn-primary">
+          <i class="material-icons md-18 align-middle">person_add</i>
+          <span class="align-middle">Agregar</span>
+        </a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="text-left">Nombre</th>
+            <th scope="col" class="text-left">email</th>
+            <th/>
+          </tr>
+        </thead>
+        <tbody>
+          <%@users.each do |user|%>
+            <tr>
+              <td class="align-left text-left" scope="row"><%=user.full_name%></td>
+              <td class="align-left text-left"><%=user.email%></td>
+              <td class="align-left text-left">
+                <%=link_to edit_user_path(user.id), title: 'Editar' do%>
+                  <i class="material-icons">edit</i>
+                <%end%>
+                <%=link_to user_path(user.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+                  <i class="material-icons">delete</i>
+                <%end%>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

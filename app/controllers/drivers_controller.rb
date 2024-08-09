@@ -2,6 +2,7 @@ class DriversController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    authorize Driver
     @drivers = policy_scope(Driver).by_date
   end
 

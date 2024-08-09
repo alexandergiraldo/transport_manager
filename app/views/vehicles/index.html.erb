@@ -1,8 +1,10 @@
 <div class="page-title">
   <h3>Vehículos</h3>
-  <a href="<%=new_vehicle_path%>" class="btn btn btn-primary">
-    <span class="align-middle">Nuevo Vehiculo</span>
-  </a>
+  <%if policy(Vehicle).create?%>
+    <a href="<%=new_vehicle_path%>" class="btn btn btn-primary">
+      <span class="align-middle">Nuevo Vehiculo</span>
+    </a>
+  <%end%>
 </div>
 
 <div class="row mb-3 ml-1 mt-5 links-list">

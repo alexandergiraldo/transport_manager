@@ -39,12 +39,14 @@
           <span class="drawer-menu-text">Vehiculos</span>
         </a>
       </li>
-      <li class="drawer-menu-item">
-        <a href="<%=drivers_path%>">
-          <i class="material-icons">account_circle</i>
-          <span class="drawer-menu-text">Conductores</span>
-        </a>
-      </li>
+      <%if policy(Driver).index?%>
+        <li class="drawer-menu-item">
+          <a href="<%=drivers_path%>">
+            <i class="material-icons">account_circle</i>
+            <span class="drawer-menu-text">Conductores</span>
+          </a>
+        </li>
+      <%end%>
       <li class="drawer-menu-item">
         <a href="<%=maintenances_path%>">
           <i class="material-icons">build</i>
@@ -76,6 +78,14 @@
           <a href="<%=global_settings_path%>">
             <i class="material-icons">settings</i>
             <span class="drawer-menu-text">Configuraciones</span>
+          </a>
+        </li>
+      <%end%>
+      <%if policy(User).create?%>
+        <li class="drawer-menu-item">
+          <a href="<%=users_path%>">
+            <i class="material-icons">account_circle</i>
+            <span class="drawer-menu-text">Usuarios</span>
           </a>
         </li>
       <%end%>

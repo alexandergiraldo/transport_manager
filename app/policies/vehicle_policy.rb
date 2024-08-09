@@ -22,10 +22,11 @@ class VehiclePolicy < ApplicationPolicy
   end
 
   def create?
-    self.update?
+    return true if user.super_admin? || user.account_admin?
+    false
   end
 
   def report?
-    self.update?
+    true
   end
 end

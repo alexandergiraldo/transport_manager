@@ -3,16 +3,12 @@
 <%end%>
 <div class="row mb-2">
   <div class="col-md-3">
-    <a href="<%=new_maintenance_path%>" class="btn btn btn-primary">
-      <i class="material-icons md-18 align-middle">assignment</i>
-      <span class="align-middle">Crear Planilla</span>
-    </a>
-  </div>
-  <div class="col-md-2">
-    <a href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#newMaintenanceModal">
-      <i class="material-icons md-18 align-middle">build</i>
-      <span class="align-middle">Agregar</span>
-    </a>
+    <%if policy(Maintenance).create?%>
+      <a href="<%=new_maintenance_path%>" class="btn btn btn-primary">
+        <i class="material-icons md-18 align-middle">assignment</i>
+        <span class="align-middle">Crear Planilla</span>
+      </a>
+    <%end%>
   </div>
 </div>
 

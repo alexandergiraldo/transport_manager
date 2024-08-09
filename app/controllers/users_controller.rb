@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user, :update?
     attrs = user_params.clone
-    attrs[:vehicle_ids] = attrs[:vehicle_ids].reject(&:empty?)
+    attrs[:vehicle_ids] = attrs[:vehicle_ids]&.reject(&:empty?) || []
 
     if attrs[:password].blank? ? @user.update_without_password(attrs) : @user.update(attrs)
       redirect_to users_path, flash: {success: "Usuario actualizado exitosamente"}
@@ -55,10 +55,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def account
+    @user = current_user
+  end
+
+  def update_account
+    @user = current_user
+    attrs = user_params.clone
+
+    if attrs[:password].blank?
+      attrs.delete(:current_password)
+    end
+
+    if attrs[:password].blank? ? @user.update_without_password(attrs) : @user.update_with_password(attrs)
+      sign_in(@user, :bypass => true) if attrs[:password].present?
+      redirect_to root_path, flash: {success: "Usuario actualizado exitosamente"}
+    else
+      flash[:alert] = @user.errors.full_messages.join(', ')
+      render :account
+    end
+  end
 
   private
 
   def user_params
-    params.require(:user).permit(:full_name, :email, :password, vehicle_ids: [])
+    params.require(:user).permit(:full_name, :email, :password, :current_password, vehicle_ids: [])
   end
 end

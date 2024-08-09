@@ -37,5 +37,8 @@ Rails.application.routes.draw do
 
   resources :global_settings, only: [:index, :update]
 
-  resources :users, except: [:show]
+  resources :users, except: [:show] do
+    get :account, to: "users#account", on: :collection
+    put :update_account, to: "users#update_account", on: :collection
+  end
 end

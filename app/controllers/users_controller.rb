@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
     if @user.save
       @user.accounts << Account.find(@user.account_id)
+      UserNotifierMailer.send_signup_email(@user).deliver
       redirect_to users_path, flash: {success: "Usuario creado exitosamente"}
     else
       flash[:alert] = @user.errors.full_messages.join(', ')

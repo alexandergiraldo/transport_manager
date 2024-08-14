@@ -5,6 +5,8 @@ class UserPolicy < ApplicationPolicy
         scope.all
       elsif user.account_admin?
         scope.where(account_id: user.active_account.id)
+      else
+        scope.none
       end
     end
   end

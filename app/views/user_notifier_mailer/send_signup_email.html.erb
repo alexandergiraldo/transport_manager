@@ -1,3 +1,15 @@
-<h1>Thanks for signing up, <%= @user.full_name %>!</h1>
-<p>Thanks for joining and have a great day! Now sign in and do
-awesome things!</p>
+<h1>Bienvenido, <%= @user.full_name %>!</h1>
+<p>
+  Ahora puedes hacer login en nuestro portal y tener
+  acceso a todo lo relacionado con tu(s) vehiculo(s):
+</p>
+<ul>
+  <%@plates.each do |plate|%>
+    <li><%=plate%></li>
+  <%end%>
+</ul>
+<p>
+  Tu correo es: <%= @user.email %>
+  Puedes ingresar al portal haciendo click en el siguiente enlace:
+  <a href="<%=new_user_session_url%>">Login</a>
+</p>

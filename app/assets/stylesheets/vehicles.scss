@@ -1,3 +1,57 @@
+.cards-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 30px;
+
+  .archived {
+    opacity: 0.5;
+  }
+
+  .vehicle {
+    display: flex;
+    width: 12.5rem;
+    border: 1px solid #ccc;
+    justify-content: center;
+    border-radius: 5px;
+    flex-direction: column;
+
+    .icon {
+      max-width: 100%;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px 5px 0 0;
+        scale: 1;
+      }
+    }
+
+    .info {
+      display: flex ;
+      flex-direction: column;
+      padding: $spacer-xs;
+      padding-top: 0px;
+
+      .label{
+        display: flex;
+        flex-direction: row;
+
+        b{
+          min-width: 40%;
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+
 .vehicle-show {
   display: flex;
   gap: 30px;

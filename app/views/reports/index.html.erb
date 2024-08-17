@@ -2,52 +2,51 @@
   <%= render_select2_css %>
 <%end%>
 
-
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <h3 class="text-uppercase">
-          <%= @vehicle.license_plate %>
-        </h3>
+<div class="row mb-3">
+  <div class="col-md-4">
+    <h3 class="text-uppercase">
+      <%= @vehicle.license_plate %>
+    </h3>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-6">
+    <div class="card card-body flex-row">
+      <div class="flex-column align-items-center">
+        <h5 class="m-0">Utilidad Global</h5>
+        <span>
+          <%=l @total_vehicle_utilities[:start_date], format: :default, locale: 'es'%> -
+          <%=l Time.now, format: :default, locale: 'es'%>
+        </span>
       </div>
+      <div class="text-success ml-auto font-weight-bold text-large"><%=value_to_currency(@total_vehicle_utilities[:total])%></div>
     </div>
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <div class="card card-body flex-row align-items-center">
-          <div class="flex-column align-items-center">
-            <h5 class="m-0">Utilidad Global</h5>
-            <span>
-              <%=l @total_vehicle_utilities[:start_date], format: :default, locale: 'es'%> -
-              <%=l Time.now, format: :default, locale: 'es'%>
-            </span>
-          </div>
-          <div class="text-success ml-auto font-weight-bold"><%=value_to_currency(@total_vehicle_utilities[:total])%></div>
-        </div>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-md-12">
-        Utilidades
-        <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
-          <%=select_year(params.dig(:year).try(:to_i) || Date.today, {start_year: 2010, end_year: Time.now.year}, class: "form-control auto-submit", name: 'year')%>
-        <%end%>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-md-12 text-center font-weight-bold text-large">
-          Total Utilidades <%=params.dig(:year).try(:to_i) || Time.zone.now.year%>:
-          <%= calculate_utility(@vehicle_utilities_by_year) %>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <%= area_chart @total_vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#38812F"], legend: true, curve: false %>
-      </div>
-      <div class="col-md-6">
-        <%= column_chart @vehicle_utilities_by_year, thousands: ".", prefix: "$", colors: ["#38812F", "#C9190B"] %>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <%= area_chart @vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#38812F", "#C9190B"], legend: false, curve: false %>
-      </div>
-    </div>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-12">
+    Utilidades
+    <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
+      <%=select_year(params.dig(:year).try(:to_i) || Date.today, {start_year: 2010, end_year: Time.now.year}, class: "form-control auto-submit", name: 'year')%>
+    <%end%>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-12 text-center font-weight-bold text-large">
+      Total Utilidades <%=params.dig(:year).try(:to_i) || Time.zone.now.year%>:
+      <%= calculate_utility(@vehicle_utilities_by_year) %>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-6">
+    <%= area_chart @total_vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#38812F"], legend: true, curve: false %>
+  </div>
+  <div class="col-md-6">
+    <%= column_chart @vehicle_utilities_by_year, thousands: ".", prefix: "$", colors: ["#38812F", "#C9190B"] %>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-6">
+    <%= area_chart @vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#38812F", "#C9190B"], legend: false, curve: false %>
+  </div>
+</div>

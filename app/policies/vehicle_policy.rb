@@ -29,4 +29,10 @@ class VehiclePolicy < ApplicationPolicy
   def report?
     true
   end
+
+  def show?
+    return true if user.super_admin?
+    return true if user.account_admin? && user.account_ids.include?(record.account_id)
+    user.vehicle_ids.include?(record.id)
+  end
 end

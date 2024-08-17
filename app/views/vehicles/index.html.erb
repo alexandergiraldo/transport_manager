@@ -23,7 +23,7 @@
   <%@vehicles.each do |vehicle|%>
     <div class="vehicle <%=vehicle.archived? ? 'archived' : ''%>">
       <div class="icon">
-        <%= vehicle_image(vehicle) %>
+        <%=link_to vehicle_image(vehicle), vehicle_path(vehicle)%>
       </div>
       <div class='actions'>
         <a class="btn btn-white btn-sm" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Acciones">

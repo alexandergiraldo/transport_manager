@@ -5,7 +5,7 @@ class RegisterPolicy < MaintenancePolicy
     elsif user.account_admin?
       user.all_vehicle_ids.include?(record.vehicle_id)
     else
-      false
+      user.vehicle_ids.include?(record.vehicle_id)
     end
   end
 

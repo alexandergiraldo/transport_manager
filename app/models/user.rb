@@ -25,4 +25,9 @@ class User < ApplicationRecord
       active_account.vehicles.active.first
     end
   end
+
+  def vehicle_ids
+    ids = super || []
+    ids.map(&:to_i)
+  end
 end

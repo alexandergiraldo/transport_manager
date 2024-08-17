@@ -8,6 +8,15 @@ class VehiclesController < ApplicationController
     @pagy, @vehicles = pagy(@vehicles, items: 20)
   end
 
+  def show
+    @vehicle = Vehicle.find(params[:id])
+    authorize @vehicle, :show?
+
+    reports = Report.new
+    @vehicle_utilities_by_year = reports.vehicle_utilities_by_year(@vehicle.id, Time.now.year)
+    @total_vehicle_utilities = reports.total_vehicle_utilities(@vehicle.id)
+  end
+
   def new
     @vehicle = Vehicle.new
   end

@@ -1,0 +1,34 @@
+<div class="table-responsive">
+  <h3 class="card-title text-uppercase mb-4">
+    <%=@vehicle.license_plate%>
+  </h3>
+  <div class="vehicle-show">
+    <div class="vehicle-image">
+      <%= vehicle_image(@vehicle) %>
+    </div>
+    <div class="info">
+      <div class="label">
+        <b>Lateral:</b>
+        <%= @vehicle.side_number %>
+      </div>
+      <div class="label">
+        <b>Modelo:</b>
+        <%= @vehicle.model_date %>
+      </div>
+      <div class="label">
+        <b>Total Utilidades:</b>
+        <%=value_to_currency(@total_vehicle_utilities[:total])%>
+      </div>
+      <div class="label">
+        <b>Utilidades Año actual:</b>
+        <%=value_to_currency(@vehicle_utilities_by_year[:Ingresos] - @vehicle_utilities_by_year[:Egresos])%>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <%= link_to 'Volver', :back, class: 'btn btn-primary'%>
+    </div>
+  </div>
+</div>

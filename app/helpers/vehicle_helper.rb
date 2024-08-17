@@ -17,9 +17,9 @@ module VehicleHelper
     options_for_select(types, selected)
   end
 
-  def vehicle_image(vehicle)
+  def vehicle_image(vehicle, size = [200, 200])
     if vehicle.image.attached?
-      return image_tag(url_for(vehicle.image.variant(resize_to_fit: [200, 200])))
+      return image_tag(url_for(vehicle.image.variant(resize_to_fit: size)))
     end
 
     if vehicle.taxi?

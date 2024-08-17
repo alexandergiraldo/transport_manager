@@ -58,11 +58,12 @@
 
   .vehicle-image {
     display: flex;
-    border-radius: 12px;
+    border-radius: 7px;
     border: 1px solid #ccc;
 
     img {
       width: 400px;
+      border-radius: 7px;
       object-fit: cover;
       border-radius: 5px 5px 0 0;
       scale: 1;

@@ -1,0 +1,54 @@
+<%= form_for(@vendor) do |f|%>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="exampleFormControlInput1">Nombre</label>
+        <%= f.text_field :name, class: "form-control", required: true%>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="exampleFormControlInput1">Nit</label>
+      <%= f.text_field :tax_id, class: "form-control"%>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="exampleFormControlInput1">Persona de Contacto</label>
+      <%= f.text_field :contact_person, class: "form-control"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="exampleFormControlInput1">Banco</label>
+      <%= f.text_field :bank_name, class: "form-control", placeholder: ""%>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="exampleFormControlInput1">Cuenta #</label>
+      <%= f.text_field :account_number, class: "form-control", placeholder: ""%>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="exampleFormControlInput1">Tipo de Cuenta</label>
+      <%= f.text_field :account_type, class: "form-control", placeholder: ""%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="exampleFormControlInput1">Email</label>
+      <%= f.text_field :email, class: "form-control", type: :email%>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="exampleFormControlInput1">Telefono</label>
+      <%= f.text_field :phone_number, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <label for="exampleFormControlInput1">Notas</label>
+      <%= f.text_area :notes, class: "form-control", placeholder: ""%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <%= f.submit 'Guardar', class: "btn btn-primary"%>
+      <%= link_to 'Cancelar', :back, class: 'btn btn-light'%>
+    </div>
+  </div>
+<%end%>

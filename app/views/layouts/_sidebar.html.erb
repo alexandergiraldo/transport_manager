@@ -89,6 +89,14 @@
           </a>
         </li>
       <%end%>
+      <%if policy(Vendor).create?%>
+        <li class="drawer-menu-item">
+          <a href="<%=vendors_path%>">
+            <i class="material-icons">store</i>
+            <span class="drawer-menu-text">Proveedores</span>
+          </a>
+        </li>
+      <%end%>
     </ul>
   <%end%>
 

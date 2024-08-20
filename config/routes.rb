@@ -41,4 +41,6 @@ Rails.application.routes.draw do
     get :account, to: "users#account", on: :collection
     put :update_account, to: "users#update_account", on: :collection
   end
+
+  resources :vendors
 end

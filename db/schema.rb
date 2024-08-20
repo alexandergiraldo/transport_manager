@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_22_204903) do
+ActiveRecord::Schema.define(version: 2024_08_20_000946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,26 @@ ActiveRecord::Schema.define(version: 2024_07_22_204903) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "accounts_payables", force: :cascade do |t|
+    t.string "name"
+    t.string "external_invoice"
+    t.integer "total_amount"
+    t.integer "amount_paid"
+    t.integer "balance_due"
+    t.integer "recurring_type"
+    t.date "payment_date"
+    t.integer "payment_day"
+    t.string "notes"
+    t.bigint "account_id", null: false
+    t.bigint "vehicle_id", null: false
+    t.bigint "vendor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_accounts_payables_on_account_id"
+    t.index ["vehicle_id"], name: "index_accounts_payables_on_vehicle_id"
+    t.index ["vendor_id"], name: "index_accounts_payables_on_vendor_id"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -135,6 +155,18 @@ ActiveRecord::Schema.define(version: 2024_07_22_204903) do
     t.index ["vehicle_id"], name: "index_maintenances_on_vehicle_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.date "payment_date"
+    t.integer "amount"
+    t.integer "payment_method"
+    t.bigint "accounts_payable_id", null: false
+    t.string "payer_details"
+    t.string "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["accounts_payable_id"], name: "index_payments_on_accounts_payable_id"
+  end
+
   create_table "preload_registers", force: :cascade do |t|
     t.text "description"
     t.integer "register_type"
@@ -223,7 +255,28 @@ ActiveRecord::Schema.define(version: 2024_07_22_204903) do
     t.index ["account_id"], name: "index_vehicles_on_account_id"
   end
 
+  create_table "vendors", force: :cascade do |t|
+    t.string "name"
+    t.string "phone_number"
+    t.string "email"
+    t.string "contact_person"
+    t.string "tax_id"
+    t.integer "account_number"
+    t.string "account_type"
+    t.string "bank_name"
+    t.string "notes"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_vendors_on_account_id"
+  end
+
+  add_foreign_key "accounts_payables", "accounts"
+  add_foreign_key "accounts_payables", "vehicles"
+  add_foreign_key "accounts_payables", "vendors"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "global_settings", "accounts"
+  add_foreign_key "payments", "accounts_payables"
+  add_foreign_key "vendors", "accounts"
 end

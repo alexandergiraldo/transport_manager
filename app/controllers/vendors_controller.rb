@@ -4,6 +4,11 @@ class VendorsController < ApplicationController
     @vendors = policy_scope(Vendor).by_name
   end
 
+  def show
+    @vendor = Vendor.find(params[:id])
+    authorize @vendor, :show?
+  end
+
   def new
     @vendor = Vendor.new
     authorize @vendor, :create?

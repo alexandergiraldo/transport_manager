@@ -27,4 +27,8 @@ class VendorPolicy < ApplicationPolicy
   def destroy?
     update?
   end
+
+  def show?
+    update?
+  end
 end

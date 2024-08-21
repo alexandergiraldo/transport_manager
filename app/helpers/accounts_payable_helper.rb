@@ -24,4 +24,8 @@ module AccountsPayableHelper
       'badge-info'
     end
   end
+
+  def accounts_payable_vendor_from_params
+    Vendor.find_by(id: params.dig(:q, :vendor_id_eq))&.name
+  end
 end

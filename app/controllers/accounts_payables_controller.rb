@@ -62,7 +62,7 @@ class AccountsPayablesController < ApplicationController
     authorize @accounts_payable, :update?
 
     if @accounts_payable.mark_as_paid
-      redirect_to accounts_payables_path, flash: { success: "Cuenta de Cobro marcada como pagada exitosamente" }
+      redirect_to accounts_payables_path, flash: { success: "Cuenta de Cobro pagada exitosamente" }
     else
       redirect_to accounts_payables_path, flash: { alert: "Error marcando Cuenta de Cobro como pagada" }
     end

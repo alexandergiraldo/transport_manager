@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(version: 2024_08_20_000946) do
     t.string "name"
     t.string "external_invoice"
     t.integer "total_amount"
-    t.integer "amount_paid"
-    t.integer "balance_due"
+    t.integer "amount_paid", default: 0
     t.integer "recurring_type", default: 0
+    t.integer "status", default: 0
     t.date "payment_date"
     t.integer "payment_day"
     t.string "notes"

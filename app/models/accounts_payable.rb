@@ -1,19 +1,16 @@
 class AccountsPayable < ActiveRecord::Base
-  PAID = 'paid'.freeze
-  OVERDUE = 'overdue'.freeze
-  PENDING = 'pending'.freeze
-  PARTIAL = 'partial'.freeze
-
   belongs_to :vendor
   belongs_to :vehicle
   belongs_to :account
+  has_many :payments, dependent: :delete_all
 
   validates :name, presence: true
   validates :recurring_type, presence: { message: 'Debe seleccionar un tipo de recurrencia' }
 
-  before_save :set_balance_due
+  before_save :set_status
 
   enum recurring_type: { one_time: 0, daily: 1, weekly: 2, biweekly: 3, monthly: 4, yearly: 5 }
+  enum status: { pending: 0, paid: 1, partial: 2 }
 
   delegate :name, to: :vendor, prefix: true, allow_nil: true
 
@@ -22,25 +19,37 @@ class AccountsPayable < ActiveRecord::Base
     query.result
   end
 
+  def mark_as_paid
+    self.amount_paid = total_amount
+    save
+  end
+
+  def balance_due
+    total_amount.to_i - amount_paid.to_i
+  end
+
+  def overdue?
+    return false if payment_date.blank?
+    payment_date < Time.current
+  end
+
   def status
-    if amount_paid.to_i >= total_amount.to_i
-      PAID
-    elsif payment_date < Time.current
-      OVERDUE
-    elsif amount_paid.to_i == 0
-      PENDING
-    elsif balance_due.to_i < total_amount.to_i
-      PARTIAL
+    if overdue? && super != 'paid'
+      'overdue'
+    else
+      super
     end
   end
 
-  def set_balance_due
-    self.balance_due = total_amount.to_i - amount_paid.to_i
-  end
+  private
 
-  def mark_as_paid
-    self.amount_paid = total_amount
-    self.balance_due = 0
-    save
+  def set_status
+    if amount_paid.to_i >= total_amount.to_i
+      self.status = AccountsPayable.statuses[:paid]
+    elsif amount_paid.to_i == 0
+      self.status = AccountsPayable.statuses[:pending]
+    else
+      self.status = AccountsPayable.statuses[:partial]
+    end
   end
 end

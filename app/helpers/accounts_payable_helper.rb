@@ -14,13 +14,13 @@ module AccountsPayableHelper
 
   def accounts_payable_status_badge(accounts_payable)
     case accounts_payable.status
-    when AccountsPayable::PAID
+    when 'paid'
       'badge-success'
-    when AccountsPayable::OVERDUE
+    when 'overdue'
       'badge-danger'
-    when AccountsPayable::PENDING
+    when 'pending'
       'badge-warning'
-    when AccountsPayable::PARTIAL
+    when 'partial'
       'badge-info'
     end
   end

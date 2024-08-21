@@ -1,0 +1,23 @@
+module AccountsPayableHelper
+  def options_for_recurring_types
+    options_for_select(
+      AccountsPayable.recurring_types.map { |key, value|
+        [I18n.t("recurring_types.#{key}"), AccountsPayable.recurring_types.key(value)]
+      },
+      @accounts_payable.recurring_type
+    )
+  end
+
+  def accounts_payable_status_badge(accounts_payable)
+    case accounts_payable.status
+    when AccountsPayable::PAID
+      'badge-success'
+    when AccountsPayable::OVERDUE
+      'badge-danger'
+    when AccountsPayable::PENDING
+      'badge-warning'
+    when AccountsPayable::PARTIAL
+      'badge-info'
+    end
+  end
+end

@@ -43,4 +43,5 @@ Rails.application.routes.draw do
   end
 
   resources :vendors
+  resources :accounts_payables
 end

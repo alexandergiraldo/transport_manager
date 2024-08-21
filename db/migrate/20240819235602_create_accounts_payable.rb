@@ -6,7 +6,7 @@ class CreateAccountsPayable < ActiveRecord::Migration[6.1]
       t.integer :total_amount
       t.integer :amount_paid
       t.integer :balance_due
-      t.integer :recurring_type
+      t.integer :recurring_type, default: 0
       t.date :payment_date
       t.integer :payment_day
       t.string :notes

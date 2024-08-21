@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2024_08_20_000946) do
     t.integer "total_amount"
     t.integer "amount_paid"
     t.integer "balance_due"
-    t.integer "recurring_type"
+    t.integer "recurring_type", default: 0
     t.date "payment_date"
     t.integer "payment_day"
     t.string "notes"

@@ -76,3 +76,9 @@ en:
     biweekly: "Quincenal"
     monthly: "Mensual"
     yearly: "Anual"
+  accounts_payable:
+    status:
+      pending: Pendiente
+      paid: Pagado
+      partial: Parcial
+      overdue: Vencido

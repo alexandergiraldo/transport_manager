@@ -30,7 +30,7 @@
               <td class="align-left text-left"><%=accounts_payable.vendor_name%></td>
               <td class="align-left text-left">
                 <div class="badge <%=accounts_payable_status_badge(accounts_payable)%>">
-                  <%=accounts_payable.status%>
+                  <%=accounts_payable_status(accounts_payable)%>
                 </div>
               </td>
 
@@ -40,7 +40,7 @@
                 </a>
 
                 <div class="dropdown-menu">
-                  <%=link_to edit_accounts_payable_path(accounts_payable.id), title: 'Editar', class: "dropdown-item" do%>
+                  <%=link_to accounts_payable_path(accounts_payable.id), title: 'Editar', class: "dropdown-item" do%>
                     <i class="material-icons md-14 align-middle">search</i>
                     <span class="align-middle">Ver</span>
                   <%end%>
@@ -48,10 +48,14 @@
                     <i class="material-icons md-14 align-middle">edit</i>
                     <span class="align-middle">Editar</span>
                   <%end%>
+                  <%=link_to mark_as_paid_accounts_payable_path(accounts_payable.id), title: 'Pagar', class: 'dropdown-item text-success', data: {confirm: 'Esta seguro que desea marcar como pagada la cuenta de cobro?', method: :put} do%>
+                    <i class="material-icons md-14 align-middle">payment</i>
+                    <span class="align-middle">Pagado</span>
+                  <%end%>
 
                   <div class="dropdown-divider"></div>
 
-                  <%=link_to accounts_payable_path(accounts_payable.id), title: 'Borrar', class: 'dropdown-item text-danger', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+                  <%=link_to accounts_payable_path(accounts_payable.id), title: 'Borrar', class: 'dropdown-item text-danger', data: {confirm: 'Esta seguro?', method: :delete} do%>
                     <i class="material-icons md-14 align-middle">delete</i>
                     <span class="align-middle">Borrar</span>
                   <%end%>

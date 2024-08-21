@@ -8,6 +8,10 @@ module AccountsPayableHelper
     )
   end
 
+  def accounts_payable_status(accounts_payable)
+    I18n.t("accounts_payable.status.#{accounts_payable.status}")
+  end
+
   def accounts_payable_status_badge(accounts_payable)
     case accounts_payable.status
     when AccountsPayable::PAID

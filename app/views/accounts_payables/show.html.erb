@@ -1,0 +1,54 @@
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td scope="col" class="text-left">Cuenta por Pagar</td>
+            <td scope="col" class="text-left"><%=@accounts_payable.name%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Valor a Pagar</td>
+            <td scope="col" class="text-left"><%=value_to_currency(@accounts_payable.total_amount)%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Valor Pagado</td>
+            <td scope="col" class="text-left"><%=value_to_currency(@accounts_payable.amount_paid)%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Valor Pendiente</td>
+            <td scope="col" class="text-left"><%=value_to_currency(@accounts_payable.balance_due)%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Fecha Limite de Pago</td>
+            <td scope="col" class="text-left"><%=l @accounts_payable.payment_date, format: :default, locale: 'es'%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Estado</td>
+            <td scope="col" class="text-left">
+              <div class="badge <%=accounts_payable_status_badge(@accounts_payable)%>">
+                <%=accounts_payable_status(@accounts_payable)%>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Factura #</td>
+            <td scope="col" class="text-left"><%=@accounts_payable.external_invoice%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Recurrencia</td>
+            <td scope="col" class="text-left"><%=I18n.t("recurring_types.#{@accounts_payable.recurring_type}")%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Día de Pago</td>
+            <td scope="col" class="text-left"><%=@accounts_payable.payment_day%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Notas</td>
+            <td scope="col" class="text-left"><%=@accounts_payable.notes%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row ml-1">
+      <%= link_to 'Volver', :back, class: 'btn btn-primary'%>
+    </div>

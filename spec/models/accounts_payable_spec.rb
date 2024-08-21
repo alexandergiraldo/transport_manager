@@ -29,22 +29,22 @@ RSpec.describe AccountsPayable, type: :model do
 
     it "should return the partial status" do
       accounts_payable = create(:accounts_payable, total_amount: 100, amount_paid: 50, vendor: vendor, vehicle: vehicle, account: account, payment_date: Time.current + 1.day)
-      expect(accounts_payable.status).to eq("Parcial")
+      expect(accounts_payable.status).to eq(AccountsPayable::PARTIAL)
     end
 
     it "should return the overdue status" do
       accounts_payable = create(:accounts_payable, total_amount: 100, amount_paid: 50, vendor: vendor, vehicle: vehicle, account: account, payment_date: Time.current - 1.day)
-      expect(accounts_payable.status).to eq("Vencido")
+      expect(accounts_payable.status).to eq(AccountsPayable::OVERDUE)
     end
 
     it "should return the pending status" do
       accounts_payable = create(:accounts_payable, total_amount: 100, amount_paid: 0, vendor: vendor, vehicle: vehicle, account: account, payment_date: Time.current + 1.day)
-      expect(accounts_payable.status).to eq("Pendiente")
+      expect(accounts_payable.status).to eq(AccountsPayable::PENDING)
     end
 
     it "should return the paid status" do
       accounts_payable = create(:accounts_payable, total_amount: 100, amount_paid: 100, vendor: vendor, vehicle: vehicle, account: account, payment_date: Time.current + 1.day)
-      expect(accounts_payable.status).to eq("Pagado")
+      expect(accounts_payable.status).to eq(AccountsPayable::PAID)
     end
   end
 end

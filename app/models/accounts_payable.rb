@@ -1,8 +1,8 @@
 class AccountsPayable < ActiveRecord::Base
-  PAID = 'Pagado'.freeze
-  OVERDUE = 'Vencido'.freeze
-  PENDING = 'Pendiente'.freeze
-  PARTIAL = 'Parcial'.freeze
+  PAID = 'paid'.freeze
+  OVERDUE = 'overdue'.freeze
+  PENDING = 'pending'.freeze
+  PARTIAL = 'partial'.freeze
 
   belongs_to :vendor
   belongs_to :vehicle
@@ -36,5 +36,11 @@ class AccountsPayable < ActiveRecord::Base
 
   def set_balance_due
     self.balance_due = total_amount.to_i - amount_paid.to_i
+  end
+
+  def mark_as_paid
+    self.amount_paid = total_amount
+    self.balance_due = 0
+    save
   end
 end

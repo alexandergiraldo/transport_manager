@@ -65,7 +65,7 @@ $drawer-dark-bg: theme-color("drawer-dark-bg");
         }
       }
       > ul > .drawer-menu-item {
-        &:after, a:after,  { background: $drawer-dark-border; }
+        &:after, a:after { background: $drawer-dark-border; }
         &.active a { color: #ffffff; }
       }
       &.drawer-submenu {

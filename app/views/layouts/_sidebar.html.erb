@@ -27,54 +27,54 @@
 
     <!-- MENU -->
     <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
-      <li class="drawer-menu-item">
+      <li class="drawer-menu-item <%=menu_active(:registers)%>">
         <a href="/">
           <i class="material-icons">home</i>
           <span class="drawer-menu-text">Inicio</span>
         </a>
       </li>
-      <li class="drawer-menu-item">
+      <li class="drawer-menu-item <%=menu_active(:vehicles)%>">
         <a href="<%=vehicles_path(status: 'active')%>">
           <i class="material-icons"><%=current_vehicle&.cars_icon%></i>
           <span class="drawer-menu-text">Vehiculos</span>
         </a>
       </li>
       <%if policy(Driver).index?%>
-        <li class="drawer-menu-item">
+        <li class="drawer-menu-item <%=menu_active(:drivers)%>">
           <a href="<%=drivers_path%>">
             <i class="material-icons">account_circle</i>
             <span class="drawer-menu-text">Conductores</span>
           </a>
         </li>
       <%end%>
-      <li class="drawer-menu-item">
+      <li class="drawer-menu-item <%=menu_active(:maintenances)%>">
         <a href="<%=maintenances_path%>">
           <i class="material-icons">build</i>
           <span class="drawer-menu-text">Mantenimiento</span>
         </a>
       </li>
-      <li class="drawer-menu-item">
+      <li class="drawer-menu-item <%=menu_active(:savings)%>">
         <a href="<%=saving_main_path%>">
           <i class="material-icons">attach_money</i>
           <span class="drawer-menu-text">Ahorros</span>
         </a>
       </li>
       <%if current_vehicle&.truck?%>
-        <li class="drawer-menu-item">
+        <li class="drawer-menu-item <%=menu_active(:egister_sketches)%>">
           <a href="<%=register_sketches_path%>">
             <i class="material-icons">assignment</i>
             <span class="drawer-menu-text">Planillas Precargadas</span>
           </a>
         </li>
       <%end%>
-      <li class="drawer-menu-item">
+      <li class="drawer-menu-item <%=menu_active(:reports)%>">
         <a href="<%=reports_path()%>">
           <i class="material-icons">insert_chart</i>
           <span class="drawer-menu-text">Reportes</span>
         </a>
       </li>
       <%if taxi_settings_allowed%>
-        <li class="drawer-menu-item">
+        <li class="drawer-menu-item <%=menu_active(:global_settings)%>">
           <a href="<%=global_settings_path%>">
             <i class="material-icons">settings</i>
             <span class="drawer-menu-text">Configuraciones</span>
@@ -82,7 +82,7 @@
         </li>
       <%end%>
       <%if policy(User).create?%>
-        <li class="drawer-menu-item">
+        <li class="drawer-menu-item <%=menu_active(:users)%>">
           <a href="<%=users_path%>">
             <i class="material-icons">account_circle</i>
             <span class="drawer-menu-text">Usuarios</span>
@@ -90,14 +90,19 @@
         </li>
       <%end%>
       <%if policy(Vendor).create?%>
-        <li class="drawer-menu-item">
+        <li class="drawer-menu-item <%=menu_active(:vendors)%>">
           <a href="<%=vendors_path%>">
             <i class="material-icons">store</i>
             <span class="drawer-menu-text">Proveedores</span>
           </a>
         </li>
+        <li class="drawer-menu-item drawer-heading <%=menu_active(:accounts_payables)%>">
+          <a href="<%=accounts_payables_path%>">
+            <i class="material-icons ">payment</i>
+            <span class="drawer-menu-text">Cuentas por Pagar</span>
+          </a>
+        </li>
       <%end%>
     </ul>
   <%end%>
-
 </nav>

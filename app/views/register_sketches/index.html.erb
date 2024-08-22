@@ -21,16 +21,28 @@
           <%@register_sketches.each do |sketch|%>
             <tr>
               <td class="align-left text-left" scope="row"><%=sketch.name%></td>
-              <td class="align-left text-left">
-                <%=link_to register_sketch_path(sketch.id), title: 'Ver' do%>
-                  <i class="material-icons">search</i>
-                <%end%>
-                <%=link_to edit_register_sketch_path(sketch.id), title: 'Editar' do%>
-                  <i class="material-icons">edit</i>
-                <%end%>
-                <%=link_to register_sketch_path(sketch.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
-                  <i class="material-icons">delete</i>
-                <%end%>
+              <td class="align-left text-center">
+                <a class="btn btn-white btn-sm" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Acciones">
+                  <i class="material-icons md-18 align-middle">more_vert</i>
+                </a>
+
+                <div class="dropdown-menu">
+                  <%=link_to register_sketch_path(sketch.id), title: 'Ver', class: "dropdown-item" do%>
+                    <i class="material-icons md-14 align-middle">visibility</i>
+                    <span class="align-middle">Ver</span>
+                  <%end%>
+                  <%=link_to edit_register_sketch_path(sketch.id), title: 'Editar', class: "dropdown-item" do%>
+                    <i class="material-icons md-14 align-middle">edit</i>
+                    <span class="align-middle">Editar</span>
+                  <%end%>
+
+                  <div class="dropdown-divider"></div>
+
+                  <%=link_to register_sketch_path(sketch.id), title: 'Borrar', class: 'dropdown-item text-danger', data: {confirm: 'Esta seguro?', method: :delete} do%>
+                    <i class="material-icons md-14 align-middle">delete</i>
+                    <span class="align-middle">Borrar</span>
+                  <%end%>
+                </div>
               </td>
             </tr>
           <%end%>

@@ -1,54 +1,46 @@
+<div class="table-responsive show-accounts-payable">
+  <div class="accounts-payable-info">
+    <div class="label">Cuenta por Pagar</div>
+    <div class="item"><%=@accounts_payable.name%></div>
+    <div class="label">Valor a Pagar</div>
+    <div class="item"><%=value_to_currency(@accounts_payable.total_amount)%></div>
+    <div class="label">Valor Pagado</div>
+    <div class="item"><%=value_to_currency(@accounts_payable.amount_paid)%></div>
+    <div class="label">Valor Pendiente</div>
+    <div class="item"><%=value_to_currency(@accounts_payable.balance_due)%></div>
+    <div class="label">Fecha Limite de Pago</div>
+    <div class="item"><%=l @accounts_payable.payment_date, format: :default, locale: 'es'%></div>
+    <div class="label">Estado</div>
+    <div class="item"><%=l @accounts_payable.payment_date, format: :default, locale: 'es'%></div>
+    <div class="label">Factura #</div>
+    <div class="item"><%=@accounts_payable.external_invoice%></div>
+    <div class="label">Recurrencia</div>
+    <div class="item"><%=I18n.t("recurring_types.#{@accounts_payable.recurring_type}")%></div>
+    <div class="label">Día de Pago</div>
+    <div class="item"><%=@accounts_payable.payment_day%></div>
+    <div class="label">Notas</div>
+    <div class="item"><%=@accounts_payable.notes%></div>
+  </div>
 
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <tbody>
+  <div class="accounts-payable-payments">
+    <h4>Pagos</h4>
+
+    <table class="table table-bordered">
+      <tbody>
+        <%@accounts_payable.payments.each do |accounts_payable|%>
           <tr>
-            <td scope="col" class="text-left">Cuenta por Pagar</td>
-            <td scope="col" class="text-left"><%=@accounts_payable.name%></td>
+            <td scope="col" class="text-left"><%=l accounts_payable.payment_date, format: :default, locale: 'es'%></td>
+            <td scope="col" class="text-left"><%=value_to_currency(accounts_payable.amount)%></td>
           </tr>
-          <tr>
-            <td scope="col" class="text-left">Valor a Pagar</td>
-            <td scope="col" class="text-left"><%=value_to_currency(@accounts_payable.total_amount)%></td>
-          </tr>
-          <tr>
-            <td scope="col" class="text-left">Valor Pagado</td>
-            <td scope="col" class="text-left"><%=value_to_currency(@accounts_payable.amount_paid)%></td>
-          </tr>
-          <tr>
-            <td scope="col" class="text-left">Valor Pendiente</td>
-            <td scope="col" class="text-left"><%=value_to_currency(@accounts_payable.balance_due)%></td>
-          </tr>
-          <tr>
-            <td scope="col" class="text-left">Fecha Limite de Pago</td>
-            <td scope="col" class="text-left"><%=l @accounts_payable.payment_date, format: :default, locale: 'es'%></td>
-          </tr>
-          <tr>
-            <td scope="col" class="text-left">Estado</td>
-            <td scope="col" class="text-left">
-              <div class="badge <%=accounts_payable_status_badge(@accounts_payable)%>">
-                <%=accounts_payable_status(@accounts_payable)%>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td scope="col" class="text-left">Factura #</td>
-            <td scope="col" class="text-left"><%=@accounts_payable.external_invoice%></td>
-          </tr>
-          <tr>
-            <td scope="col" class="text-left">Recurrencia</td>
-            <td scope="col" class="text-left"><%=I18n.t("recurring_types.#{@accounts_payable.recurring_type}")%></td>
-          </tr>
-          <tr>
-            <td scope="col" class="text-left">Día de Pago</td>
-            <td scope="col" class="text-left"><%=@accounts_payable.payment_day%></td>
-          </tr>
-          <tr>
-            <td scope="col" class="text-left">Notas</td>
-            <td scope="col" class="text-left"><%=@accounts_payable.notes%></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row ml-1">
-      <%= link_to 'Volver', :back, class: 'btn btn-primary'%>
-    </div>
+        <%end%>
+        <tr>
+          <td scope="col" class="text-left"><b>Total</b></td>
+          <td scope="col" class="text-left"><%=value_to_currency(@accounts_payable.payments.map(&:amount).reduce(:+))%></td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row ml-1">
+  <%= link_to 'Volver', :back, class: 'btn btn-primary'%>
+</div>

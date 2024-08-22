@@ -1,0 +1,47 @@
+.show-accounts-payable{
+  display: flex;
+  // Check responsive version and change flex-direction
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+  }
+
+  .accounts-payable-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 12px;
+    width: 50%;
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+
+
+    border-radius: 5px;
+    padding: 10px;
+
+    .label {
+      font-weight: bold;
+    }
+  }
+
+  .accounts-payable-payments{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    padding: 10px;
+    width: 50%;
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+
+    table {
+
+      td {
+        width: 50%;
+      }
+    }
+  }
+}

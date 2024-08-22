@@ -1,0 +1,6 @@
+$("#add-payment-modal").html("<%= j render(partial: 'form', locals: {payment: @payment}) %>");
+$("#add-payment-modal").modal("show");
+$(".select-category").toggle();
+
+window.Application.init_sheet_inputs();
+window.Application.initNumberMask();

@@ -160,10 +160,12 @@ ActiveRecord::Schema.define(version: 2024_08_20_000946) do
     t.integer "amount"
     t.integer "payment_method"
     t.bigint "accounts_payable_id", null: false
+    t.bigint "account_id", null: false
     t.string "payer_details"
     t.string "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_payments_on_account_id"
     t.index ["accounts_payable_id"], name: "index_payments_on_accounts_payable_id"
   end
 
@@ -277,6 +279,7 @@ ActiveRecord::Schema.define(version: 2024_08_20_000946) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "global_settings", "accounts"
+  add_foreign_key "payments", "accounts"
   add_foreign_key "payments", "accounts_payables"
   add_foreign_key "vendors", "accounts"
 end

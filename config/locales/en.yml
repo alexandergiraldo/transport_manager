@@ -82,3 +82,10 @@ en:
       paid: Pagado
       partial: Parcial
       overdue: Vencido
+  payment:
+    payment_methods:
+      cash: Efectivo
+      card: Tarjeta de Crédito / Debito
+      bank_transfer: Transferencia Bancaria
+      check: Cheque
+      other: Otro

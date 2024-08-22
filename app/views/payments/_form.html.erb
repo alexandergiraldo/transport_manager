@@ -1,0 +1,43 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="newCollaboratorModalLabel">Agregar Pago</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <%= form_for(payment, url: accounts_payable_payments_path(accounts_payable_id: payment.accounts_payable_id)) do |f|%>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="row mb-1">
+            <div class="col-md-6 mb-1">
+              <%= f.text_field :payment_date, class: "form-control datepicker", placeholder: "Fecha", required: true, autocomplete: "off"%>
+            </div>
+            <div class="col-md-6 mb-1">
+              <%= f.text_field :amount, class: "form-control imask_number", placeholder: '$', required: true%>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-6">
+              <%= label_tag :payer_details, "Persona que paga", class: "col-form-label" %>
+              <%= f.text_field :payer_details, class: "form-control", placeholder: ""%>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag :payment_method, "Método de Pago", class: "col-form-label" %>
+              <%= f.select :payment_method, options_for_payment_methods(payment), {}, {class: "form-control category-select2"}%>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <%= f.text_area :notes, rows: 1, placeholder: "Notas extras", class: "form-control"%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    <%end%>
+  </div>
+</div>

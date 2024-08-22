@@ -45,5 +45,6 @@ Rails.application.routes.draw do
   resources :vendors
   resources :accounts_payables do
     put 'mark_as_paid', on: :member
+    resources :payments
   end
 end

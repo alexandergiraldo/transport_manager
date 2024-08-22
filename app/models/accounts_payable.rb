@@ -41,6 +41,11 @@ class AccountsPayable < ActiveRecord::Base
     end
   end
 
+  def add_payment(amount)
+    self.amount_paid += amount
+    save!
+  end
+
   private
 
   def set_status

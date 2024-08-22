@@ -1,3 +1,7 @@
+<%content_for :external_css do %>
+  <%= render_select2_css %>
+<%end%>
+
 <div class="card">
   <div class="card-header">
     <h4>Cuentas por Pagar</h4>
@@ -25,7 +29,11 @@
         <tbody>
           <%@accounts_payables.each do |accounts_payable|%>
             <tr>
-              <td class="align-left text-left" scope="row"><%=accounts_payable.name%></td>
+              <td class="align-left text-left" scope="row">
+                <%=link_to accounts_payable_path(accounts_payable.id) do%>
+                  <%=accounts_payable.name%>
+                <%end%>
+              </td>
               <td class="align-left text-left"><%=value_to_currency(accounts_payable.total_amount)%></td>
               <td class="align-left text-left"><%=value_to_currency(accounts_payable.amount_paid)%></td>
               <td class="align-left text-left"><%=accounts_payable.vendor_name%></td>
@@ -41,16 +49,22 @@
                 </a>
 
                 <div class="dropdown-menu">
-                  <%=link_to accounts_payable_path(accounts_payable.id), title: 'Editar', class: "dropdown-item" do%>
-                    <i class="material-icons md-14 align-middle">search</i>
+                  <%=link_to accounts_payable_path(accounts_payable.id), title: 'Ver', class: "dropdown-item" do%>
+                    <i class="material-icons md-14 align-middle">visibility</i>
                     <span class="align-middle">Ver</span>
                   <%end%>
                   <%=link_to edit_accounts_payable_path(accounts_payable.id), title: 'Editar', class: "dropdown-item" do%>
                     <i class="material-icons md-14 align-middle">edit</i>
                     <span class="align-middle">Editar</span>
                   <%end%>
+                  <%if !accounts_payable.paid?%>
+                    <%=link_to new_accounts_payable_payment_path(accounts_payable.id, format: :js), title: 'Agregar Pago', class: 'dropdown-item text-info', data: {remote: true} do%>
+                      <i class="material-icons md-14 align-middle">add_circle</i>
+                      <span class="align-middle">Agregar Pago</span>
+                    <%end%>
+                  <%end%>
                   <%=link_to mark_as_paid_accounts_payable_path(accounts_payable.id), title: 'Pagar', class: 'dropdown-item text-success', data: {confirm: 'Esta seguro que desea marcar como pagada la cuenta de cobro?', method: :put} do%>
-                    <i class="material-icons md-14 align-middle">payment</i>
+                    <i class="material-icons md-14 align-middle">monetization_on</i>
                     <span class="align-middle">Pagado</span>
                   <%end%>
 
@@ -70,3 +84,6 @@
     </div>
   </div>
 </div>
+<%content_for :app_modals do %>
+  <div class="modal fade" id="add-payment-modal" role="dialog" aria-hidden="true"></div>
+<%end%>

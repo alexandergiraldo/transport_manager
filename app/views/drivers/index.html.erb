@@ -30,15 +30,28 @@
               <td class="align-left text-left"><%=driver.insurance%></td>
               <td class="align-left text-left"><%=driver.email%></td>
               <td class="align-left text-left">
-                <%=link_to driver_path(driver.id), title: 'Ver' do%>
-                  <i class="material-icons">search</i>
-                <%end%>
-                <%=link_to edit_driver_path(driver.id), title: 'Editar' do%>
-                  <i class="material-icons">edit</i>
-                <%end%>
-                <%=link_to driver_path(driver.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
-                  <i class="material-icons">delete</i>
-                <%end%>
+                <a class="btn btn-white btn-sm" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Acciones">
+                  <i class="material-icons md-18 align-middle">more_vert</i>
+                </a>
+
+                <div class="dropdown-menu">
+                  <%=link_to driver_path(driver.id), title: 'Ver', class: "dropdown-item" do%>
+                    <i class="material-icons md-14 align-middle">visibility</i>
+                    <span class="align-middle">Ver</span>
+                  <%end%>
+                  <%=link_to edit_driver_path(driver.id), title: 'Editar', class: "dropdown-item" do%>
+                    <i class="material-icons md-14 align-middle">edit</i>
+                    <span class="align-middle">Editar</span>
+                  <%end%>
+
+                  <div class="dropdown-divider"></div>
+
+                  <%=link_to driver_path(driver.id), title: 'Borrar', class: 'dropdown-item text-danger', data: {confirm: 'Esta seguro?', method: :delete} do%>
+                    <i class="material-icons md-14 align-middle">delete</i>
+                    <span class="align-middle">Borrar</span>
+                  <%end%>
+
+                </div>
               </td>
             </tr>
           <%end%>

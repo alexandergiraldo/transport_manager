@@ -1,0 +1,89 @@
+<%content_for :external_css do %>
+  <%= render_select2_css %>
+<%end%>
+
+<div class="card">
+  <div class="card-header">
+    <h4>Cuentas por Pagar</h4>
+    <h5><%=accounts_payable_vendor_from_params%></h5>
+  </div>
+  <div class="card-body">
+    <div class="row mb-3 mr-1 float-right">
+      <a href="<%=new_accounts_payable_path%>" class="btn btn btn-primary">
+        <i class="material-icons md-18 align-middle">payment</i>
+        <span class="align-middle">Nuevo</span>
+      </a>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="text-left">Descripción</th>
+            <th scope="col" class="text-left">Valor Total</th>
+            <th scope="col" class="text-left">Valor Pagado</th>
+            <th scope="col" class="text-left">Proveedor</th>
+            <th scope="col" class="text-left">Estado</th>
+            <th/>
+          </tr>
+        </thead>
+        <tbody>
+          <%@accounts_payables.each do |accounts_payable|%>
+            <tr>
+              <td class="align-left text-left" scope="row">
+                <%=link_to accounts_payable_path(accounts_payable.id) do%>
+                  <%=accounts_payable.name%>
+                <%end%>
+              </td>
+              <td class="align-left text-left"><%=value_to_currency(accounts_payable.total_amount)%></td>
+              <td class="align-left text-left"><%=value_to_currency(accounts_payable.amount_paid)%></td>
+              <td class="align-left text-left"><%=accounts_payable.vendor_name%></td>
+              <td class="align-left text-left">
+                <div class="badge <%=accounts_payable_status_badge(accounts_payable)%>">
+                  <%=accounts_payable_status(accounts_payable)%>
+                </div>
+              </td>
+
+              <td class="align-midle text-center">
+                <a class="btn btn-white btn-sm" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Acciones">
+                  <i class="material-icons md-18 align-middle">more_vert</i>
+                </a>
+
+                <div class="dropdown-menu">
+                  <%=link_to accounts_payable_path(accounts_payable.id), title: 'Ver', class: "dropdown-item" do%>
+                    <i class="material-icons md-14 align-middle">visibility</i>
+                    <span class="align-middle">Ver</span>
+                  <%end%>
+                  <%=link_to edit_accounts_payable_path(accounts_payable.id), title: 'Editar', class: "dropdown-item" do%>
+                    <i class="material-icons md-14 align-middle">edit</i>
+                    <span class="align-middle">Editar</span>
+                  <%end%>
+                  <%if !accounts_payable.paid?%>
+                    <%=link_to new_accounts_payable_payment_path(accounts_payable.id, format: :js), title: 'Agregar Pago', class: 'dropdown-item text-info', data: {remote: true} do%>
+                      <i class="material-icons md-14 align-middle">add_circle</i>
+                      <span class="align-middle">Agregar Pago</span>
+                    <%end%>
+                  <%end%>
+                  <%=link_to mark_as_paid_accounts_payable_path(accounts_payable.id), title: 'Pagar', class: 'dropdown-item text-success', data: {confirm: 'Esta seguro que desea marcar como pagada la cuenta de cobro?', method: :put} do%>
+                    <i class="material-icons md-14 align-middle">monetization_on</i>
+                    <span class="align-middle">Pagado</span>
+                  <%end%>
+
+                  <div class="dropdown-divider"></div>
+
+                  <%=link_to accounts_payable_path(accounts_payable.id), title: 'Borrar', class: 'dropdown-item text-danger', data: {confirm: 'Esta seguro?', method: :delete} do%>
+                    <i class="material-icons md-14 align-middle">delete</i>
+                    <span class="align-middle">Borrar</span>
+                  <%end%>
+
+                </div>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%content_for :app_modals do %>
+  <div class="modal fade" id="add-payment-modal" role="dialog" aria-hidden="true"></div>
+<%end%>

@@ -3,6 +3,7 @@ class Account < ApplicationRecord
   has_many :vehicles, dependent: :destroy
   has_many :drivers, dependent: :delete_all
   has_many :maintenance_types, dependent: :delete_all
+  has_many :vendors, dependent: :delete_all
 
   has_many :account_users
   has_many :users, through: :account_users, dependent: :delete_all

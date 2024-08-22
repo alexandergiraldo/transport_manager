@@ -69,3 +69,23 @@ en:
   balance_in_favor_of:
     driver_balance: Conductor
     vehicle_balance: Vehiculo
+  recurring_types:
+    one_time: "Una vez"
+    daily: "Diario"
+    weekly: "Semanal"
+    biweekly: "Quincenal"
+    monthly: "Mensual"
+    yearly: "Anual"
+  accounts_payable:
+    status:
+      pending: Pendiente
+      paid: Pagado
+      partial: Parcial
+      overdue: Vencido
+  payment:
+    payment_methods:
+      cash: Efectivo
+      card: Tarjeta de Crédito / Debito
+      bank_transfer: Transferencia Bancaria
+      check: Cheque
+      other: Otro

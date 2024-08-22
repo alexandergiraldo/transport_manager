@@ -50,4 +50,8 @@ module ApplicationHelper
   def taxi_settings_allowed
     current_vehicle&.taxi? && (current_user.super_admin? || current_user.account_admin?)
   end
+
+  def menu_active(controller)
+    controller_name == controller.to_s ? 'active' : ''
+  end
 end

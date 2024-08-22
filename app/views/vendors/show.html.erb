@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%=@vendor.name%></h3>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td scope="col" class="text-left">Nit</td>
+            <td scope="col" class="text-left"><%=@vendor.tax_id%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Persona de Contacto</td>
+            <td scope="col" class="text-left"><%=@vendor.contact_person%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Banco</td>
+            <td scope="col" class="text-left"><%=@vendor.bank_name%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Cuenta #</td>
+            <td scope="col" class="text-left"><%=@vendor.account_number%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Email</td>
+            <td scope="col" class="text-left"><%=@vendor.email%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Telefono</td>
+            <td scope="col" class="text-left"><%=@vendor.phone_number%></td>
+          </tr>
+          <tr>
+            <td scope="col" class="text-left">Notas</td>
+            <td scope="col" class="text-left"><%=@vendor.notes%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row ml-1">
+      <%= link_to 'Volver', :back, class: 'btn btn-primary'%>
+    </div>
+  </div>
+</div>

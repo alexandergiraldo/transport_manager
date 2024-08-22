@@ -70,6 +70,32 @@ Registers = (function () {
     })
   }
 
+  function autocompleteDates() {
+    $('.autocomplete-register-dates').on('click', function () {
+      var date = $('tbody#registers tr:first-child').find('input.fill-date').val();
+      if (date == "") {
+        return
+      }
+      $('tbody#registers input.fill-date').each(function () {
+        $(this).val(date);
+        date = new Date(date);
+        date.setDate(date.getDate() + 1);
+
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1;
+        var yyyy = date.getFullYear();
+
+        if (dd < 10) {
+          dd = '0' + dd
+        }
+        if (mm < 10) {
+          mm = '0' + mm
+        }
+        date = yyyy + '/' + mm + '/' + dd;
+      });
+    });
+  }
+
   return {
     calculate_registers_totals: function () {
       calculate_registers_totals();
@@ -78,6 +104,7 @@ Registers = (function () {
       calculate_registers_totals();
       monitor_total_values();
       applySameDate();
+      autocompleteDates();
     }
   }
 })();

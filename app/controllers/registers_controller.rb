@@ -75,11 +75,27 @@ class RegistersController < ApplicationController
     end
   end
 
+  def delete_multiple
+    ids = params.require(:register_ids).split(",")
+    @registers = Register.where(id: ids)
+    @registers = authorized_registers_to_delete
+
+    if Register.destroy(@registers.map(&:id))
+      redirect_to request.referer, flash: {alert: "Registros eliminados exitosamente"}
+    else
+      redirect_to request.referer, flash: {alert: "Error al eliminar los registros"}
+    end
+  end
+
   protected
 
   def register_params
     r_params = params.require(:register).permit(:description, :category, :register_type, :notes, :event_date, :value, :vehicle_id, :maintainable, :document_id)
     r_params[:value] = Register.sanitize_amount(r_params[:value])
     r_params
+  end
+
+  def authorized_registers_to_delete
+    @registers.each { |register| authorize(register, :destroy?) }
   end
 end

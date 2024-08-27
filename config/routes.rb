@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :registers, except: :index do
     post "multiple", to: "registers#create_multiple", on: :collection, as: "multiple"
     get "print", to: "registers#print", on: :collection, as: "print"
+    delete "delete_multiple", to: "registers#delete_multiple", on: :collection, as: "delete_multiple"
   end
   get 'registers', to: 'registers#index'
   get 'savings', to: 'savings#index'

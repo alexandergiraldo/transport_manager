@@ -109,7 +109,7 @@ Registers = (function () {
         $('.delete-registers').removeClass('d-block').addClass('d-none');
       }
 
-      updateMultipleRegistersIds();
+      updateMultipleRegistersIds($this);
     });
 
     $(document).on('click', '.register-check-item', function () {
@@ -125,19 +125,31 @@ Registers = (function () {
           $('.delete-registers').removeClass('d-block').addClass('d-none');
         }
       }
-      updateMultipleRegistersIds();
+      updateMultipleRegistersIds($this);
     });
   }
 
-  function updateMultipleRegistersIds() {
-    var registerItems = $('.register-check-item:checked');
+  function updateMultipleRegistersIds(checkItem) {
+    var deleteLink = checkItem.closest('.registers-list').find('.remove-all-registers');
+    var registerItems = deleteLink.closest('.delete-registers').siblings('table').find('.register-check-item');
+    var checkedItems = registerItems.filter(':checked');
+
     var ids = [];
 
-    registerItems.each(function() {
+    checkedItems.each(function() {
       ids.push($(this).val());
     });
 
-    var deleteLink = $('.remove-all-registers');
+    var confirmMessage = deleteLink.data('confirm');
+    var confirmMessageParts = confirmMessage.split(' ');
+    var lastPart = confirmMessageParts[confirmMessageParts.length - 1];
+    if (lastPart.match(/\d+/)) {
+      confirmMessageParts[confirmMessageParts.length - 1] = ids.length;
+      deleteLink.attr('data-confirm', confirmMessageParts.join(' ')  + ' registros');
+    } else {
+      deleteLink.attr('data-confirm', confirmMessage + ' ' + ids.length + ' registros');
+    }
+
     var href = deleteLink.attr('href');
     var url = new URL(href, window.location.origin);
     url.searchParams.set('register_ids', ids.join(','));

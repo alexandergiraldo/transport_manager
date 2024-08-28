@@ -89,3 +89,6 @@ en:
       bank_transfer: Transferencia Bancaria
       check: Cheque
       other: Otro
+  account_types:
+    savings: Ahorro
+    checking: Corriente

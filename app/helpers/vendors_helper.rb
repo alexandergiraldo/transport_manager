@@ -8,4 +8,17 @@ module VendorsHelper
       Vendor.none
     end
   end
+
+  def options_for_account_type
+    options_for_select(
+      Vendor.account_types.map { |key, value|
+        [I18n.t("account_types.#{key}"), Vendor.account_types.key(value)]
+      },
+      @vendor.account_type
+    )
+  end
+
+  def vendor_account_type(vendor)
+    I18n.t("account_types.#{vendor.account_type}")
+  end
 end

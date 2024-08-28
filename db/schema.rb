@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_20_000946) do
+ActiveRecord::Schema.define(version: 2024_08_28_200229) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "account_users", force: :cascade do |t|
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 2024_08_20_000946) do
     t.bigint "vendor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "start_date", null: false
     t.index ["account_id"], name: "index_accounts_payables_on_account_id"
     t.index ["vehicle_id"], name: "index_accounts_payables_on_vehicle_id"
     t.index ["vendor_id"], name: "index_accounts_payables_on_vendor_id"
@@ -263,13 +265,13 @@ ActiveRecord::Schema.define(version: 2024_08_20_000946) do
     t.string "email"
     t.string "contact_person"
     t.string "tax_id"
-    t.integer "account_number"
-    t.string "account_type"
+    t.bigint "account_number"
     t.string "bank_name"
     t.string "notes"
     t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "account_type"
     t.index ["account_id"], name: "index_vendors_on_account_id"
   end
 

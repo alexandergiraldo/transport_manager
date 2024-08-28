@@ -59,9 +59,16 @@
             </a>
 
             <div class="dropdown-menu">
-              <%=link_to "Editar", edit_document_path(document.id), class: "dropdown-item" %>
+              <%=link_to edit_document_path(document.id), title: 'Editar', class: "dropdown-item" do%>
+                <i class="material-icons md-14 align-middle">edit</i>
+                <span class="align-middle">Editar</span>
+              <%end%>
+
               <div class="dropdown-divider"></div>
-              <%= link_to "Borrar", document_path(document.id), class: "dropdown-item text-danger", data: { method: :delete, confirm: "Esta seguro de eliminar este documento y todos los registros?" } %>
+              <%=link_to document_path(document.id), title: 'Borrar', class: 'dropdown-item text-danger', data: {confirm: 'Esta seguro de eliminar este documento y todos los registros?', method: :delete} do%>
+                <i class="material-icons md-14 align-middle">delete</i>
+                <span class="align-middle">Borrar</span>
+              <%end%>
             </div>
           </div>
         </div>

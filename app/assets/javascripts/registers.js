@@ -96,6 +96,66 @@ Registers = (function () {
     });
   }
 
+  function selectRegisterItems() {
+    $(document).on('click', '.select-registers', function () {
+      var $this = $(this);
+      var registerItems = $this.closest('table').find('.register-check-item');
+
+      if($this.is(':checked')) {
+        registerItems.prop('checked', true);
+        $('.delete-registers').removeClass('d-none').addClass('d-block');
+      } else {
+        registerItems.prop('checked', false);
+        $('.delete-registers').removeClass('d-block').addClass('d-none');
+      }
+
+      updateMultipleRegistersIds($this);
+    });
+
+    $(document).on('click', '.register-check-item', function () {
+      var $this = $(this);
+
+      if($this.is(':checked')) {
+        $('.delete-registers').removeClass('d-none').addClass('d-block');
+      } else {
+        var registerItems = $this.closest('table').find('.register-check-item');
+        var checkedItems = registerItems.filter(':checked');
+
+        if(checkedItems.length == 0) {
+          $('.delete-registers').removeClass('d-block').addClass('d-none');
+        }
+      }
+      updateMultipleRegistersIds($this);
+    });
+  }
+
+  function updateMultipleRegistersIds(checkItem) {
+    var deleteLink = checkItem.closest('.registers-list').find('.remove-all-registers');
+    var registerItems = deleteLink.closest('.delete-registers').siblings('table').find('.register-check-item');
+    var checkedItems = registerItems.filter(':checked');
+
+    var ids = [];
+
+    checkedItems.each(function() {
+      ids.push($(this).val());
+    });
+
+    var confirmMessage = deleteLink.data('confirm');
+    var confirmMessageParts = confirmMessage.split(' ');
+    var lastPart = confirmMessageParts[confirmMessageParts.length - 1];
+    if (lastPart.match(/\d+/)) {
+      confirmMessageParts[confirmMessageParts.length - 1] = ids.length;
+      deleteLink.attr('data-confirm', confirmMessageParts.join(' ')  + ' registros');
+    } else {
+      deleteLink.attr('data-confirm', confirmMessage + ' ' + ids.length + ' registros');
+    }
+
+    var href = deleteLink.attr('href');
+    var url = new URL(href, window.location.origin);
+    url.searchParams.set('register_ids', ids.join(','));
+    deleteLink.attr('href', url.toString());
+  }
+
   return {
     calculate_registers_totals: function () {
       calculate_registers_totals();
@@ -105,6 +165,7 @@ Registers = (function () {
       monitor_total_values();
       applySameDate();
       autocompleteDates();
+      selectRegisterItems();
     }
   }
 })();

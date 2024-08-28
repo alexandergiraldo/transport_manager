@@ -12,4 +12,8 @@ class RegisterPolicy < MaintenancePolicy
   def update?
     self.create?
   end
+
+  def destroy?
+    self.create?
+  end
 end

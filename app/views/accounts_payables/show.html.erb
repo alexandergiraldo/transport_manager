@@ -2,16 +2,24 @@
   <div class="accounts-payable-info">
     <div class="label">Cuenta por Pagar</div>
     <div class="item"><%=@accounts_payable.name%></div>
+    <div class="label">Proveedor</div>
+    <div class="item"><%=@accounts_payable.vendor.name%></div>
     <div class="label">Valor a Pagar</div>
     <div class="item"><%=value_to_currency(@accounts_payable.total_amount)%></div>
     <div class="label">Valor Pagado</div>
     <div class="item"><%=value_to_currency(@accounts_payable.amount_paid)%></div>
     <div class="label">Valor Pendiente</div>
     <div class="item"><%=value_to_currency(@accounts_payable.balance_due)%></div>
+    <div class="label">Fecha de Inicio</div>
+    <div class="item"><%=l @accounts_payable.start_date, format: :default, locale: 'es'%></div>
     <div class="label">Fecha Limite de Pago</div>
     <div class="item"><%=l @accounts_payable.payment_date, format: :default, locale: 'es'%></div>
     <div class="label">Estado</div>
-    <div class="item"><%=l @accounts_payable.payment_date, format: :default, locale: 'es'%></div>
+    <div class="item">
+      <div class="badge <%=accounts_payable_status_badge(@accounts_payable)%>">
+        <%=accounts_payable_status(@accounts_payable)%>
+      </div>
+    </div>
     <div class="label">Factura #</div>
     <div class="item"><%=@accounts_payable.external_invoice%></div>
     <div class="label">Recurrencia</div>

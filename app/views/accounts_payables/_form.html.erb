@@ -13,25 +13,29 @@
       <%= f.text_field :total_amount, class: "form-control imask_number", disabled: f.object.paid? %>
     </div>
     <div class="col-md-4 mb-3">
-      <label for="accounts_payable_payment_date">Fecha Limite de Pago</label>
-      <%= f.text_field :payment_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
+      <label for="accounts_payable_external_invoice">Factura #</label>
+      <%= f.text_field :external_invoice, class: "form-control", placeholder: ""%>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4 mb-3">
-      <label for="accounts_payable_external_invoice">Factura #</label>
-      <%= f.text_field :external_invoice, class: "form-control", placeholder: ""%>
+      <label for="accounts_payable_payment_date">Fecha de Inicio</label>
+      <%= f.text_field :start_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="accounts_payable_payment_date">Fecha Limite de Pago</label>
+      <%= f.text_field :payment_date, class: "form-control datepicker", placeholder: "", required: true, autocomplete: "off"%>
     </div>
     <div class="col-md-4 mb-3">
       <label for="accounts_payable_recurring_type">Recurrencia</label>
       <%= f.select :recurring_type, options_for_recurring_types, {:include_blank => 'Seleccionar'}, multiple: false, class: "category-select2 form-control"%>
     </div>
+  </div>
+  <div class="row">
     <div class="col-md-4 mb-3">
       <label for="accounts_payable_payment_day">Día de pago</label>
       <%= f.select :payment_day, [*1..31], { include_blank: true }, class: "form-control"%>
     </div>
-  </div>
-  <div class="row">
     <div class="col-md-4 mb-3">
       <label for="accounts_payable_vendor_id">Proveedor</label>
       <%= f.select :vendor_id, account_vendors.map{|v| [v.name, v.id]}, {prompt: 'Seleccione'}, multiple: false, class: "form-control category-select2"%>

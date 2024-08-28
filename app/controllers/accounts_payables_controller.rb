@@ -71,7 +71,7 @@ class AccountsPayablesController < ApplicationController
   protected
 
   def accounts_payable_params
-    a_params = params.require(:accounts_payable).permit(:vendor_id, :total_amount, :name, :notes, :payment_date, :external_invoice, :recurring_type, :payment_day, :vehicle_id)
+    a_params = params.require(:accounts_payable).permit(:vendor_id, :total_amount, :start_date, :name, :notes, :payment_date, :external_invoice, :recurring_type, :payment_day, :vehicle_id)
     a_params[:total_amount] = Register.sanitize_amount(a_params[:total_amount])
     a_params
   end

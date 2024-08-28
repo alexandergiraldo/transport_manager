@@ -6,6 +6,7 @@ class AccountsPayable < ActiveRecord::Base
 
   validates :name, presence: true
   validates :recurring_type, presence: { message: 'Debe seleccionar un tipo de recurrencia' }
+  validates :start_date, presence: { message: 'Debe seleccionar una fecha de inicio' }
 
   before_save :set_status
 

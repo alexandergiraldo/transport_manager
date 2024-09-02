@@ -18,7 +18,7 @@ class Report
     month = year.to_i == Time.zone.now.year ? Time.zone.now.month : 12
     Time.use_zone("UTC") {
       start_date = Date.new(year.to_i,1,1)
-      end_date = Date.new(year.to_i,month,31)
+      end_date = Date.new(year.to_i,month,Time.days_in_month(month, year))
       income = Register.incoming.where(vehicle_id: vehicle_id).group_by_month(:event_date, format: "%b", range: start_date..end_date).sum(:value)
       outcome = Register.outcoming.where(vehicle_id: vehicle_id).group_by_month(:event_date, format: "%b", range: start_date..end_date).sum(:value)
       return [
@@ -39,7 +39,7 @@ class Report
     month = year.to_i == Time.zone.now.year ? Time.zone.now.month : 12
     Time.use_zone("UTC") {
       start_date = Date.new(year.to_i,1,1)
-      end_date = Date.new(year.to_i,month,31)
+      end_date = Date.new(year.to_i,month,Time.days_in_month(month, year))
       income = Register.incoming.where(vehicle_id: vehicle_id).group_by_month(:event_date, format: "%b", range: start_date..end_date).sum(:value)
       outcome = Register.outcoming.where(vehicle_id: vehicle_id).group_by_month(:event_date, format: "%b", range: start_date..end_date).sum(:value)
       return [

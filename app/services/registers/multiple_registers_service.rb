@@ -37,10 +37,13 @@ module Registers
           vehicle_id: vehicle.id,
           maintainable: register[:maintainable],
           notes: register[:notes],
-          register_type: register[:register_type]
+          register_type: register[:register_type],
+          payment: register[:payment]
         )
       end
     end
+
+    private
 
     def create_register(register, document = nil)
       register_object = Register.new(
@@ -56,9 +59,8 @@ module Registers
       raise Pundit::NotAuthorizedError.new("Not authorized") unless RegisterPolicy.new(user, register_object).create?
       register_object.save!
       create_maintenance(register, register_object.id) if register[:maintainable] == "1" && register_object.outcoming?
+      create_payment(register, register_object.id) if register[:paymentable] == "1" && register_object.outcoming?
     end
-
-    private
 
     def valid?
       self.errors << "Invalid parameters" if params[:vehicle].blank? && params[:document].blank?
@@ -103,6 +105,22 @@ module Registers
         user_id: user.id,
         register_id: register_id
       )
+    end
+
+    def create_payment(register, register_id)
+      payment_params = {
+        payment_date: register[:event_date],
+        amount:  Register.sanitize_amount(register[:value]),
+        payment_method: Payment.payment_methods[:cash],
+        accounts_payable_id: register[:payment],
+        notes: register[:notes],
+        register_id:
+      }
+      payment_service = Payments::PaymentCreator.new(payment_params, @current_account)
+      unless payment_service.call
+        self.errors << payment_service.payment.errors.full_messages.join("\n")
+        raise ActiveRecord::Rollback
+      end
     end
   end
 end

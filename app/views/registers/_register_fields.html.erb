@@ -4,32 +4,43 @@
     <%= f.text_field :event_date, class: current_vehicle.taxi? ? 'auto-fill-date form-control datepicker fill-date' : 'form-control datepicker fill-date', placeholder: "", required: true, autocomplete: "off"%>
   </td>
   <td class="align-left text-left" scope="row">
-    <%= f.label(:register_type) do %>
-      <%= f.radio_button :register_type, :incoming, class: register_type_class %>
-      Entrada
-    <%end%>
-    <%= f.label(:register_type) do %>
-      <%= f.radio_button :register_type, :outcoming, class: register_type_class %>
-      Gasto
-    <%end%>
+    <div class="align-left ml-3">
+      <%= f.label(:register_type) do %>
+        <%= f.radio_button :register_type, :incoming, class: register_type_class %>
+        Entrada
+      <%end%>
+      <%= f.label(:register_type) do %>
+        <%= f.radio_button :register_type, :outcoming, class: register_type_class %>
+        Gasto
+      <%end%>
+    </div>
   </td>
   <td class="align-left text-center">
     <%= f.text_field :description, class: "form-control register-description", placeholder: "", required: true%>
   </td>
   <td class="align-left text-left">
     <%= f.text_field :value, class: "form-control register-value imask_number", placeholder: '', required: true%>
-  </td>
-  <td class="align-left text-center">
-    <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>
-  </td>
-  <td class="align-left d-print-none">
-    <div class="custom-control custom-checkbox mb-1 register-maintainable-checkbox">
-      <%=f.check_box :maintainable, class: "custom-control-input check_box"%>
-      <%=f.label :maintainable, "Gasto de mantenimiento?", class: "custom-control-label align-middle"%>
+    <div class="register-payments">
+      <div class="custom-control custom-checkbox mb-1 register-maintainable-checkbox">
+        <%=f.check_box :maintainable, class: "custom-control-input maintenance_check_box"%>
+        <%=f.label :maintainable, "Gasto de mantenimiento?", class: "custom-control-label align-middle"%>
+      </div>
+      <div class="custom-control custom-checkbox mb-1 register-maintainable-checkbox">
+        <%=f.check_box :paymentable, class: "custom-control-input payment_check_box"%>
+        <%=f.label :paymentable, "Abono a cuenta por pagar?", class: "custom-control-label align-middle"%>
+      </div>
     </div>
     <div class="align-left mb-3 select-category">
       <%= f.select :category, category_options(f.object), {:prompt => 'Seleccionar Categoría'}, {class: "category-select2 form-control", required: false}%>
     </div>
+    <div class="align-left mb-3 select-accounts-payable">
+      <%= f.select :payment, accounts_payable_options(f.object), {:prompt => 'Seleccionar Cuenta por Pagar'}, {class: "category-select2 form-control", required: false}%>
+    </div>
+  </td>
+  <td class="align-left text-center">
+    <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>
+  </td>
+  <td class="align-left d-print-none" style="vertical-align: middle;">
     <div class="text-center">
       <%= link_to_remove_association f, wrapper_class: 'register-row', title: "Eliminar" do%>
         <i class="material-icons md-18 align-middle">delete</i>

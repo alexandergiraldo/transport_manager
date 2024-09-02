@@ -1,6 +1,7 @@
 class Payment < ApplicationRecord
   belongs_to :accounts_payable
   belongs_to :account
+  belongs_to :register, optional: true
 
   validates :payment_date, :amount, :payment_method, presence: true
 

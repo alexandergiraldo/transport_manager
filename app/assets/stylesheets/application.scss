@@ -36,6 +36,7 @@ $font-size-base: 0.9375rem;
 @import "core/navbar";
 @import "vehicles";
 @import "accounts_payable";
+@import "registers";
 
 a{
   color: theme-color('primary-app');

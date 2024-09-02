@@ -1,5 +1,5 @@
 class Register < ApplicationRecord
-  attr_accessor :category, :maintainable
+  attr_accessor :category, :maintainable, :payment, :paymentable
 
   enum register_type: [ :incoming, :outcoming ]
 
@@ -60,7 +60,7 @@ class Register < ApplicationRecord
         register_id: id
       }
       maintenance.present? ? maintenance.update(attributes) : Maintenance.create!(attributes)
-    elsif
+    else
       maintenance&.destroy
     end
   end

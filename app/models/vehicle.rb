@@ -6,6 +6,7 @@ class Vehicle < ApplicationRecord
   belongs_to :account
   has_many :maintenances, dependent: :delete_all
   has_many :registers, dependent: :delete_all
+  has_many :accounts_payables, dependent: :delete_all
 
   accepts_nested_attributes_for :maintenances, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :registers, reject_if: :all_blank, allow_destroy: true

@@ -19,7 +19,7 @@ module Payments
 
       return true if payment.persisted?
       return false
-    rescue ActiveRecord::RecordInvalid => e
+    rescue ActiveRecord::RecordInvalid
       return false
     end
   end

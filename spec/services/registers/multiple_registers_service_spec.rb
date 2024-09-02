@@ -105,5 +105,61 @@ RSpec.describe Registers::MultipleRegistersService, type: :service do
         expect { subject.process }.to change { Document.count }.by(1)
       end
     end
+
+    context "when payment is present" do
+      let(:vendor) { create(:vendor, account_id: current_account.id) }
+      let(:accounts_payable) { create(:accounts_payable, vendor_id: vendor.id, account_id: current_account.id, vehicle_id: vehicle.id) }
+      let(:params) do
+        {
+          vehicle: {
+            registers_attributes: {
+              '0' => {
+                description: "Description",
+                event_date: Date.today,
+                value: "10000",
+                notes: "Notes",
+                register_type: "outcoming",
+                vehicle_id: vehicle.id,
+                paymentable: "1",
+                payment: accounts_payable.id
+              }
+            }
+          }
+        }
+      end
+
+      it "creates a payment" do
+        expect { subject.process }.to change { Payment.count }.by(1)
+      end
+    end
+
+    context "when payment is present and maintainable is present" do
+      let(:vendor) { create(:vendor, account_id: current_account.id) }
+      let(:accounts_payable) { create(:accounts_payable, vendor_id: vendor.id, account_id: current_account.id, vehicle_id: vehicle.id) }
+      let(:params) do
+        {
+          vehicle: {
+            registers_attributes: {
+              '0' => {
+                description: "Description",
+                event_date: Date.today,
+                value: "10000",
+                notes: "Notes",
+                register_type: "outcoming",
+                vehicle_id: vehicle.id,
+                paymentable: "1",
+                payment: accounts_payable.id,
+                maintainable: "1",
+                category: "Oil change",
+              }
+            }
+          }
+        }
+      end
+
+      it "creates a payment and maintanance" do
+        expect { subject.process }.to change { Payment.count }.by(1).and change { Maintenance.count }.by(1)
+      end
+    end
   end
 end

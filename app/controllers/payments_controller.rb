@@ -35,6 +35,17 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def destroy
+    @payment_service = Payments::PaymentDestroy.new(params[:id])
+    authorize @payment_service.payment, :destroy?
+
+    if @payment_service.call
+      redirect_to accounts_payable_path(@payment_service.payment.accounts_payable_id), alert: 'Pago eliminado exitosamente'
+    else
+      redirect_to accounts_payable_path(@payment_service.payment.accounts_payable_id), alert: 'Error eliminando Pago'
+    end
+  end
+
   private
 
   def payment_params

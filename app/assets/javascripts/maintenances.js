@@ -18,8 +18,19 @@ Maintenances = (function () {
 
   function toggle_category_select() {
     $(".select-category").toggle();
-    $(document).on("change", ".register-maintainable-checkbox .check_box, .maintenance_checkbox", function () {
+    $(document).on("change", ".register-maintainable-checkbox .maintenance_check_box", function () {
+      $(this).closest('td').find(".select-category").toggle();
+    });
+
+    $(document).on("change", ".maintenance_checkbox", function () {
       $(this).parent().next(".select-category").toggle();
+    });
+  }
+
+  function toggle_payment_select() {
+    $(".select-accounts-payable").toggle();
+    $(document).on("change", ".register-payments .payment_check_box", function () {
+      $(this).closest('td').find(".select-accounts-payable").toggle();
     });
   }
 
@@ -87,6 +98,7 @@ Maintenances = (function () {
       cocoon_callbacks();
       toggle_category_select();
       monitor_maintenances_values();
+      toggle_payment_select();
     }
   }
 })();

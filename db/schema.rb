@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_28_200229) do
+ActiveRecord::Schema.define(version: 2024_09_02_162257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -160,15 +160,17 @@ ActiveRecord::Schema.define(version: 2024_08_28_200229) do
   create_table "payments", force: :cascade do |t|
     t.date "payment_date"
     t.integer "amount"
-    t.integer "payment_method"
+    t.integer "payment_method", default: 0
     t.bigint "accounts_payable_id", null: false
     t.bigint "account_id", null: false
     t.string "payer_details"
     t.string "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "register_id"
     t.index ["account_id"], name: "index_payments_on_account_id"
     t.index ["accounts_payable_id"], name: "index_payments_on_accounts_payable_id"
+    t.index ["register_id"], name: "index_payments_on_register_id"
   end
 
   create_table "preload_registers", force: :cascade do |t|
@@ -283,5 +285,6 @@ ActiveRecord::Schema.define(version: 2024_08_28_200229) do
   add_foreign_key "global_settings", "accounts"
   add_foreign_key "payments", "accounts"
   add_foreign_key "payments", "accounts_payables"
+  add_foreign_key "payments", "registers"
   add_foreign_key "vendors", "accounts"
 end

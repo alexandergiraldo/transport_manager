@@ -9,12 +9,18 @@ module VehicleHelper
     end
   end
 
-  def category_options(maintenance = nil)
+  def category_options(register = nil)
     types = current_vehicle.account.maintenance_types.by_name.map{|m| [m.name, m.id]}
-    selected = maintenance.try(:category) || params.dig(:q, :maintenance_type_id_eq)
-    types << [maintenance.category, maintenance.category] if maintenance && maintenance.category.to_i == 0
+    selected = register.try(:category) || params.dig(:q, :maintenance_type_id_eq)
+    types << [register.category, register.category] if register && register.category.to_i == 0
 
     options_for_select(types, selected)
+  end
+
+  def accounts_payable_options(register)
+    accounts_payables = current_vehicle.accounts_payables
+
+    options_for_select(accounts_payables.map{|a| [a.name, a.id]}, '')
   end
 
   def vehicle_image(vehicle, size = [200, 200])

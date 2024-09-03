@@ -31,21 +31,7 @@
   </div>
 
   <div class="accounts-payable-payments">
-    <h4>Pagos</h4>
-
-    <table class="table table-bordered">
-      <tbody>
-        <%@accounts_payable.payments.each do |accounts_payable|%>
-          <tr>
-            <td scope="col" class="text-left"><%=l accounts_payable.payment_date, format: :default, locale: 'es'%></td>
-            <td scope="col" class="text-left"><%=value_to_currency(accounts_payable.amount)%></td>
-          </tr>
-        <%end%>
-        <tr>
-          <td scope="col" class="text-left"><b>Total</b></td>
-          <td scope="col" class="text-left"><%=value_to_currency(@accounts_payable.payments.map(&:amount).reduce(:+))%></td>
-      </tbody>
-    </table>
+    <%= render 'payments' %>
   </div>
 </div>
 

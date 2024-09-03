@@ -23,6 +23,10 @@ module VehicleHelper
     options_for_select(accounts_payables.map{|a| [a.name, a.id]}, '')
   end
 
+  def display_accounts_payables?
+    current_vehicle.accounts_payables.exists?
+  end
+
   def vehicle_image(vehicle, size = [200, 200])
     if vehicle.image.attached?
       return image_tag(url_for(vehicle.image.variant(resize_to_fit: size)))

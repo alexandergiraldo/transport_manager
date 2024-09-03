@@ -25,17 +25,21 @@
         <%=f.check_box :maintainable, class: "custom-control-input maintenance_check_box"%>
         <%=f.label :maintainable, "Gasto de mantenimiento?", class: "custom-control-label align-middle"%>
       </div>
-      <div class="custom-control custom-checkbox mb-1 register-maintainable-checkbox">
-        <%=f.check_box :paymentable, class: "custom-control-input payment_check_box"%>
-        <%=f.label :paymentable, "Abono a cuenta por pagar?", class: "custom-control-label align-middle"%>
-      </div>
+      <%if display_accounts_payables?%>
+        <div class="custom-control custom-checkbox mb-1 register-maintainable-checkbox">
+          <%=f.check_box :paymentable, class: "custom-control-input payment_check_box"%>
+          <%=f.label :paymentable, "Abono a cuenta por pagar?", class: "custom-control-label align-middle"%>
+        </div>
+      <%end%>
     </div>
     <div class="align-left mb-3 select-category">
       <%= f.select :category, category_options(f.object), {:prompt => 'Seleccionar Categoría'}, {class: "category-select2 form-control", required: false}%>
     </div>
-    <div class="align-left mb-3 select-accounts-payable">
-      <%= f.select :payment, accounts_payable_options(f.object), {:prompt => 'Seleccionar Cuenta por Pagar'}, {class: "category-select2 form-control", required: false}%>
-    </div>
+    <%if display_accounts_payables?%>
+      <div class="align-left mb-3 select-accounts-payable">
+        <%= f.select :payment, accounts_payable_options(f.object), {:prompt => 'Seleccionar Cuenta por Pagar'}, {class: "category-select2 form-control", required: false}%>
+      </div>
+    <%end%>
   </td>
   <td class="align-left text-center">
     <%= f.text_area :notes, rows: 1, class: "form-control", placeholder: "", required: false%>

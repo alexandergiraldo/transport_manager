@@ -80,6 +80,7 @@ end
 group :production do
   gem 'sentry-ruby'
   gem 'sentry-rails'
+  gem 'stackprof'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

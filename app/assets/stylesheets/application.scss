@@ -37,6 +37,7 @@ $font-size-base: 0.9375rem;
 @import "vehicles";
 @import "accounts_payable";
 @import "registers";
+@import "errors";
 
 a{
   color: theme-color('primary-app');

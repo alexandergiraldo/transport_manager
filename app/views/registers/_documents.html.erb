@@ -77,7 +77,12 @@
       <div id="collapse<%=document.id%>" class="collapse <%=document_card_state(document)%>" aria-labelledby="heading<%=document.id%>" data-parent="#documents">
         <div class="card-body">
           <div class="row-fluid">
-            <%=document.description%>
+            <%if document.description.present?%>
+              <b>Obervaciones:</b>
+              <p class="">
+                <i><%=document.description%></i>
+              </p>
+            <%end%>
             <br/>
             <%=link_to "Nuevo Registro", new_register_path(document_id: document.id) %>
           </div>

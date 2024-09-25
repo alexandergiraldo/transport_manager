@@ -2,7 +2,6 @@ Maintenances = (function () {
   function cocoon_callbacks() {
     $('.container-fluid').on('cocoon:after-insert', function (e, insertedItem) {
       window.Application.init_sheet_inputs();
-      insertedItem.find(".select-category").toggle();
       window.Application.initNumberMask();
       fillRegisterDate(insertedItem);
       autoFillDate(insertedItem);
@@ -13,11 +12,9 @@ Maintenances = (function () {
       window.Registers.calculate_registers_totals();
       window.Savings.calculate_savings_totals();
     });
-
   }
 
   function toggle_category_select() {
-    $(".select-category").toggle();
     $(document).on("change", ".register-maintainable-checkbox .maintenance_check_box", function () {
       $(this).closest('td').find(".select-category").toggle();
     });
@@ -28,7 +25,6 @@ Maintenances = (function () {
   }
 
   function toggle_payment_select() {
-    $(".select-accounts-payable").toggle();
     $(document).on("change", ".register-payments .payment_check_box", function () {
       $(this).closest('td').find(".select-accounts-payable").toggle();
     });

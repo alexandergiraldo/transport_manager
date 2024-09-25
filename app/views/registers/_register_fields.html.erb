@@ -32,11 +32,11 @@
         </div>
       <%end%>
     </div>
-    <div class="align-left mb-3 select-category">
+    <div class="align-left mb-3 select-category <%=f.object.maintainable.to_i != 0 ? '' : 'hidden'%>">
       <%= f.select :category, category_options(f.object), {:prompt => 'Seleccionar Categoría'}, {class: "category-select2 form-control", required: false}%>
     </div>
     <%if display_accounts_payables?%>
-      <div class="align-left mb-3 select-accounts-payable">
+      <div class="align-left mb-3 select-accounts-payable <%=f.object.paymentable.to_i != 0 ? '' : 'hidden'%>">
         <%= f.select :payment, accounts_payable_options(f.object), {:prompt => 'Seleccionar Cuenta por Pagar'}, {class: "category-select2 form-control", required: false}%>
       </div>
     <%end%>

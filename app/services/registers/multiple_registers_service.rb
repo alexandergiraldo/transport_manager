@@ -38,7 +38,8 @@ module Registers
           maintainable: register[:maintainable],
           notes: register[:notes],
           register_type: register[:register_type],
-          payment: register[:payment]
+          payment: register[:payment],
+          paymentable: register[:paymentable]
         )
       end
     end

@@ -3,6 +3,7 @@ class Report
     year = Time.zone.now.year unless year
     data = Register.select("value, register_type").
       where(vehicle_id: vehicle_id).
+      where("event_date <= ?", Time.current).
       where('extract(year from event_date) = ?', year).
       group(:register_type).
       sum(:value)
@@ -52,7 +53,7 @@ class Report
   end
 
   def total_vehicle_utilities(vehicle_id)
-    data = Register.select("value, register_type").where(vehicle_id: vehicle_id).group(:register_type).sum(:value)
+    data = Register.select("value, register_type").where(vehicle_id: vehicle_id).where("event_date <= ?", Time.current).group(:register_type).sum(:value)
     return {
       start_date: Vehicle.find_by(id: vehicle_id)&.created_at,
       total: data.present? ? data["incoming"] - data["outcoming"] : 0

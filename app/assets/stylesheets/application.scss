@@ -103,3 +103,8 @@ $mynewcolor: theme-color('primary-app');
 .hidden {
   display: none;
 }
+
+.date-controls {
+  display: flex;
+  align-items: center;
+}

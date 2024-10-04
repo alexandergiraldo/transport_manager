@@ -54,4 +54,24 @@ module ApplicationHelper
   def menu_active(controller)
     controller_name == controller.to_s ? 'active' : ''
   end
+
+  def date_control_prev_month
+    min_date = Date.parse('2000-01-01')
+    selected_date = params[:event_start] || Time.current.strftime('%Y-%m')
+
+    date = Date.parse(selected_date+'-01')
+    prev_month = date.prev_month < min_date ? min_date : date.prev_month
+
+    request.env['PATH_INFO'] + "?event_start=#{prev_month.strftime('%Y-%m')}"
+  end
+
+  def date_control_next_month
+    max_date = Time.current + 2.months
+    selected_date = params[:event_start] || Time.current.strftime('%Y-%m')
+
+    date = Date.parse(selected_date+'-01')
+    next_month = date.next_month > max_date ? max_date : date.next_month
+
+    request.env['PATH_INFO'] + "?event_start=#{next_month.strftime('%Y-%m')}"
+  end
 end

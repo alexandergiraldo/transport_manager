@@ -2,7 +2,7 @@
   <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
     <div class="form-group">
       <div class="row mb-1">
-        <div class="ml-3 mb-1 date-controls">
+        <div class="ml-1 mb-1 date-controls">
           <%= link_to date_control_prev_month, class: "btn" do %>
             <i class="material-icons md-18 align-middle">chevron_left</i>
           <% end %>

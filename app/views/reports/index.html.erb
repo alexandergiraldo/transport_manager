@@ -49,4 +49,7 @@
   <div class="col-md-6">
     <%= area_chart @vehicle_utilities_by_month, thousands: ".", prefix: "$", colors: ["#38812F", "#C9190B"], legend: false, curve: false, download: { background: "#ffffff" } %>
   </div>
+  <div class="col-md-6">
+    <%= column_chart @total_vehicle_utilities_data, thousands: ".", prefix: "$", colors: ["#38812F", "#C9190B"], download: { background: "#ffffff" } %>
+  </div>
 </div>

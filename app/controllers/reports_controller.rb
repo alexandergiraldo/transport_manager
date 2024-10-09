@@ -10,5 +10,6 @@ class ReportsController < ApplicationController
     @vehicle_utilities_by_month = reports.vehicle_utilities_by_month(vehicle_id, params[:year])
     @total_vehicle_utilities = reports.total_vehicle_utilities(vehicle_id)
     @total_vehicle_utilities_by_month = reports.total_vehicle_utilities_by_month(vehicle_id, params[:year])
+    @total_vehicle_utilities_data = reports.total_vehicle_utilities_data(vehicle_id)
   end
 end

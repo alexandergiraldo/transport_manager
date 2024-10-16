@@ -52,13 +52,10 @@ class Report
     }
   end
 
-  def total_vehicle_utilities_data(vehicle_id, year = nil)
-    year = Time.zone.now.year unless year
-    month = year.to_i == Time.zone.now.year ? Time.zone.now.month : 12
+  def total_vehicle_utilities_data(vehicle_id)
     Time.use_zone("UTC") {
-      end_date = Date.new(year.to_i,month,Time.days_in_month(month, year))
-      income = Register.incoming.where(vehicle_id: vehicle_id).where("event_date <= ?", end_date).group_by_year(:event_date, format: "%Y").sum(:value)
-      outcome = Register.outcoming.where(vehicle_id: vehicle_id).where("event_date <= ?", end_date).group_by_year(:event_date, format: "%Y").sum(:value)
+      income = Register.incoming.where(vehicle_id: vehicle_id).where("event_date <= ?", Time.current).group_by_year(:event_date, format: "%Y").sum(:value)
+      outcome = Register.outcoming.where(vehicle_id: vehicle_id).where("event_date <= ?", Time.current).group_by_year(:event_date, format: "%Y").sum(:value)
       return [
         {
           "name" => "Utilidades por Año",

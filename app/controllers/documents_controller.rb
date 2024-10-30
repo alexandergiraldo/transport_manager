@@ -2,6 +2,10 @@ class DocumentsController < ApplicationController
     before_action :authenticate_user!
     before_action :init_date_params, only: [:export]
 
+    content_security_policy only: [:index, :new] do |policy|
+      policy.style_src :self, :unsafe_inline
+    end
+
     def index
       @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).by_date
     end

@@ -3,6 +3,10 @@ class RegistersController < ApplicationController
   before_action :authenticate_user!
   before_action :init_date_params, only: [:index]
 
+  content_security_policy only: [:index, :new] do |policy|
+    policy.style_src :self, :unsafe_inline
+  end
+
   def index
     @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).includes(registers: [:vehicle]).by_date
     @pagy, @registers = pagy(policy_scope(Register).where(vehicle_id: current_vehicle.id, document_id: nil).search(params).by_date, items: 60)

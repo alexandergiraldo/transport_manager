@@ -7,10 +7,11 @@
     <%= render 'application/favicon' %>
     <title>Transport Manager</title>
     <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload', nonce: true %>
     <%= yield :external_css%>
-    <%= javascript_tag do %>
+    <%= javascript_tag nonce: true do %>
       window.settings = <%=raw current_settings.to_json(except: [:id, :account_id]) %>;
     <% end %>
   </head>
@@ -58,6 +59,6 @@
     </div>
     <%= yield :app_modals%>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', nonce: true %>
   </body>
 </html>

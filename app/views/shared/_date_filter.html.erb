@@ -6,7 +6,7 @@
           <%= link_to date_control_prev_month, class: "btn" do %>
             <i class="material-icons md-18 align-middle">chevron_left</i>
           <% end %>
-          <input type="month" id="start" onfocus="this.showPicker()" name="event_start" min="2000-01" lang="es" max="<%=(Time.now+2.month).strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
+          <input type="month" id="register-date" name="event_start" min="2000-01" lang="es" max="<%=(Time.now+2.month).strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
           <%= link_to date_control_next_month, class: "btn" do %>
             <i class="material-icons md-18 align-middle">chevron_right</i>
           <% end %>

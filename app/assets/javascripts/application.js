@@ -36,6 +36,9 @@
 Application = (function () {
   function init_datepicker() {
     $('.datepicker').datepicker({ format: 'yyyy/mm/dd' });
+    $('#register-date').on('focus', function () {
+      this.showPicker();
+    });
     $('.daterange').daterangepicker({
       autoApply: true,
       locale: {

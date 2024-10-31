@@ -23,7 +23,7 @@
           <div class="form-group">
             <div class="row mb-1">
               <div class="col-md-2 mb-1">
-                <input type="month" id="start" onfocus="this.showPicker()" name="event_start" min="2018-03" lang="es" max="<%=(Time.now+2.month).strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
+                <input type="month" id="register-date" name="event_start" min="2018-03" lang="es" max="<%=(Time.now+2.month).strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
               </div>
 
               <div class="col-md-4 mb-1">
@@ -78,6 +78,3 @@
     </div>
   </div>
 </div>
-<%content_for :app_modals do %>
-  <%= render partial: 'form_modal'%>
-<%end%>

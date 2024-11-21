@@ -3,7 +3,7 @@ class DocumentsController < ApplicationController
     before_action :init_date_params, only: [:export]
 
     content_security_policy only: [:index, :new] do |policy|
-      policy.style_src :self, :unsafe_inline
+      policy.style_src :self, :unsafe_inline, 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com'
     end
 
     def index

@@ -2,7 +2,7 @@ module ApplicationHelper
   include Pagy::Frontend
 
   def render_select2_css
-    '<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />'.html_safe
+    '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />'.html_safe
   end
 
   def render_date_picker

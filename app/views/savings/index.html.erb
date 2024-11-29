@@ -11,7 +11,7 @@
             <%= f.select :driver_id_eq, options_for_select(drivers_list, params.dig(:q, :driver_id_eq)), {include_blank: false}, {class: "form-control auto-submit"}%>
           </div>
           <div class="col-md-4 mb-1">
-            <input type="month" id="start" name="event_start" onfocus="this.showPicker()" min="2018-03" lang="es" max="<%=(Time.now+2.month).strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
+            <input type="month" id="register-date" name="event_start" min="2018-03" lang="es" max="<%=(Time.now+2.month).strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
           </div>
         </div>
       </div>

@@ -4,6 +4,10 @@ class SavingsController < ApplicationController
   before_action :init_date_params, :filter_driver, only: [:index]
   before_action :filter_driver, only: [:index2]
 
+  content_security_policy only: [:index, :new, :edit, :update] do |policy|
+    policy.style_src :self, :unsafe_inline, 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com'
+  end
+
   def index
     result = policy_scope(Saving)
     result = result.search(params).by_date

@@ -25,4 +25,18 @@ class Document < ApplicationRecord
   def pending_difference
     pending_company_amount_paid.to_f - pending_company_amount.to_f
   end
+
+  def from_location_title
+    if title.to_s.downcase.include?('viaje')
+      return title.gsub(/viaje/i, '').strip.split(' ').first
+    end
+    title.to_s.split(' - ').first
+  end
+
+  def to_location_title
+    if title.to_s.downcase.include?('viaje')
+      return title.gsub(/viaje/i, '').strip.split(' ').last
+    end
+    title.to_s.split(' - ').last
+  end
 end

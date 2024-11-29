@@ -2,8 +2,8 @@ class DocumentsController < ApplicationController
     before_action :authenticate_user!
     before_action :init_date_params, only: [:export]
 
-    content_security_policy only: [:index, :new] do |policy|
-      policy.style_src :self, :unsafe_inline, 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com'
+    content_security_policy only: [:index, :new, :edit, :update] do |policy|
+      policy.style_src :self, :unsafe_inline, 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com', 'https://fonts.googleapis.com'
     end
 
     def index
@@ -75,7 +75,7 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      d_params = params.require(:document).permit(:title, :driver_id, :event_date, :description, :company, :load_type, :load_value, :load_size, :load_manifest, :driver_advance, :company_advance, :advance_responsible, :balance_in_favor, :balance_in_favor_of, :pending_company_amount, :pending_company_amount_paid, :paid_date, :retentions)
+      d_params = params.require(:document).permit(:title, :driver_id, :event_date, :description, :company, :load_type, :load_value, :load_size, :load_manifest, :driver_advance, :company_advance, :advance_responsible, :balance_in_favor, :balance_in_favor_of, :pending_company_amount, :pending_company_amount_paid, :paid_date, :retentions, :from_latitude, :from_longitude, :to_latitude, :to_longitude)
       d_params[:load_value] = Register.sanitize_amount(d_params[:load_value])
       d_params[:driver_advance] = Register.sanitize_amount(d_params[:driver_advance])
       d_params[:company_advance] = Register.sanitize_amount(d_params[:company_advance])

@@ -10,10 +10,16 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload', nonce: true %>
-    <%= yield :external_css%>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', nonce: true %>
+
+    <%= yield :head_tags%>
     <%= javascript_tag nonce: true do %>
       window.settings = <%=raw current_settings.to_json(except: [:id, :account_id]) %>;
     <% end %>
+
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.credentials.dig(:google, :maps_api_key)%>&loading=async&libraries=places&callback=locationAutocomplete">
+    </script>
   </head>
 
   <body>
@@ -58,7 +64,5 @@
       <!-- // END drawer -->
     </div>
     <%= yield :app_modals%>
-
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', nonce: true %>
   </body>
 </html>

@@ -1,5 +1,15 @@
-<%content_for :external_css do %>
+<%content_for :head_tags do %>
   <%= render_select2_css %>
+  <%if @document.from_latitude%>
+    <%= javascript_tag nonce: true do %>
+      document.addEventListener("DOMContentLoaded", function(){
+        initMap([
+          {lat: <%=@document.from_latitude%>, lng: <%=@document.from_longitude%>},
+          {lat: <%=@document.to_latitude%>, lng: <%=@document.to_longitude%>}
+        ])
+      });
+    <%end%>
+  <%end%>
 <%end%>
 
 <div class="card-header">
@@ -10,12 +20,15 @@
     <%= form_for(@document, url: document_path(@document.id), method: :put) do |f|%>
       <%= render partial: 'form', locals: {apply_date_to_registers: true, f: f} %>
 
-      <div class="row">
+      <div class="row mb-5">
         <div class="col-sm-12 text-center">
           <%= f.submit 'Guardar', class: "btn btn-primary"%>
           <%= link_to 'Cancelar', :back, class: 'btn btn-light'%>
         </div>
       </div>
+      <%if @document.from_latitude%>
+        <div id="map" style="height: 400px; width: 100%;"></div>
+      <%end%>
     <%end%>
   </div>
 </div>

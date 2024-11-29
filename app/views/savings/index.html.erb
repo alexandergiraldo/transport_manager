@@ -1,74 +1,73 @@
-<%content_for :external_css do %>
+<%content_for :head_tags do %>
   <%= render_select2_css %>
 <%end%>
 
-
-    <div class="row mb-1">
-      <div class="col-md-8">
-        <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
-          <div class="form-group">
-            <div class="row mb-1">
-              <div class="col-md-4 mb-1">
-                <%= f.select :driver_id_eq, options_for_select(drivers_list, params.dig(:q, :driver_id_eq)), {include_blank: false}, {class: "form-control auto-submit"}%>
-              </div>
-              <div class="col-md-4 mb-1">
-                <input type="month" id="start" name="event_start" onfocus="this.showPicker()" min="2018-03" lang="es" max="<%=(Time.now+2.month).strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
-              </div>
-            </div>
+<div class="row mb-1">
+  <div class="col-md-8">
+    <%= form_for(:q, url: request.env['PATH_INFO'], method: :get) do |f|%>
+      <div class="form-group">
+        <div class="row mb-1">
+          <div class="col-md-4 mb-1">
+            <%= f.select :driver_id_eq, options_for_select(drivers_list, params.dig(:q, :driver_id_eq)), {include_blank: false}, {class: "form-control auto-submit"}%>
           </div>
-        <%end%>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <a href=<%=new_driver_saving_url("@")%> id="add-savings-button" class="btn btn btn-primary">
-          <i class="material-icons md-18 align-middle">assignment</i>
-          <span class="align-middle">Añadir Ahorros</span>
-        </a>
-      </div>
-    </div>
-    <div class="row font-1 mb-3 totals">
-      <div class="col-md-4">
-        <div class="card card-body flex-row align-items-center">
-          <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">content_paste</i> Total Mes</h5>
-            <div class="text-success ml-auto"><%=value_to_currency(@savings.map(&:amount).sum)%></div>
+          <div class="col-md-4 mb-1">
+            <input type="month" id="start" name="event_start" onfocus="this.showPicker()" min="2018-03" lang="es" max="<%=(Time.now+2.month).strftime('%Y-%m')%>" value="<%=params[:event_start] || Time.now.strftime('%Y-%m')%>" class="form-control auto-submit">
+          </div>
         </div>
       </div>
+    <%end%>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-4">
+    <a href=<%=new_driver_saving_url("@")%> id="add-savings-button" class="btn btn btn-primary">
+      <i class="material-icons md-18 align-middle">assignment</i>
+      <span class="align-middle">Añadir Ahorros</span>
+    </a>
+  </div>
+</div>
+<div class="row font-1 mb-3 totals">
+  <div class="col-md-4">
+    <div class="card card-body flex-row align-items-center">
+      <h5 class="m-0"><i class="material-icons align-middle text-muted md-18">content_paste</i> Total Mes</h5>
+        <div class="text-success ml-auto"><%=value_to_currency(@savings.map(&:amount).sum)%></div>
     </div>
+  </div>
+</div>
 
-    <div class="table-responsive">
-      <table class="table table-bordered table-sm">
-        <thead>
-          <tr>
-            <th scope="col" class="text-left">Fecha</th>
-            <th scope="col" class="text-left">Valor</th>
-            <th style="width: 13%" scope="col" class="text-left">Vehiculo</th>
-            <th scope="col" class="text-left">Notas</th>
-            <th/>
-          </tr>
-        </thead>
-        <tbody>
-          <%@savings.each do |saving|%>
-            <tr>
-              <td class="align-left text-left" scope="row"><%=format_date(saving.event_date)%></td>
-              <td class="align-left text-left"><%=value_to_currency(saving.amount)%></td>
-              <td class="align-left text-right"><%=saving.vehicle&.license_plate%></td>
-              <td class="align-left text-left"><%=saving.notes%></td>
-              <td class="align-left text-left">
-                <%=link_to edit_driver_saving_path(saving.driver_id, saving.id, format: :js), title: 'Editar', data: {remote: true}, class: "edit-saving" do%>
-                  <i class="material-icons">edit</i>
-                <%end%>
-                <%=link_to driver_saving_path(saving.driver_id, saving.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
-                  <i class="material-icons">delete</i>
-                <%end%>
-              </td>
-            </tr>
-          <%end%>
-        </tbody>
-      </table>
+<div class="table-responsive">
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        <th scope="col" class="text-left">Fecha</th>
+        <th scope="col" class="text-left">Valor</th>
+        <th style="width: 13%" scope="col" class="text-left">Vehiculo</th>
+        <th scope="col" class="text-left">Notas</th>
+        <th/>
+      </tr>
+    </thead>
+    <tbody>
+      <%@savings.each do |saving|%>
+        <tr>
+          <td class="align-left text-left" scope="row"><%=format_date(saving.event_date)%></td>
+          <td class="align-left text-left"><%=value_to_currency(saving.amount)%></td>
+          <td class="align-left text-right"><%=saving.vehicle&.license_plate%></td>
+          <td class="align-left text-left"><%=saving.notes%></td>
+          <td class="align-left text-left">
+            <%=link_to edit_driver_saving_path(saving.driver_id, saving.id, format: :js), title: 'Editar', data: {remote: true}, class: "edit-saving" do%>
+              <i class="material-icons">edit</i>
+            <%end%>
+            <%=link_to driver_saving_path(saving.driver_id, saving.id), title: 'Borrar', data: {confirm: 'Esta seguro ?', method: :delete} do%>
+              <i class="material-icons">delete</i>
+            <%end%>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
 
-      <%= pagy_bootstrap_nav(@pagy).html_safe if @savings.present?%>
-    </div>
+  <%= pagy_bootstrap_nav(@pagy).html_safe if @savings.present?%>
+</div>
 
 
 <%content_for :app_modals do %>

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  constraints(host: /.herokuapp/) do
+    match '/(*path)' => redirect { |params, req|
+      "https://#{ENV["SITE_DOMAIN"]}#{req.fullpath}"
+    }, via: [:get, :head]
+  end
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
 

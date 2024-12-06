@@ -22,6 +22,7 @@ module RegisterHelper
   end
 
   def register_total_color(value)
+    return '' if value == 0
     value < 0 ? 'text-danger' : 'text-success'
   end
 

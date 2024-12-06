@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="row font-1 mb-3 totals">
+<div class="row font-1 mb-5 totals">
   <%all_registers = @registers + @documents.map(&:registers).flatten%>
   <%totals = calculate_registers_totals(all_registers)%>
 
@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<div class="row mb-3">
+<div class="row mb-2">
   <%= render partial: 'shared/date_filter'%>
 
   <div class="col-md-7 text-right">

@@ -7,30 +7,30 @@
   </div>
 
 
-  <table class="table table-bordered table-sm">
+  <table class="table m-0 table-sm">
     <thead>
       <tr>
-        <th scope="col" class="text-center" style="width: 2%">
+        <th scope="col" class="text-center align-middle" style="width: 2%">
           <%=check_box_tag 'select_registers', "1", false, class: 'select-registers' %>
         </th>
-        <th scope="col" class="text-left">Fecha</th>
-        <th scope="col" class="text-left">Descripción</th>
-        <th scope="col" class="text-left" style="width: 5%">Valor</th>
-        <th scope="col" class="text-left">Notas</th>
-        <th/>
+        <th scope="col" class="text-left align-middle">Fecha</th>
+        <th scope="col" class="text-left align-middle">Descripción</th>
+        <th scope="col" class="text-left align-middle" style="width: 5%">Valor</th>
+        <th scope="col" class="text-left align-middle">Notas</th>
+        <th />
       </tr>
     </thead>
     <tbody>
       <%registers.each do |register|%>
         <tr>
-          <td class="text-center">
+          <td class="text-center align-middle">
             <%=check_box_tag 'select_registers', register.id, false, class: 'register-check-item' %>
           </td>
-          <td class="align-left text-left" scope="row"><%=format_date(register.event_date)%></td>
-          <td class="align-left text-left"><%=register.description%></td>
-          <td class="align-left text-left <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
-          <td class="align-left text-left"><%=register.notes%></td>
-          <td class="align-left text-center">
+          <td class="align-left text-left align-middle" scope="row"><%=format_date(register.event_date)%></td>
+          <td class="align-left text-left align-middle"><%=register.description%></td>
+          <td class="align-left text-left align-middle <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
+          <td class="align-left text-left align-middle"><%=register.notes%></td>
+          <td class="align-left text-center align-middle">
             <%=link_to edit_register_path(register.id, format: :js), title: 'Editar', data: {remote: true}, class: "edit-register" do%>
               <i class="material-icons">edit</i>
             <%end%>

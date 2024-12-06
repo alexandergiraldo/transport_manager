@@ -1,7 +1,7 @@
 # README
 ![ci workflow](https://github.com/alexandergiraldo/transport_manager/actions/workflows/ci.yml/badge.svg)
 
-Transport manager is an all-in-one solution for effortlessly managing public transport operations! Transport Manager simplifies the complexities of day-to-day operations with its user-friendly interface and comprehensive features.
+Transpocontrol is an all-in-one solution for effortlessly managing public transport operations! It simplifies the complexities of day-to-day operations with its user-friendly interface and comprehensive features.
 
 Things you may want to cover:
 

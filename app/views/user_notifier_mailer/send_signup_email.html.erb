@@ -1,7 +1,7 @@
 <h1>Bienvenido, <%= @user.full_name %>!</h1>
 <p>
   Ahora puedes hacer login en nuestro portal y tener
-  acceso a todo lo relacionado con tu(s) vehiculo(s):
+  acceso a todo lo relacionado con tu(s) vehículo(s):
 </p>
 <ul>
   <%@plates.each do |plate|%>
@@ -10,6 +10,7 @@
 </ul>
 <p>
   Tu correo es: <%= @user.email %>
-  Puedes ingresar al portal haciendo click en el siguiente enlace:
-  <a href="<%=new_user_session_url%>">Login</a>
+  <br/>
+  Puedes ingresar al portal haciendo click en el siguiente
+  <a href="<%=new_user_session_url%>">enlace</a>.
 </p>

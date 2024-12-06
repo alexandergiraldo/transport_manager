@@ -6,6 +6,6 @@ class UserNotifierMailer < ApplicationMailer
     @plates = Vehicle.where(id: user.all_vehicle_ids).pluck(:license_plate)
     mail(
       :to => @user.email,
-      :subject => 'Bienvenido a Transport Manager' )
+      :subject => 'Bienvenido a TranspoControl' )
   end
 end

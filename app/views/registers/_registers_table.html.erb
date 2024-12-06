@@ -28,7 +28,7 @@
           </td>
           <td class="align-left text-left align-middle" scope="row"><%=format_date(register.event_date)%></td>
           <td class="align-left text-left align-middle"><%=register.description%></td>
-          <td class="align-left text-left align-middle <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
+          <td class="align-left text-left align-middle <%=register_type_color(register)%>"><%=register_type_sign(register)%><%=value_to_currency(register.value)%></td>
           <td class="align-left text-left align-middle"><%=register.notes%></td>
           <td class="align-left text-center align-middle">
             <%=link_to edit_register_path(register.id, format: :js), title: 'Editar', data: {remote: true}, class: "edit-register" do%>

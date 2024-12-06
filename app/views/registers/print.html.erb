@@ -12,10 +12,10 @@
     </thead>
     <tbody>
       <%@registers.each do |register|%>
-        <tr class="<%=register_type_color(register.register_type) if register.register_type.eql?('outcoming')%>">
+        <tr class="<%=register_type_color(register) if register.register_type.eql?('outcoming')%>">
           <td class="align-left text-left" scope="row"><%=format_date(register.event_date)%></td>
           <td class="align-left text-left"><%=register.description%></td>
-          <td class="align-left text-center <%=register_type_color(register.register_type)%>"><%=register_type_sign(register.register_type)%><%=value_to_currency(register.value)%></td>
+          <td class="align-left text-center <%=register_type_color(register)%>"><%=register_type_sign(register)%><%=value_to_currency(register.value)%></td>
           <td class="align-left text-left"><%=register.notes%></td>
         </tr>
       <%end%>

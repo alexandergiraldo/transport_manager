@@ -1,13 +1,16 @@
 module RegisterHelper
-  def register_type_color(register_type)
-    return '' if register_type.blank?
+  def register_type_color(register)
+    return '' if register.register_type.blank?
+    return '' if register.value == 0
 
-    register_type.eql?('outcoming') ? 'text-danger' : 'text-success'
+    register.register_type.eql?('outcoming') ? 'text-danger' : 'text-success'
   end
 
-  def register_type_sign(register_type)
-    return '' if register_type.blank?
-    register_type.eql?('outcoming') ? '-' : '+'
+  def register_type_sign(register)
+    return '' if register.register_type.blank?
+    return '' if register.value == 0
+
+    '-' if register.register_type.eql?('outcoming')
   end
 
   def calculate_registers_totals(registers)

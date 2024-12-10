@@ -17,6 +17,10 @@ class Document < ApplicationRecord
 
   enum balance_in_favor_of: [ :driver_balance, :vehicle_balance ]
 
+  def self.ransackable_attributes(auth_object = nil)
+    ['title', 'event_date', 'vehicle_id', 'user_id', 'driver_id']
+  end
+
   def self.search(params, paginate: true)
     query = self.ransack(params[:q])
     query.result

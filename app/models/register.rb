@@ -21,6 +21,10 @@ class Register < ApplicationRecord
   #Callbacks
   after_save :save_maintenance
 
+  def self.ransackable_attributes(auth_object = nil)
+    ['description', 'event_date', 'value', 'register_type', 'vehicle_id', 'user_id', 'document_id']
+  end
+
   def self.search(params, paginate: true)
     query = self.includes(:vehicle).ransack(params[:q])
     query.result

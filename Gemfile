@@ -30,15 +30,15 @@ gem 'jbuilder', '~> 2.12'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.10.0', require: false
+gem 'bootsnap', '~> 1.18.0', require: false
 gem "cocoon"
 
 # Authorization
 gem 'devise', '>= 4.9.4'
-gem 'pundit', '~> 2.3.2'
+gem 'pundit', '~> 2.4.0'
 
 # Search engine
-gem 'ransack', '~> 3.1'
+gem 'ransack', '~> 4.0.0'
 gem 'pagy', '~> 6.5.0'
 gem "groupdate"
 

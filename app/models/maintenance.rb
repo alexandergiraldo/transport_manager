@@ -15,6 +15,10 @@ class Maintenance < ApplicationRecord
   delegate :license_plate, to: :vehicle, prefix: true
   delegate :name, to: :maintenance_type, prefix: true
 
+  def self.ransackable_attributes(auth_object = nil)
+    ['event_date', 'value', 'vehicle_id', 'maintenance_type_id', 'register_id']
+  end
+
   def self.search(params, paginate: true)
     query = self.includes(:maintenance_type, :vehicle).ransack(params[:q])
     query.result

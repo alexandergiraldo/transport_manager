@@ -40,15 +40,15 @@ gem 'pundit', '~> 2.4.0'
 # Search engine
 gem 'ransack', '~> 4.2'
 gem 'pagy', '~> 8.0'
-gem "groupdate"
+gem "groupdate", '~> 6.3'
 
 # Read excel file
-gem 'roo'
+gem 'roo', '~> 2.10'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 
 # Charts
-gem "chartkick"
+gem "chartkick", '~> 5.1'
 
 # Active Storage
 gem 'image_processing', '~> 1.12'

@@ -99,7 +99,7 @@ GEM
     caxlsx_rails (0.6.4)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
-    chartkick (5.0.7)
+    chartkick (5.1.2)
     cocoon (1.2.15)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
@@ -130,8 +130,8 @@ GEM
     ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    groupdate (6.2.1)
-      activesupport (>= 5.2)
+    groupdate (6.4.0)
+      activesupport (>= 6.1)
     htmlentities (4.3.4)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
@@ -171,9 +171,9 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.16.8-arm64-darwin)
+    nokogiri (1.17.1-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.8-x86_64-linux)
+    nokogiri (1.17.1-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (8.6.3)
@@ -315,14 +315,14 @@ DEPENDENCIES
   byebug
   caxlsx
   caxlsx_rails
-  chartkick
+  chartkick (~> 5.1)
   cocoon
   coffee-rails (~> 5.0)
   devise (>= 4.9.4)
   devise-bootstrapped!
   dotenv
   factory_bot_rails (~> 6.4)
-  groupdate
+  groupdate (~> 6.3)
   image_processing (~> 1.12)
   jbuilder (~> 2.12)
   listen (>= 3.0.5, < 3.2)
@@ -333,7 +333,7 @@ DEPENDENCIES
   rails (~> 6.1)
   rails_real_favicon
   ransack (~> 4.2)
-  roo
+  roo (~> 2.10)
   rspec-rails (~> 5.1.2)
   sass-rails (~> 5.1)
   sentry-rails

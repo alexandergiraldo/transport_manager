@@ -38,7 +38,7 @@ gem 'devise', '>= 4.9.4'
 gem 'pundit', '~> 2.4.0'
 
 # Search engine
-gem 'ransack', '~> 4.0.0'
+gem 'ransack', '~> 4.2'
 gem 'pagy', '~> 6.5.0'
 gem "groupdate"
 

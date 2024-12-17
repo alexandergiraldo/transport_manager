@@ -10,8 +10,8 @@ class AccountsPayable < ActiveRecord::Base
 
   before_save :set_status
 
-  enum recurring_type: { one_time: 0, daily: 1, weekly: 2, biweekly: 3, monthly: 4, yearly: 5 }
-  enum status: { pending: 0, paid: 1, partial: 2 }
+  enum :recurring_type, { one_time: 0, daily: 1, weekly: 2, biweekly: 3, monthly: 4, yearly: 5 }
+  enum :status, { pending: 0, paid: 1, partial: 2 }
 
   delegate :name, to: :vendor, prefix: true, allow_nil: true
 

@@ -2,7 +2,7 @@ class Saving < ApplicationRecord
   belongs_to :driver
   belongs_to :vehicle, optional: true
 
-  enum status: [ :saved, :paid ]
+  enum :status, [ :saved, :paid ]
 
   # Scopes
   scope :by_date, -> { order('event_date ASC') }

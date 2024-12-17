@@ -1,7 +1,7 @@
 class Register < ApplicationRecord
   attr_accessor :category, :maintainable, :payment, :paymentable
 
-  enum register_type: [ :incoming, :outcoming ]
+  enum :register_type, [ :incoming, :outcoming ]
 
   # Associations
   belongs_to :vehicle

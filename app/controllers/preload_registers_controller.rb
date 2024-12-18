@@ -8,7 +8,7 @@ class PreloadRegistersController < ApplicationController
 
     respond_to do |format|
       format.js {
-          render  :action => "edit.js.erb",
+          render  :action => "edit",
                   :layout => false
       }
     end

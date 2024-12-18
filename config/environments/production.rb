@@ -47,7 +47,7 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  # config.assume_ssl = true
+  config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
@@ -89,7 +89,7 @@ Rails.application.configure do
 
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
-  
+
   config.action_mailer.default_url_options = { host: ENV["SITE_DOMAIN"], protocol: :https }
 
   # Do not dump schema after migrations.
@@ -106,7 +106,6 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  
   ActionMailer::Base.smtp_settings = {
     :user_name => 'apikey', # This is the secret sendgrid username which was issued during API key creation
     :password => Rails.application.credentials.dig(:sendgrid, :api_key), # This is the secret sendgrid API key which was issued during API key creation

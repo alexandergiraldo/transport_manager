@@ -4,7 +4,7 @@ class SavingsController < ApplicationController
   before_action :init_date_params, :filter_driver, only: [:index]
   before_action :filter_driver, only: [:index2]
 
-  content_security_policy only: [:index, :new, :edit, :update] do |policy|
+  content_security_policy only: [:index, :index2, :new, :edit, :update] do |policy|
     policy.style_src :self, :unsafe_inline, 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com'
   end
 
@@ -55,7 +55,7 @@ class SavingsController < ApplicationController
 
     respond_to do |format|
       format.js {
-          render  :action => "edit.js.erb",
+          render  :action => "edit",
                   :layout => false
       }
     end

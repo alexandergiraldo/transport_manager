@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       format.js {
-          render  :action => "new.js.erb",
+          render  :action => "new",
                   :layout => false
       }
     end
@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
     authorize @payment_creator.payment, :create?
 
     if @payment_creator.call
-      redirect_to accounts_payables_path, success: 'Pago abonado exitosamente'
+      redirect_to accounts_payables_path, flash: { success: 'Pago abonado exitosamente' }
     else
       fash.now[:error] = @payment_creator.payment.errors.full_messages.join("\n")
       @payment = @payment_creator.payment

@@ -4,13 +4,16 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 # Use sqlite3 as the database for Active Record
 gem 'pg', '~> 1.5.9'
 # Use Puma as the app server
 gem 'puma', '~> 6.5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.1'
+
+# Sprockets
+gem "sprockets-rails"
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
@@ -72,8 +75,8 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 5.1.2'
-  gem 'shoulda-matchers', '~> 5.1'
+  gem 'rspec-rails', '~> 6.0'
+  gem 'shoulda-matchers', '~> 6.0'
   gem 'factory_bot_rails', '~> 6.4'
 end
 

@@ -4,7 +4,7 @@ class Vendor < ActiveRecord::Base
 
   validates :name, presence: true
 
-  enum account_type: { savings: 0, checking: 1 }
+  enum :account_type, { savings: 0, checking: 1 }
 
   scope :by_name, -> { order(:name) }
 end

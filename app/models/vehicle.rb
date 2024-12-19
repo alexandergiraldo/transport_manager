@@ -1,6 +1,6 @@
 class Vehicle < ApplicationRecord
-  enum status: [ :active, :archived ]
-  enum vehicle_type: [ :taxi, :truck ]
+  enum :status, [ :active, :archived ]
+  enum :vehicle_type, [ :taxi, :truck ]
 
   # Associations
   belongs_to :account

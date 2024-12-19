@@ -15,7 +15,7 @@ class Document < ApplicationRecord
   # Scopes
   scope :by_date, -> { order('event_date ASC') }
 
-  enum balance_in_favor_of: [ :driver_balance, :vehicle_balance ]
+  enum :balance_in_favor_of, [ :driver_balance, :vehicle_balance ]
 
   def self.ransackable_attributes(auth_object = nil)
     ['title', 'event_date', 'vehicle_id', 'user_id', 'driver_id']

@@ -7,3 +7,12 @@
     flex-direction: column;
   }
 }
+
+.sortable-row {
+  display: flex;
+  gap: 10px;
+
+  &:hover {
+    cursor: move;
+  }
+}

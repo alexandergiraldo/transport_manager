@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   resources :documents do
     get "export", to: "documents#export", on: :collection, as: "export"
   end
-  resources :register_sketches
+
+  resources :register_sketches do
+    put 'update_registers', on: :member
+  end
+
   resources :preload_registers, only: [:edit, :destroy, :update]
   resources :drivers do
     resources :savings, except: [:index] do

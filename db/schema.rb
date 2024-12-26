@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_17_195605) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_24_154301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -185,6 +185,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_17_195605) do
     t.integer "register_sketch_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "position"
     t.index ["account_id"], name: "index_preload_registers_on_account_id"
     t.index ["register_sketch_id"], name: "index_preload_registers_on_register_sketch_id"
   end

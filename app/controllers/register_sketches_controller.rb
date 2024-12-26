@@ -2,6 +2,10 @@ class RegisterSketchesController < ApplicationController
   include Pagy::Backend
   before_action :authenticate_user!
 
+  content_security_policy only: [:show, :edit] do |policy|
+    policy.style_src :self, :unsafe_inline, 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com'
+  end
+
   def index
     @register_sketches = policy_scope(RegisterSketch)
   end
@@ -44,6 +48,25 @@ class RegisterSketchesController < ApplicationController
     end
   end
 
+  def update_registers
+    register_ids = preload_registers_params
+    @register_sketch = RegisterSketch.find(params[:id])
+    authorize @register_sketch, :update?
+
+    preload_registers = @register_sketch.preload_registers.where(id: register_ids)
+
+    register_ids.each_with_index do |register_id, index|
+      register = preload_registers.find { |r| r.id == register_id.to_i }
+      register.position = index + 1
+      register.save! if register.changed?
+    end
+
+    respond_to do |format|
+      format.json { head :ok }
+    end
+  end
+
+
   def destroy
     @register_sketch = RegisterSketch.find(params[:id])
     authorize @register_sketch, :update?
@@ -65,5 +88,9 @@ class RegisterSketchesController < ApplicationController
       p_register[:value] = Register.sanitize_amount(p_register[:value])
     end
     sketch_params
+  end
+
+  def preload_registers_params
+    params.require(:register_ids)
   end
 end

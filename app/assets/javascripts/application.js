@@ -17,6 +17,7 @@
 //= require popper.js/dist/umd/popper.js
 //= require bootstrap/dist/js/bootstrap.min.js
 //= require imask/dist/imask.min.js
+//= require sortablejs/Sortable.min.js
 //= require datepicker.js
 //= require select2.min.js
 //= require moment.min.js
@@ -28,6 +29,7 @@
 //= require registers
 //= require maintenances
 //= require savings
+//= require sortable_registers
 
 //= require dom-factory/dist/dom-factory.js
 //= require material-design-kit/dist/material-design-kit.js

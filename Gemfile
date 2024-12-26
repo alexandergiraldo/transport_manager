@@ -57,6 +57,9 @@ gem "chartkick", '~> 5.1'
 gem 'image_processing', '~> 1.13'
 gem 'aws-sdk-s3', '~> 1.156', require: false
 
+# Sorting
+gem 'acts_as_list'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

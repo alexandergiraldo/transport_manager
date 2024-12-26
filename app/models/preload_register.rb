@@ -1,4 +1,6 @@
 class PreloadRegister < ApplicationRecord
+  acts_as_list scope: :register_sketch
+
   enum :register_type, [ :incoming, :outcoming ]
 
   belongs_to :account

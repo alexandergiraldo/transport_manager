@@ -63,10 +63,9 @@
           <%end%>
           <tr>
             <td class="align-left text-left" scope="row"></td>
-            <td class="align-left text-center">TOTAL:</td>
+            <td class="align-left text-left"></td>
+            <td class="align-right text-left">TOTAL:</td>
             <td class="align-left text-center"><%=value_to_currency(@maintenances.map(&:value).reduce(:+))%></td>
-            <td class="align-left text-left"></td>
-            <td class="align-left text-left"></td>
             <td class="align-left text-left"></td>
           </tr>
         </tbody>

@@ -127,4 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
   })
+
+  $('.print-page').on('click', function () {
+    window.print();
+  });
 });

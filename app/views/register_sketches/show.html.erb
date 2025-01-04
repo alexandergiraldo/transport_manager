@@ -14,12 +14,12 @@
           </tr>
         </thead>
         <tbody id="sortable-list">
-          <% @register_sketch.preload_registers.each do |register| %>
+          <% @register_sketch.preload_registers.each_with_index do |register, i| %>
             <tr data-id="<%= register.id %>">
               <td scope="col" class="align-middle">
                 <span class="sortable-row">
                   <i class="material-icons">menu</i>
-                  <%=register.description%>
+                  <%=i+1%>. <%=register.description%>
                 </span>
               </td>
               <td class="align-left text-center <%=register_type_color(register)%>"><%=register_type_sign(register)%><%=value_to_currency(register.value)%></td>

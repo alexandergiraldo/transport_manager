@@ -79,11 +79,18 @@ Registers = (function () {
       $('tbody#registers input.fill-date').each(function () {
         $(this).val(date);
         date = new Date(date);
+        prev_date = new Date(date);
         date.setDate(date.getDate() + 1);
 
-        var dd = date.getDate();
-        var mm = date.getMonth() + 1;
-        var yyyy = date.getFullYear();
+        if (date.getMonth() != prev_date.getMonth()) {
+          var mm = prev_date.getMonth() + 1;
+          var dd = prev_date.getDate();
+          var yyyy = prev_date.getFullYear();
+        } else {
+          var mm = date.getMonth() + 1;
+          var dd = date.getDate();
+          var yyyy = date.getFullYear();
+        }
 
         if (dd < 10) {
           dd = '0' + dd
@@ -91,6 +98,7 @@ Registers = (function () {
         if (mm < 10) {
           mm = '0' + mm
         }
+
         date = yyyy + '/' + mm + '/' + dd;
       });
     });

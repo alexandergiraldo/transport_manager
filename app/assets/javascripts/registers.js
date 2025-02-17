@@ -194,7 +194,7 @@ function locationAutocomplete () {
   function initializeAutocomplete(input, callback) {
     var options = {
       types: ['geocode'],
-      componentRestrictions: {country: 'co'},
+      componentRestrictions: { country: ['us', 'co'] },
       fields: ['address_components', 'geometry', 'icon', 'name']
     }
     var autocomplete = new google.maps.places.Autocomplete(input, options);

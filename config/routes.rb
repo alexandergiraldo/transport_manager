@@ -60,4 +60,6 @@ Rails.application.routes.draw do
     put 'mark_as_paid', on: :member
     resources :payments
   end
+
+  get "up" => "rails/health#show"
 end

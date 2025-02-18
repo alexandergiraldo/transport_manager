@@ -38,4 +38,20 @@ namespace :accounts do
     end
     MaintenanceType.where(id: list_to_delete).destroy_all
   end
+
+  task copy_register_sketch: :environment do
+    ActiveRecord::Base.transaction do
+      register_sketch = RegisterSketch.find(ENV['REGISTER_SKETCH_ID'].to_i)
+      new_register_sketch = register_sketch.dup
+      new_register_sketch.account_id = ENV['ACCOUNT_ID'].to_i
+      new_register_sketch.save!
+
+      register_sketch.preload_registers.each do |preload_register|
+        register = preload_register.dup
+        register.account_id = new_register_sketch.account_id
+        register.register_sketch_id = new_register_sketch.id
+        register.save!
+      end
+    end
+  end
 end

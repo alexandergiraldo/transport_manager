@@ -40,6 +40,11 @@
 
     <%= form_for(current_vehicle, url: registers_path(document_id: @document&.id), method: :post) do |f|%>
       <div class="table-responsive">
+        <div class="row-fluid">
+          <div class="custom-checkbox mb-3">
+            <%=link_to "Autocompletar Fechas", '#', class: "autocomplete-register-dates"%>
+          </div>
+        </div>
         <table class="table table-bordered table-sm">
           <thead>
             <tr>
@@ -57,11 +62,6 @@
             <%end%>
           </tbody>
         </table>
-      </div>
-      <div class="row">
-        <div class="custom-control custom-checkbox mb-1">
-          <%=link_to "Autocompletar Fechas", '#', class: "autocomplete-register-dates"%>
-        </div>
       </div>
       <div class="row mb-3 d-print-none">
         <div class="col-sm-6 text-right">

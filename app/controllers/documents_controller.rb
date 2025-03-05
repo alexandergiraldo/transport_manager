@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
     before_action :authenticate_user!
     before_action :init_date_params, only: [:export]
+    before_action :validate_vehicle, only: [:new]
 
     content_security_policy only: [:index, :new, :edit, :update] do |policy|
       policy.style_src :self, :unsafe_inline, 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com', 'https://fonts.googleapis.com'
@@ -84,5 +85,11 @@ class DocumentsController < ApplicationController
       d_params[:pending_company_amount_paid] = Register.sanitize_amount(d_params[:pending_company_amount_paid])
       d_params[:retentions] = Register.sanitize_amount(d_params[:retentions])
       d_params
+    end
+
+    def validate_vehicle
+      unless current_vehicle.truck?
+        redirect_to root_path
+      end
     end
   end

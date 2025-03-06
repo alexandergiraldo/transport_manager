@@ -21,7 +21,7 @@
       </div>
       <div class="label">
         <b>Utilidades Año actual:</b>
-        <%=value_to_currency(@vehicle_utilities_by_year[:Ingresos].to_i - @vehicle_utilities_by_year[:Egresos].to_i)%>
+        <%=calculate_utility(@vehicle_utilities_by_year)%>
       </div>
     </div>
   </div>

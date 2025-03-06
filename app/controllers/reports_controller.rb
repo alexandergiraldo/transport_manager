@@ -9,11 +9,8 @@ class ReportsController < ApplicationController
     vehicle_id = params[:id].present? ? params[:id] : current_vehicle.id
     @vehicle = Vehicle.find(vehicle_id)
     authorize @vehicle, :report?
-    reports = Report.new
-    @vehicle_utilities_by_year = reports.vehicle_utilities_by_year(vehicle_id, params[:year])
-    @vehicle_utilities_by_month = reports.vehicle_utilities_by_month(vehicle_id, params[:year])
-    @total_vehicle_utilities = reports.total_vehicle_utilities(vehicle_id)
-    @total_vehicle_utilities_by_month = reports.total_vehicle_utilities_by_month(vehicle_id, params[:year])
-    @total_vehicle_utilities_data = reports.total_vehicle_utilities_data(vehicle_id)
+
+    reports = Report.new(@vehicle.id)
+    @all_reports = reports.all_reports(params[:year])
   end
 end

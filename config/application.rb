@@ -23,6 +23,11 @@ module TaxiManager
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Preserve timezone when converting to time
+    config.active_support.to_time_preserves_timezone = :zone
+
+    # Handle exceptions
     config.exceptions_app = self.routes
   end
 end

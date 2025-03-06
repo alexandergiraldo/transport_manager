@@ -43,7 +43,7 @@ gem 'pundit', '~> 2.4.0'
 # Search engine
 gem 'ransack', '~> 4.2'
 gem 'pagy', '~> 8.0'
-gem "groupdate", '~> 6.3'
+gem "groupdate", '~> 6.5.1'
 
 # Read excel file
 gem 'roo', '~> 2.10'

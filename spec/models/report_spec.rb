@@ -71,4 +71,47 @@ RSpec.describe Report, type: :model do
       ])
     end
   end
+
+  describe '#total_vehicle_utilities_by_month' do
+    it 'returns the total vehicle utilities by month' do
+      create(:register, vehicle_id: vehicle.id, user_id: user.id, value: 100, register_type: 'incoming', event_date: Date.new(2020, 1, 1))
+      create(:register, vehicle_id: vehicle.id, user_id: user.id, value: 50, register_type: 'outcoming', event_date: Date.new(2020, 1, 1))
+      create(:register, vehicle_id: vehicle.id, user_id: user.id, value: 200, register_type: 'incoming', event_date: Date.new(2020, 1, 1))
+      create(:register, vehicle_id: vehicle.id, user_id: user.id, value: 50, register_type: 'outcoming', event_date: Date.new(2020, 1, 1))
+
+      expect(report.total_vehicle_utilities_by_month(2020)).to eq([
+        {
+          "name" => "Total utilidades por mes",
+          "data" => {
+            "Abr" => 0,
+            "Agos" => 0,
+            "Dic" => 0,
+            "Ene" => 200,
+            "Feb" => 0,
+            "Jul" => 0,
+            "Jun" => 0,
+            "Mar" => 0,
+            "May" => 0,
+            "Nov" => 0,
+            "Oct" => 0,
+            "Sept" => 0
+          }
+        }
+      ])
+    end
+  end
+
+  describe '#total_vehicle_utilities_data' do
+    it 'returns the total vehicle utilities data' do
+      create(:register, vehicle_id: vehicle.id, user_id: user.id, value: 100, register_type: 'incoming', event_date: Date.new(2020, 1, 1))
+      create(:register, vehicle_id: vehicle.id, user_id: user.id, value: 50, register_type: 'outcoming', event_date: Date.new(2020, 1, 1))
+
+      expect(report.total_vehicle_utilities_data).to eq([
+        {
+          "name" => "Utilidades por Año",
+          "data" => { "2020" => 50 }
+        }
+      ])
+    end
+  end
 end

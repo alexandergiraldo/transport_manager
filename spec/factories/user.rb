@@ -15,9 +15,11 @@ FactoryBot.define do
     end
 
     after(:create) do |user|
-      account = create(:account)
-      user.accounts << account
-      user.update(account_id: account.id)
+      if user.account_id.blank?
+        account = create(:account)
+        user.accounts << account
+        user.update(account_id: account.id)
+      end
     end
   end
 end

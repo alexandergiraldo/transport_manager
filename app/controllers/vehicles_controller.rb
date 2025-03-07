@@ -12,9 +12,9 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.find(params[:id])
     authorize @vehicle, :show?
 
-    reports = Report.new
-    @vehicle_utilities_by_year = reports.vehicle_utilities_by_year(@vehicle.id, Time.now.year)
-    @total_vehicle_utilities = reports.total_vehicle_utilities(@vehicle.id)
+    reports = Report.new(@vehicle.id)
+    @vehicle_utilities_by_year = reports.vehicle_utilities_by_year(Time.now.year)
+    @total_vehicle_utilities = reports.total_vehicle_utilities
   end
 
   def new

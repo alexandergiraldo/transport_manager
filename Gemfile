@@ -38,11 +38,11 @@ gem "cocoon"
 
 # Authorization
 gem 'devise', '>= 4.9.4'
-gem 'pundit', '~> 2.4.0'
+gem 'pundit', '~> 2.5.0'
 
 # Search engine
-gem 'ransack', '~> 4.2'
-gem 'pagy', '~> 8.0'
+gem 'ransack', '~> 4.3'
+gem 'pagy', '~> 9.3.0'
 gem "groupdate", '~> 6.5.1'
 
 # Read excel file
@@ -78,7 +78,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 6.0'
+  gem 'rspec-rails', '~> 7.1'
   gem 'shoulda-matchers', '~> 6.0'
   gem 'factory_bot_rails', '~> 6.4'
 end

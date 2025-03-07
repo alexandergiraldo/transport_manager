@@ -23,7 +23,7 @@ RSpec.describe Register, type: :model do
   end
 
   describe "Class Methods" do
-    describe ".search" do
+    describe "#search" do
       it "should return the result of the query" do
         params = { q: { description_cont: "test" } }
         query = Register.includes(:vehicle).ransack(params[:q])
@@ -31,14 +31,14 @@ RSpec.describe Register, type: :model do
       end
     end
 
-    describe ".sanitize_amount" do
+    describe "#sanitize_amount" do
       it "should return the amount without special characters" do
         amount = "R$ 1.000,00"
         expect(Register.sanitize_amount(amount)).to eq("100000")
       end
     end
 
-    describe ".preload_registers" do
+    describe "#preload_registers" do
       it "should return an array of registers" do
         register_sketch = double("register_sketch", preload_registers: [double("register", description: "test", register_type: "incoming", value: 1000, notes: "test")])
         registers = Register.preload_registers(register_sketch)

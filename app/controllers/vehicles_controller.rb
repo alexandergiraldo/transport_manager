@@ -5,7 +5,7 @@ class VehiclesController < ApplicationController
   def index
     @vehicles = policy_scope(Vehicle).by_model_date.includes(:image_attachment)
     @vehicles = params[:status] == 'active' ? @vehicles.active : @vehicles
-    @pagy, @vehicles = pagy(@vehicles, items: 20)
+    @pagy, @vehicles = pagy(@vehicles, limit: 20)
   end
 
   def show

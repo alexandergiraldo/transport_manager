@@ -4,7 +4,7 @@ class MaintenancesController < ApplicationController
   before_action :init_date_params, only: [:index]
 
   def index
-    @pagy, @maintenances = pagy(policy_scope(Maintenance).where(vehicle_id: current_vehicle.id).search(params).by_date, items: 31)
+    @pagy, @maintenances = pagy(policy_scope(Maintenance).where(vehicle_id: current_vehicle.id).search(params).by_date, limit: 31)
   end
 
   def new

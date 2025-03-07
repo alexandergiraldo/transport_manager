@@ -9,7 +9,7 @@ class RegistersController < ApplicationController
 
   def index
     @documents = policy_scope(Document).where(vehicle_id: current_vehicle.id).search(params).includes(registers: [:vehicle]).by_date
-    @pagy, @registers = pagy(policy_scope(Register).where(vehicle_id: current_vehicle.id, document_id: nil).search(params).by_date, items: 60)
+    @pagy, @registers = pagy(policy_scope(Register).where(vehicle_id: current_vehicle.id, document_id: nil).search(params).by_date, limit: 60)
   end
 
   def print

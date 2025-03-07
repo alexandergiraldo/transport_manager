@@ -11,13 +11,13 @@ class SavingsController < ApplicationController
   def index
     result = policy_scope(Saving)
     result = result.search(params).by_date
-    @pagy, @savings = pagy(result, items: 60)
+    @pagy, @savings = pagy(result, limit: 60)
   end
 
   def index2
     result = policy_scope(Saving)
     result = result.search(params).includes(:vehicle).by_date_desc
-    @pagy, @savings = pagy(result, items: 60)
+    @pagy, @savings = pagy(result, limit: 60)
 
     @total = policy_scope(Saving).search(params).sum(:amount)
     @total_saved = policy_scope(Saving).search({
